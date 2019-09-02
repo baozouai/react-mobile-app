@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {getUserInfo} from '../api/index'
 // import { connect } from 'react-redux'
 import {Tabs, Badge, NavBar, Icon} from 'antd-mobile'
+import {getCartGoods, syncCart} from '../api/index'
 export class My extends Component {
     constructor(props) {
         super(props)
@@ -10,11 +11,18 @@ export class My extends Component {
              manage: true
         }
     }
+    // syncCart({ infos: JSON.stringify({4932:JSON.parse(res.data.message.cart_info.replace(/null,/g, ''))[0]}) })
     componentWillMount() {
         // 获取用户信息
         getUserInfo().then(res => {
             // console.log(res)
         })
+        // getCartGoods().then(res => {
+        //     console.log(JSON.parse(res.data.message.cart_info));
+        //     syncCart({ infos: JSON.stringify({}) })
+        //         // console.log(res.data.message.cart_info.replace(/null,/g, ''));
+        //         // console.log({4932:JSON.parse(res.data.message.cart_info.replace(/null,/g, ''))[0]});
+        // })
     }
     toggle = () => {
       this.setState({manage: !this.state.manage})
@@ -24,33 +32,6 @@ export class My extends Component {
         return (
             <div>
                 
-    
-    <NavBar
-                        mode="dark"
-                        // style={{position: 'relative'}}
-                        leftContent={<Icon type='left' />}
-                        onLeftClick={() => this.setState({manage: this.state.manage? false: true})}
-                        rightContent={
-                            <div className="cart-footer-right">
-                                <span onClick={() => {this.setState({manage: this.state.manage? false: true})
-                            console.log(this.state.manage);
-                        }}>{this.state.manage?'管理': '完成'}</span>
-                            </div>
-                        }
-                        style={{
-                            position: 'fixed',
-                            width: '100%',
-                            left: 0,
-                            top: 0,
-                            zIndex: 1
-                        }}
-                    >购物车
-                    {/* <span onClick={() => this.setState({manage: this.state.manage? false: true})} style={{
-                        color: '#fff',
-                        }}>管理</span> */}
-                    </NavBar>
-                    <button onClick={this.toggle}>切换</button>
-    <div style={{display: this.state.manage? 'block': 'none', marginTop: 100}}>111111111</div>
             </div>
         )
     }

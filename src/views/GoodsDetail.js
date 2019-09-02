@@ -194,7 +194,7 @@ export class GoodsDetail extends Component {
                         <span className="iconfont iconkefu1"></span>
                         <span>联系客服</span>
                     </div>
-                    <div className="goods-footer-item cart">
+                    <div className="goods-footer-item cart" onClick={() => this.props.history.push('/cart')}>
                         <span className="iconfont icongouwuche1">
                             <Badge
                                 text={this.props.totalNum}

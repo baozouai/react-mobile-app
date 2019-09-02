@@ -25,6 +25,8 @@ export const searchSuggest = value => axios.get('/goods/search?query=' + value)
 export const getCartGoods = () => axios.get('/my/cart/all')
 // 添加购物车
 export const addCart = goodsInfo => axios.post('/my/cart/add', goodsInfo)
+// 创建订单
+export const createOrder = goodsInfo => axios.post('/my/orders/create', goodsInfo)
 // 同步购物车
 export const syncCart = infos => axios.post('/my/cart/sync', infos)
 // 获取用户信息

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { List, InputItem, WhiteSpace, NavBar, Icon, Button, Toast, Flex, Radio } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import {submitRegister} from '../api/index'
-import {getVerigyCode} from '../api/index'
+import { submitRegister } from '../api/index'
+import { getVerigyCode } from '../api/index'
 export class Register extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +15,7 @@ export class Register extends Component {
             pwd: '',
             verifyPwd: '',
             gender: '男',
-            
+
         }
     }
     // 点击单选框时触发
@@ -26,36 +26,53 @@ export class Register extends Component {
     };
     // 点击立即注册按钮
     handleRegister = () => {
-        var mobile = this.state.mobile.replace(/\s/g, '')
-        console.log(mobile)
-        console.log(this.state)
-        submitRegister({...this.state, mobile}).then(res => {
-            console.log(res);
-            const {meta: {status, msg}} = res.data
-            if (status === 200) {
-                // 提示注册成功
-                Toast.success(msg)
-                // 注册成功后返回首页
-                this.props.history.push('/')
-            } 
+        // validateFields方法用于js校验, error是错误对象,如果没有就是null
+        this.props.form.validateFields((error, value) => {
+            if (error) {
+                // 有错误,校验不通过
+                Toast.fail('请检查数据是否填写正确', 2)
+            } else {
+
+                var mobile = this.state.mobile.replace(/\s/g, '')
+                console.log(mobile)
+                console.log(this.state)
+                submitRegister({ ...this.state, mobile }).then(res => {
+                    console.log(res);
+                    const { meta: { status, msg } } = res.data
+                    if (status === 200) {
+                        // 提示注册成功
+                        Toast.success(msg)
+                        // 注册成功后返回首页
+                        this.props.history.push('/')
+                    }
+                })
+            }
+
         })
     }
+
     getCode = () => {
         // 这里的号码格式是139 9999 9999 ，提交之前把中间的空格去掉
         var mobile = this.state.mobile.replace(/\s/g, '')
-        getVerigyCode(mobile).then(res => {
-            // 将验证码赋值给输入框
-            console.log(res)
-            const {meta: {status}, message}  = res.data
-            if(status === 200) {
-                this.setState({
-                    code: message
-                })
-            }
-        })
-        
-}
-    
+        // 判断手机号码是否符合要求
+        if (!/^1[3-9]\d{9}$/.test(mobile)) {
+            Toast.fail('手机号码格式有误', 2)
+        } else {
+
+            getVerigyCode(mobile).then(res => {
+                // 将验证码赋值给输入框
+                console.log(res)
+                const { meta: { status }, message } = res.data
+                if (status === 200) {
+                    this.setState({
+                        code: message
+                    })
+                }
+            })
+        }
+
+    }
+
     render() {
         const { getFieldError, getFieldProps } = this.props.form
         const RadioItem = Radio.RadioItem;
@@ -83,7 +100,7 @@ export class Register extends Component {
                     }}
 
                 >
-                    
+
                     <InputItem
                         // 输入类型为手机号码
                         type="phone"
@@ -117,10 +134,10 @@ export class Register extends Component {
                     >
                         <span className="star">*</span>  手机号码
                     </InputItem>
-                    <button className="get-code" onClick={this.getCode}>获取验证码</button>  
+                    <button className="get-code" onClick={this.getCode}>获取验证码</button>
 
-                    
-                    <InputItem 
+
+                    <InputItem
                         // 输入类型为数字
                         type="number"
                         placeholder="请输入验证码"
@@ -150,13 +167,13 @@ export class Register extends Component {
                         }}
                         // 将state中的username赋值给输入框
                         value={this.state.code}
-                        
+
                     >
-                        <span className="star">*</span>   
-                        验证码 
-                        
+                        <span className="star">*</span>
+                        验证码
+
                     </InputItem>
-                    
+
 
                     <InputItem
                         // 输入类型为邮箱
@@ -170,7 +187,7 @@ export class Register extends Component {
                             // 验证规则
                             rules: [
                                 { required: true, message: "邮箱不能为空" },
-                                { type: 'email', message: '错误的 email 格式'}
+                                { type: 'email', message: '错误的 email 格式' }
                             ]
                         })
                         }
@@ -258,21 +275,21 @@ export class Register extends Component {
                     </RadioItem>
                     <WhiteSpace />
                     <Flex justify="center">
-                    {/* 注册按钮 */}
-                    <Button type="primary"   size="small" style={{marginRight: 10}}
-                    className="bottom-button"
-                    onClick={this.handleRegister}>
-                        立即注册
+                        {/* 注册按钮 */}
+                        <Button type="primary" size="small" style={{ marginRight: 10 }}
+                            className="bottom-button"
+                            onClick={this.handleRegister}>
+                            立即注册
                     </Button>
-                    {/* 取消注册按钮 */}
-                    <Button type="warning"  size="small" className="bottom-button" style={{padding: '0 25px'}}
-                    onClick={() => this.props.history.push('/login')}>
-                        取消
-                    </Button>  
-                          
+                        {/* 取消注册按钮 */}
+                        <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px' }}
+                            onClick={() => this.props.history.push('/login')}>
+                            取消
+                    </Button>
+
                     </Flex>
-                    <WhiteSpace/>   
-                        
+                    <WhiteSpace />
+
                 </List>
 
                 <style jsx>{`

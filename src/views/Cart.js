@@ -21,8 +21,10 @@ export class Cart extends Component {
             totalPrice: 0,
             // allStatus即全选按钮是否选择，默认不选中
             allStatus: false,
-            // 右下角选择去结算的商品数量
+            // 右下角选择去结算的商品种类数量
             allSelectedNum: 0,
+            // 选择的商品总个数 商品种类*单个商品的amount
+            selectedGoodsTotalNum: 0,
             // totalNum为购物车商品种类的数量
             totalNum: 0,
             // manage是为了点击右上角的管理时是否显示底部的删除按钮
@@ -41,6 +43,7 @@ export class Cart extends Component {
             const { meta: { status }, message: { cart_info } } = res.data
             // 状态码200表示获取购物车数据成功
             if (status === 200) {
+                console.log(res)
                 // 判断购物车是否为空
                 if (Object.values(JSON.parse(cart_info)).length) {
                     // 不为空的话设置其标志，以便是否显示购物车为空的图片标志，并将购物车数据解析后存入state的cart_infos
@@ -67,7 +70,7 @@ export class Cart extends Component {
     syncCartGoodsData = () => {
         syncCart({ infos: JSON.stringify(this.state.cart_infos) })
         // 计算CartReducer中的totalNum
-        this.props.snycCartGoods(this.state.cart_infos)
+        this.props.snycCartGoods(this.state.cart_infos, this.state.totalPrice, this.state.selectedGoodsTotalNum)
     }
 
     // 改变商品数量（stepper)
@@ -136,13 +139,16 @@ export class Cart extends Component {
     // 计算总价
     calTotalPrice = () => {
         let totalPrice = 0
+        let selectedGoodsTotalNum = 0
         for (var goods_id in this.state.cart_infos) {
             if (this.state.cart_infos[goods_id].selectedStatus) {
                 totalPrice += this.state.cart_infos[goods_id].amount * this.state.cart_infos[goods_id].goods_price
+                selectedGoodsTotalNum += this.state.cart_infos[goods_id].amount
             }
         }
         this.setState({
-            totalPrice
+            totalPrice,
+            selectedGoodsTotalNum
         })
     }
     // 删除单个商品
@@ -185,17 +191,21 @@ export class Cart extends Component {
             cart_infos,
             totalPrice: 0,
             allSelectedNum: 0,
+            selectedGoodsTotalNum: 0,
             totalNum: Object.values(cart_infos).length
         }, () => {
             this.syncCartGoodsData()
         })
     }
     gotoPay = () => {
+       
         // 提交订单之前判断是否选择了商品
         if (!this.state.allSelectedNum) {
             Toast.fail('您还没有选择宝贝呢', 2)
             return
         }
+         // 将CartReducer中保存的数据更新
+        this.props.snycCartGoods(this.state.cart_infos, this.state.totalPrice, this.state.selectedGoodsTotalNum)
         this.props.history.push('/pay')
     }
     
@@ -533,10 +543,9 @@ export class Cart extends Component {
 const mapActionToProps = (dispatch) => {
     return {
         // 同步购物车数据
-        snycCartGoods: (cart_Infos) => {
-            dispatch({ type: 'SYNC_CART_GOODS', payload: { cartInfos: Object.values(cart_Infos) } })
+        snycCartGoods: (cart_Infos, totalPrice, selectedGoodsTotalNum) => {
+            dispatch({ type: 'SYNC_CART_GOODS', payload: { cart_Infos, totalPrice, selectedGoodsTotalNum } })
         }
-
     }
 }
 
