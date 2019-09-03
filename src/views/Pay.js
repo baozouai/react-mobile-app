@@ -19,9 +19,9 @@ export class Pay extends Component {
             cart_infos_Array: Object.values(this.props.cart_Infos)
         })
     }
+    // 提交订单
     submitOrder = () => {
-        console.log(this.props.cart_Infos)
-        // 创建订单
+        
         // 初始化goods数组
         let goods = []
         let cart_infos = this.props.cart_Infos
@@ -33,15 +33,18 @@ export class Pay extends Component {
                     goods_number: v.amount,
                     goods_price: v.goods_price,
                 })
+                // 同时将订单中选择的商品删除
                 delete cart_infos[v.goods_id]
             }
         })
-        createOrder({order_price: this.props.totalPrice, consignee_addr: this.state.address}).then(res => {
-            console.log(res);
+        // 创建订单
+        createOrder({order_price: this.props.totalPrice, consignee_addr: this.state.address, goods}).then(res => {
             const {meta: {msg, status}} = res.data
             if (status === 200) {
-                Toast.success(msg, 2)
-                // 提交订单后同步购物车
+                Toast.success(msg, 2, () => {
+                    this.props.history.push('/order')
+                })
+                // 提交订单后同步购物车 cart_infos中的数据是未被提交的订单
                 syncCart({ infos: JSON.stringify(cart_infos) })
             }
         })
@@ -64,7 +67,7 @@ export class Pay extends Component {
                         zIndex: 1000
                     }}
                 >确认订单</NavBar>
-                <div style={{ margin: '60px 10px'}}>
+                <div style={{ margin: '60px 10px 0'}}>
                     <div className="default-address">
                         <div className="left-icon">
                             <i className="iconfont icon-dingwei" ></i>
@@ -208,7 +211,7 @@ export class Pay extends Component {
                         }
                         .submit-order-footer {
                             position: fixed;
-                            bottom: 50px;
+                            bottom: 0px;
                             display: flex;
                             justify-content: space-between;
                             height: 50px;
