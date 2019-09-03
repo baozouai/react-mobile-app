@@ -69,6 +69,6 @@
 
 ### 4、成功如图
 
-![首页](/Users/baozou/Downloads/mobile-app/项目截图/首页.png)
+![首页](./项目截图/首页.png)
 
-其他请看[项目截图](/Users/baozou/Downloads/mobile-app/项目截图)
+其他请看[项目截图](./项目截图)
