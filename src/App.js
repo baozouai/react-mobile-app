@@ -23,8 +23,8 @@ function App() {
           <Route path='/login' render={props => <Layout {...props}><Login></Login></Layout>}></Route>
           <Route path='/my' render={props => <Layout {...props}><PrivateRoute component={My}></PrivateRoute></Layout>}></Route>
           <Route path='/cart' render={props => <Layout {...props}><PrivateRoute path="/cart" component={Cart}></PrivateRoute></Layout>}></Route>
-          <Route path='/pay/:goods_id' render={props => <PrivateRoute {...props} component={Pay}></PrivateRoute>}></Route>
-          <Route path='/address' render={props => <PrivateRoute {...props} path='/address' component={AddressInfo}></PrivateRoute>}></Route>
+          <Route path='/pay' render={props => <PrivateRoute {...props} component={Pay}></PrivateRoute>}></Route>
+          <Route path='/address' render={props => <PrivateRoute {...props} component={AddressInfo}></PrivateRoute>}></Route>
           <Route path='/order' render={props => <PrivateRoute {...props} component={OrderList}></PrivateRoute>}></Route>
           <Route path='/register' render={props => <Layout {...props}><Register></Register></Layout>}></Route>
           <Route path='/goodsdetail/:id' render={props => <GoodsDetail {...props}></GoodsDetail>}></Route>

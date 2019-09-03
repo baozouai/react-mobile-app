@@ -359,7 +359,6 @@ const mapDispatchToProps = dispatch => {
             dispatch({type: 'ADD_CART'})
         },
         buyNow: (selectedGoodsTotalNum, totalPrice) => {
-            console.log(totalPrice);
             dispatch({type: 'BUY_NOW', payload: {selectedGoodsTotalNum, totalPrice}})
         }
     }

@@ -8,13 +8,18 @@ export class Pay extends Component {
         super(props)
 
         this.state = {
-            cart_infos_Array: []
+            cart_infos_Array: [],
+            id: ''
         }
     }
     componentWillMount() {
-        console.log(this.props.cart_Infos);
-        if (this.props.match.params.goods_id) {
-            getGoogdDetail(this.props.match.params.goods_id).then(res => {
+        // render之前获取页面是否有id 如果是购物车跳转过来的话没有id，Number之后的NaN
+        var id = Number(this.props.location.pathname.split('/').pop())
+        if (id) {
+            this.setState({
+                id
+            })
+            getGoogdDetail(id).then(res => {
                 res.data.message.selectedStatus = true
                 this.setState({
                     cart_infos_Array: [res.data.message]
@@ -37,7 +42,7 @@ export class Pay extends Component {
         var cart_infos
         //因为有可能从商品详情的立即购买跳转过来，也可能从购物车的结算跳转过来，所以分两条路径判断
         // 从商品详情的立即购买跳转过来location带有参数，购物车没有
-        if (!this.props.match.params.goods_id) {
+        if (!this.state.id) {
             cart_infos = this.props.cart_Infos
             this.state.cart_infos_Array.forEach(v => {
                 // 商品选中就将id，数量，价格存入goods数组中
