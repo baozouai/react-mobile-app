@@ -165,7 +165,6 @@ export class Cart extends Component {
         // 再更新state中的cart_infos
         this.setState({
             cart_infos,
-            // cart_infos_change: true,
             allSelectedNum: this.state.allSelectedNum ? this.state.allSelectedNum - 1 : 0
         }, () => {
             // 同步购物车

@@ -80,6 +80,12 @@ export class GoodsDetail extends Component {
     jumpCart = () => {
         this.props.history.push('/my/cart')
     }
+    // 立即购买
+    jumpCart = () => {
+        this.props.buyNow(1, this.state.message.goods_price)
+        this.props.history.push(`/pay/${this.state.message.goods_id}`)
+    }
+    
 
     render() {
         return (
@@ -339,19 +345,6 @@ export class GoodsDetail extends Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     const calTotalNum = (cartModule) => {
-//         var totalNum = 0;
-//         cartModule.forEach(v => {
-//             totalNum += v.num
-//         })
-//         return totalNum
-//     }
-
-//     return {
-//         productNum: calTotalNum(state.CartModule)
-//     }
-// }
 // 创建映射状态函数
 const mapStateToProps = state => {
     return {
@@ -364,6 +357,10 @@ const mapDispatchToProps = dispatch => {
     return {
         addCart: () => {
             dispatch({type: 'ADD_CART'})
+        },
+        buyNow: (selectedGoodsTotalNum, totalPrice) => {
+            console.log(totalPrice);
+            dispatch({type: 'BUY_NOW', payload: {selectedGoodsTotalNum, totalPrice}})
         }
     }
 }

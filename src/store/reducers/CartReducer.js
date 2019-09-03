@@ -6,23 +6,22 @@ export const CartReducer = (state = initState, action) => {
     switch (action.type) {
         // 同步购物车数据
         case 'SYNC_CART_GOODS':
-            let {cart_Infos, totalPrice, selectedGoodsTotalNum} = action.payload
+            var {cart_Infos, totalPrice, selectedGoodsTotalNum} = action.payload
             var totalNum = 0;
             // 通过循环遍历获取购物车商品总量
             for (var goods_id in cart_Infos) {
                 totalNum += cart_Infos[goods_id].amount
             }
-
-            console.log({...state, totalNum, cart_Infos});
             // 返回新的数据
             return {...state, totalNum, cart_Infos, totalPrice, selectedGoodsTotalNum}
         case 'ADD_CART':
             state.totalNum += 1
             return {...state}
         // 点击结算时保存购物车数据
-        // case 'SETTLE':
-
-        default:
+        case 'BUY_NOW':
+            var {totalPrice, selectedGoodsTotalNum} = action.payload
+            return {...state, totalPrice, selectedGoodsTotalNum}
+            default:
             // 返回默认数据
             return state
     }

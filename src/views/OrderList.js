@@ -26,6 +26,16 @@ export class OrderList extends Component {
         })
         
     }
+    convertTime = (create_time) => {
+        var time =  new Date(parseInt(create_time) * 1000)
+        var y = time.getFullYear(); //getFullYear方法以四位数字返回年份
+        var M = time.getMonth() + 1; // getMonth方法从 Date 对象返回月份 (0 ~ 11)，返回结果需要手动加一
+        var d = time.getDate(); // getDate方法从 Date 对象返回一个月中的某一天 (1 ~ 31)
+        var h = time.getHours(); // getHours方法返回 Date 对象的小时 (0 ~ 23)
+        var m = time.getMinutes(); // getMinutes方法返回 Date 对象的分钟 (0 ~ 59)
+        var s = time.getSeconds(); // getSeconds方法返回 Date 对象的秒数 (0 ~ 59)
+        return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s;
+    }
     render() {
         const tabs = [
             { title: '全部订单' },
@@ -78,6 +88,10 @@ export class OrderList extends Component {
                                                 <div>
                                                     <span>订单编号：</span>
                                                     <span>{ v.order_number }</span>
+                                                </div>
+                                                <div>
+                                                    <span>创建时间：</span>
+                                                    <span>{ this.convertTime(v.create_time) }</span>
                                                 </div>
                                                 <div>
                                                     <span>地址：</span>
@@ -137,6 +151,10 @@ export class OrderList extends Component {
                                                 <div>
                                                     <span>订单编号：</span>
                                                     <span>{ v.order_number }</span>
+                                                </div>
+                                                <div>
+                                                    <span>创建时间：</span>
+                                                    <span></span>
                                                 </div>
                                                 <div>
                                                     <span>地址：</span>

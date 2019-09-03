@@ -1,51 +1,83 @@
 import React, { Component } from 'react'
-import { createForm } from 'rc-form';
+import { withRouter } from 'react-router-dom';
 import { NavBar, Icon, Toast } from 'antd-mobile'
 import {connect} from 'react-redux'
-import {createOrder, syncCart} from '../api/index'
+import {createOrder, syncCart, getGoogdDetail, getCartGoods} from '../api/index'
 export class Pay extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            name: '暴走',
-            phone: '13999999999',
-            address: '广东省广州市天河区xxx',
             cart_infos_Array: []
         }
     }
     componentWillMount() {
-        this.setState({
-            cart_infos_Array: Object.values(this.props.cart_Infos)
-        })
-    }
+        console.log(this.props.cart_Infos);
+        if (this.props.match.params.goods_id) {
+            getGoogdDetail(this.props.match.params.goods_id).then(res => {
+                res.data.message.selectedStatus = true
+                this.setState({
+                    cart_infos_Array: [res.data.message]
+                })
+                console.log(this.state.cart_infos_Array);
+            })
+        } else if (this.props.cart_Infos) {
+                this.setState({
+                    cart_infos_Array: Object.values(this.props.cart_Infos)
+                })
+            }
+        }
+       
+    
     // 提交订单
     submitOrder = () => {
         
         // 初始化goods数组
         let goods = []
-        let cart_infos = this.props.cart_Infos
-        this.state.cart_infos_Array.forEach(v => {
-            // 商品选中就将id，数量，价格存入goods数组中
-            if (v.selectedStatus) {
-                goods.push({
-                    goods_id: v.goods_id,
-                    goods_number: v.amount,
-                    goods_price: v.goods_price,
-                })
-                // 同时将订单中选择的商品删除
-                delete cart_infos[v.goods_id]
-            }
-        })
+        var cart_infos
+        //因为有可能从商品详情的立即购买跳转过来，也可能从购物车的结算跳转过来，所以分两条路径判断
+        // 从商品详情的立即购买跳转过来location带有参数，购物车没有
+        if (!this.props.match.params.goods_id) {
+            cart_infos = this.props.cart_Infos
+            this.state.cart_infos_Array.forEach(v => {
+                // 商品选中就将id，数量，价格存入goods数组中
+                if (v.selectedStatus) {
+                    goods.push({
+                        goods_id: v.goods_id,
+                        goods_number: v.amount,
+                        goods_price: v.goods_price,
+                    })
+                    // 同时将订单中选择的商品删除
+                    delete cart_infos[v.goods_id]
+                }
+            })
+        } else {
+            // 如果从商品详情的立即购买跳转过来，要拿到购物车的数据，否则提交订单的时候购物车还没结算的数据会丢失
+            getCartGoods().then(res => {
+                // 将数据解构处理
+                const { meta: { status }, message: { cart_info } } = res.data
+                // 状态码200表示获取购物车数据成功
+                if (status === 200) {
+                    cart_infos = JSON.parse(cart_info)
+                }
+            })
+            goods = [{
+                goods_id:this.state.cart_infos_Array[0].goods_id,
+                goods_number:1,
+                goods_price:this.state.cart_infos_Array[0].goods_price
+            }]
+        }
         // 创建订单
-        createOrder({order_price: this.props.totalPrice, consignee_addr: this.state.address, goods}).then(res => {
+        createOrder({order_price: this.props.totalPrice, consignee_addr: this.props.address, goods}).then(res => {
             const {meta: {msg, status}} = res.data
             if (status === 200) {
                 Toast.success(msg, 2, () => {
                     this.props.history.push('/order')
                 })
                 // 提交订单后同步购物车 cart_infos中的数据是未被提交的订单
-                syncCart({ infos: JSON.stringify(cart_infos) })
+                syncCart({ infos: JSON.stringify(cart_infos) }).then(res=>{
+                    console.log(res);
+                })
             }
         })
     }
@@ -68,16 +100,18 @@ export class Pay extends Component {
                     }}
                 >确认订单</NavBar>
                 <div style={{ margin: '60px 10px 0'}}>
-                    <div className="default-address">
+                    <div className="default-address"
+                    onClick={() => this.props.history.push('/address')}
+                    >
                         <div className="left-icon">
                             <i className="iconfont icon-dingwei" ></i>
                         </div>
                         <div className="address-info">
                             <div className="address-info-top">
-                                <span className="name">{this.state.name}</span>
-                                <span className="phone">{this.state.phone}</span>
+                                <span className="name">{this.props.name}</span>
+                                <span className="phone">{this.props.phone}</span>
                             </div>
-                            <div className="address-info-bottom">{this.state.address}</div>
+                            <div className="address-info-bottom">{this.props.address}</div>
                         </div>
                         <div className="right-icon">
                             <i className="iconfont icon-youjiantou" ></i>
@@ -94,9 +128,9 @@ export class Pay extends Component {
                                     <div className="order-title ellipsis-2">{v.goods_name}</div>
 
                                     <div className="order-price">
-                                        <span>共{v.amount}件 </span>
+                                        <span>共{v.amount? v.amount: 1}件 </span>
                                         <span>小计：</span>
-                                        <span>&yen;{v.amount * v.goods_price}.00</span>
+                                        <span>&yen;{v.amount?v.amount * v.goods_price: v.goods_price}.00</span>
                                     </div>
                                 </div>
                         </div>: ''
@@ -257,7 +291,9 @@ const mapStateToProps = (state) => {
         cart_Infos: state.CartModule.cart_Infos,
         totalPrice: state.CartModule.totalPrice,
         selectedGoodsTotalNum: state.CartModule.selectedGoodsTotalNum,
-
+        name: state.userModule.name,
+        phone: state.userModule.phone,
+        address: state.userModule.address,
     }
 }        
-export default connect(mapStateToProps)(Pay)
+export default connect(mapStateToProps)(withRouter(Pay))
