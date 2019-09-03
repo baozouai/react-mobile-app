@@ -58,23 +58,30 @@ export class GoodsDetail extends Component {
     }
     // 添加商品到购物车
     addGoodsToCart = () => {
-        let info = {}
-        info.cat_id = this.state.message.cat_id
-        info.goods_id = this.state.message.goods_id
-        info.goods_name = this.state.message.goods_name
-        info.goods_number = this.state.message.goods_number
-        info.goods_price = this.state.message.goods_price
-        info.goods_small_logo = this.state.message.goods_small_logo
-        info.goods_weight = this.state.message.goods_weight        
-        addCart({info: JSON.stringify(info)}).then(res => {
-            const {meta: {status}} = res.data
-            if (status === 200) {
-                // 商品数量+1，改变cartReducer中的商品总数
-                this.props.addCart()
-            }
-            getCartGoods()
-        })
-        Toast.success('添加成功，在购物车等亲', 2)
+        if (this.props.loginState) {
+            let info = {}
+            info.cat_id = this.state.message.cat_id
+            info.goods_id = this.state.message.goods_id
+            info.goods_name = this.state.message.goods_name
+            info.goods_number = this.state.message.goods_number
+            info.goods_price = this.state.message.goods_price
+            info.goods_small_logo = this.state.message.goods_small_logo
+            info.goods_weight = this.state.message.goods_weight        
+            addCart({info: JSON.stringify(info)}).then(res => {
+                const {meta: {status}} = res.data
+                if (status === 200) {
+                    // 商品数量+1，改变cartReducer中的商品总数
+                    this.props.addCart()
+                }
+                getCartGoods()
+            })
+            Toast.success('添加成功，在购物车等亲', 2)
+        } else {
+            Toast.fail('您还没登录，请先登录', 2, () => {
+                this.props.history.push('/login')
+            })
+        }
+        
     }
     // 跳转到购物车
     jumpCart = () => {
@@ -348,7 +355,8 @@ export class GoodsDetail extends Component {
 // 创建映射状态函数
 const mapStateToProps = state => {
     return {
-        totalNum: state.CartModule.totalNum
+        totalNum: state.CartModule.totalNum,
+        loginState: state.userModule.loginState
     }   
 }
 

@@ -42,7 +42,10 @@ export class My extends Component {
                     backgroundColor: 'rgb(244, 51, 60)',
                     color: '#fff',
                     fontWeight: 700
-                }, onPress: () => this.props.loginOut()
+                }, onPress: () => {
+                    this.props.loginOut()
+                    this.props.clearCartData()
+                }
             }
         ])
     }
@@ -122,6 +125,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loginOut: () => {
             dispatch({type: 'LOGINOUT'})
+        },
+        clearCartData: () => {
+            dispatch({type: 'CLEAR'})
         }
     }
 }

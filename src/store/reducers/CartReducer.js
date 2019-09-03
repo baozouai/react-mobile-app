@@ -21,6 +21,8 @@ export const CartReducer = (state = initState, action) => {
         case 'BUY_NOW':
             var {totalPrice, selectedGoodsTotalNum} = action.payload
             return {...state, totalPrice, selectedGoodsTotalNum}
+        case 'CLEAR': 
+            return {}
             default:
             // 返回默认数据
             return state

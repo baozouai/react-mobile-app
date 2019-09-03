@@ -10,11 +10,11 @@ export class Login extends Component {
         super(props)
 
         this.state = {
-            // 预设用户名和密码
+            // 预设用户名和密码为13999999999，123456
             // 用户名
-            username: '13499999999',
+            username: '',
             // 密码
-            password: '123456'
+            password: ''
         }
     }
     // 点击登录
@@ -39,7 +39,7 @@ export class Login extends Component {
                         // 修改userReducer中的登录状态
                         this.props.changeLoginState({Login: true, token})
                         getCartGoods().then(res => {
-                            console.log(res)
+                            // console.log(res)
                             // 将数据解构处理
                             const { meta: { status }, message } = res.data
                             // 状态码200表示获取购物车数据成功
@@ -113,7 +113,7 @@ export class Login extends Component {
                         type="phone"
                         placeholder="请输入手机号码"
                         // 输入框尾部清空按钮
-                        defaultValue="13499999999"
+                        // defaultValue="13499999999"
                         clear
                         {...getFieldProps('myusername', {
                             // 输入框失焦时验证
@@ -145,7 +145,7 @@ export class Login extends Component {
                     <InputItem
                         type="password"
                         placeholder="请输入密码"
-                        defaultValue="123456"
+                        // defaultValue="123456"
                         clear
                         {...getFieldProps('password', {
                             validateTrigger: 'onBlur',
