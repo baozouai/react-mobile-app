@@ -86,7 +86,7 @@ export class Login extends Component {
                     <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.go(-1)}
+                    onLeftClick={() => this.props.history.push('/')}
                     
                     style={{
                         position: 'fixed',

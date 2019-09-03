@@ -12,9 +12,14 @@ export const UserReducer = (state = initState, action) => {
             // 登录成功则将token存入本地存储，退出则将本地存储的token移除
             action.payload.Login ? sessionStorage.setItem('token', action.payload.token) : sessionStorage.removeItem('token')
             return {...state, loginState: action.payload.Login}
+        // 保存地址信息
         case 'SAVE_ADDRESS_INFO': 
             let {name, phone, address} = action.payload
             return {...state, name, phone, address}
+        // 退出账号
+        case 'LOGINOUT':
+            sessionStorage.removeItem('token')
+            return {...state, loginState: false}
         default:
             return {...state, loginState: sessionStorage.getItem('token')? true: false}
     }

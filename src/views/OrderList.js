@@ -12,6 +12,11 @@ export class OrderList extends Component {
         }
     }
     componentWillMount() {
+         // render之前获取页面是否有id 如果是提交订单后跳转过来的话没有id，Number之后的NaN
+         var id = Number(this.props.location.pathname.split('/').pop())
+         if (id) {
+             this.setState({id})
+         }
         // 获取订单
         getOrder().then(res => {
             console.log(res)
@@ -57,7 +62,7 @@ export class OrderList extends Component {
                         zIndex: 1000
                     }}
                 >我的订单{this.state.count? `(${this.state.count})`: ''}</NavBar>
-                <Tabs tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
+                <Tabs tabs={tabs} initialPage={this.state.id?this.state.id: 0} animated={false} useOnPan={false}>
                 
                 <WingBlank style={{marginTop: 20, marginBottom: 60}}>
 
