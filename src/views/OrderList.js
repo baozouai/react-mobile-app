@@ -79,6 +79,9 @@ export class OrderList extends Component {
                                                     <div className="order-title ellipsis-2">
                                                         { v1.goods_name }
                                                     </div>
+                                                    <div className="num-price">
+                                                        <span>￥{v1.goods_price}</span> X <span>{ v1.goods_number }</span>
+                                                    </div>
                                                     <div className="order-price">
                                                         <span>共{ v1.goods_number }件</span>
                                                         <span>小计：</span>
@@ -231,7 +234,6 @@ export class OrderList extends Component {
 
                                 .order-content {
                                     flex: 4;
-                                    background-color: red;
                                     .order-title {
                                         position: absolute;
                                         top: 15px;
@@ -240,7 +242,11 @@ export class OrderList extends Component {
                                         padding-right: 5px;
 
                                     }
-
+                                    .num-price {
+                                        font-size: 12px;
+                                        color:#666;
+                                        margin-top: 20px;
+                                    }
                                     .order-price {
                                         position: absolute;
                                         bottom: 15px;
@@ -248,6 +254,9 @@ export class OrderList extends Component {
 
                                         span {
                                             font-size: 12px;
+                                            &:nth-of-type(1) {
+                                                margin-right: 5px;
+                                            }
                                         }
                                     }
                                 }
