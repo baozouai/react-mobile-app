@@ -18,9 +18,9 @@ export class Login extends Component {
         }
     }
     UNSAFE_componentWillMount() {
-        // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
-        // 先判断是否有this.props.location.state，有的话以为着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
         if(this.props.location.state && this.props.location.state.from.pathname !== '/login') {
+            // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
+        // 先判断是否有this.props.location.state，有的话以为着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
             Toast.info('请先登录', 1)
         }
     }
@@ -211,9 +211,11 @@ export class Login extends Component {
 }
 // // 创建state映射函数
 
-// const mapStateToProps = (state) => {
-//     return {}
-// }
+const mapStateToProps = (state) => {
+    return {
+        loginState: state.userModule.loginState
+    }
+}
 
 // 创建映射函数，登录成功改变userReducer中的登录状态为true
 const mapActionToProps = (dispatch) => {
@@ -227,4 +229,4 @@ const mapActionToProps = (dispatch) => {
     }
 }
 // 这里目前由于没有mapStateToProps，故将其设为null
-export default connect(null, mapActionToProps)(createForm()(withRouter(Login)))
+export default connect(mapStateToProps, mapActionToProps)(createForm()(withRouter(Login)))

@@ -89,8 +89,9 @@ export class GoodsDetail extends Component {
     }
     // 立即购买
     jumpCart = () => {
-        this.props.buyNow(1, this.state.message.goods_price)
-        this.props.history.push(`/pay/${this.state.message.goods_id}`)
+        // 如果已登录，则跳转到支付页面
+            this.props.buyNow(1, this.state.message.goods_price)
+            this.props.history.push(`/pay/${this.state.message.goods_id}`)
     }
     
 

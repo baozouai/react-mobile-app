@@ -9,10 +9,10 @@ export class Pay extends Component {
 
         this.state = {
             cart_infos_Array: [],
-            id: ''
+            
         }
     }
-    UNSAFE_componentWillMount() {
+    componentWillMount() {
         // render之前获取页面是否有id 如果是购物车跳转过来的话没有id，Number之后的NaN
         var id = Number(this.props.location.pathname.split('/').pop())
         if (id) {
@@ -94,7 +94,7 @@ export class Pay extends Component {
                 <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.goBack()}
+                    onLeftClick={() =>this.props.history.goBack()}
                     style={{
                         position: 'fixed',
                         width: '100%',
@@ -299,6 +299,7 @@ const mapStateToProps = (state) => {
         name: state.userModule.name,
         phone: state.userModule.phone,
         address: state.userModule.address,
+        loginState: state.userModule.loginState
     }
 }        
 export default connect(mapStateToProps)(withRouter(Pay))

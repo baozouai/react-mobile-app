@@ -21,6 +21,8 @@ export class ErrorPage extends Component {
                 <Link to="/">商城首页</Link>
                     <span>|</span>
                 <Link to="/searchfield">搜宝贝</Link>
+                <span>|</span>
+                <Link to="/category">商品分类</Link>
                 </p>
                 </div>
                 </WingBlank>
