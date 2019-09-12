@@ -12,7 +12,7 @@ export class Category extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 页面加载前获取分类数据
         getCategory().then(res => {
             const { meta: { status }, message } = res.data

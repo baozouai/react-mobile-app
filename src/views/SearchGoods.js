@@ -96,10 +96,30 @@ export class SearchGoods extends Component {
                     text="拼命加载啊..."
                     animating={this.state.animating}
                 />
-                <SearchBar
+                <div style={{display: 'flex',backgroundColor: '#efeff4'}}>
+                    <i className="iconfont icon-arrow-left" 
+                    style={{width: 30, alignSelf: 'center',  padding: '0 10px'}}
+                    onClick={() => this.props.history.goBack()}
+                    ></i>
+                    <SearchBar placeholder="搜索你感兴趣的商品"
                     onFocus={() => this.props.history.push('/searchfield')}
                     placeholder="搜索你感兴趣的商品"
+                    style={{flex: 1}}
+                    onCancel={v => this.handleSearch(v)}
+                    onSubmit={v => this.handleSearch(v)}
+                    ref={ref => this.autoFocusInst = ref}
+                    cancelText="搜索"
+                    onChange={v => {
+                        // 中文输入法下输入时会出现先英文，如n'i'h'a'o => 你好，中间会有'的标点，
+                        // 通过判断是否带有此符号来判断是否继续获取搜索建议
+                        if (v.indexOf("'") === -1) {
+                            console.log(v)
+                            this.handleSearchSuggest(v)
+                        }
+                    }}
                 />
+                </div>
+
                 
                 <PullToRefresh
                     damping={60}

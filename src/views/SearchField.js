@@ -45,7 +45,6 @@ export class SearchField extends Component {
                     ></i>
                     <SearchBar placeholder="请输入商品"
                     style={{flex: 1}}
-                    // onCancel={() => this.props.history.goBack()}
                     onCancel={v => this.handleSearch(v)}
                     onSubmit={v => this.handleSearch(v)}
                     ref={ref => this.autoFocusInst = ref}
