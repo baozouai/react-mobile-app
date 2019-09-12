@@ -23,10 +23,7 @@ export class SearchGoods extends Component {
         this.setState({ animating: true })
         // 获取搜索值
         var searchValue = this.props.match.params.goodsvalue
-        // if (query.indexOf('cid') !== -1) {
-        //     query = qs.parse(query)
-        // }
-        // console.log(query);
+        
         // // 商品商品
         searchGoods(searchValue).then(res => {
             // 解构赋值
@@ -43,7 +40,6 @@ export class SearchGoods extends Component {
                     Toast.info('没有这类商品，正在跳转回首页...', 2, () => this.props.history.push('/'))
                    
                 }
-                console.log(goods)
                 this.setState({
                     goodsList: goods
                 })

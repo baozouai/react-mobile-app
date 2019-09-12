@@ -143,6 +143,9 @@ export class OrderList extends Component {
                                                     <div className="order-title ellipsis-2">
                                                         { v1.goods_name }
                                                     </div>
+                                                    <div className="num-price">
+                                                        <span>￥{v1.goods_price}</span> X <span>{ v1.goods_number }</span>
+                                                    </div>
                                                     <div className="order-price">
                                                         <span>共{ v1.goods_number }件</span>
                                                         <span>小计：</span>
@@ -160,7 +163,7 @@ export class OrderList extends Component {
                                                 </div>
                                                 <div>
                                                     <span>创建时间：</span>
-                                                    <span></span>
+                                                    <span>{ this.convertTime(v.create_time) }</span>
                                                 </div>
                                                 <div>
                                                     <span>地址：</span>

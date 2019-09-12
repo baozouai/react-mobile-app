@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from './layout/Layout'
 import Home from './views/Home'
+import Category from './views/Category'
 import Cart from './views/Cart'
 import My from './views/My'
 import Pay from './views/Pay'
@@ -21,6 +22,7 @@ function App() {
       <div style={{ height: '100%' }}>
         <Switch>
           <Route path='/' exact render={props => <Layout {...props}><Home></Home></Layout>}></Route>
+          <Route path='/category' exact render={props => <Layout {...props}><Category></Category></Layout>}></Route>
           <Route path='/login' render={props => <Layout {...props}><Login></Login></Layout>}></Route>
           <Route path='/my' render={props => <Layout {...props}><PrivateRoute component={My}></PrivateRoute></Layout>}></Route>
           <Route path='/cart' render={props => <Layout {...props}><PrivateRoute path="/cart" component={Cart}></PrivateRoute></Layout>}></Route>

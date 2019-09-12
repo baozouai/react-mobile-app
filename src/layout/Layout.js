@@ -8,6 +8,7 @@ export class Layout extends Component {
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
         barTintColor="white"
+        
       >
         {/* 
           unselectedTintColor	未选中的字体颜色
@@ -31,7 +32,18 @@ export class Layout extends Component {
           onPress={() => {this.props.history.push('/')}}
         >
           {/* 利用props.children接收Layout组件innerHTML位置的内容 */}
-          {this.props.children}
+          { this.props.location.pathname === '/' ? this.props.children : null }
+        </TabBar.Item>
+        <TabBar.Item
+          title="分类"
+          key="Category"
+          icon={<i className="iconfont icon-fenlei"></i>}
+          selectedIcon={<i className="iconfont icon-fenlei" style={{color: '#33A3F4'}}></i>}
+          selected={this.props.location.pathname === '/category'}
+          onPress={() => {this.props.history.push('/category')}}
+        >
+          {/* 利用props.children接收Layout组件innerHTML位置的内容 */}
+          { this.props.location.pathname === '/category' ? this.props.children : null }
         </TabBar.Item>
         <TabBar.Item
           title="购物车"
@@ -41,7 +53,7 @@ export class Layout extends Component {
           selected={this.props.location.pathname === '/cart'}
           onPress={() => {this.props.history.push('/cart')}}
         >
-          {this.props.children}
+          { this.props.location.pathname === '/cart' ? this.props.children : null }
         </TabBar.Item>
         <TabBar.Item
           title="我的"
@@ -52,9 +64,10 @@ export class Layout extends Component {
           selected={['/login', '/register', '/my'].includes(this.props.location.pathname)}
           onPress={() => {this.props.history.push('/my')}}
         >
-          {this.props.children}
+          { ['/login', '/register', '/my'].includes(this.props.location.pathname) ? this.props.children : null }
         </TabBar.Item>
       </TabBar>
+      
     )
   }
 }
