@@ -20,21 +20,24 @@ export class Login extends Component {
     // 点击登录
     handleLogin = () => {
         this.props.form.validateFields((error, value) => {
+            console.log(value);
             if (error) {
                 // 有错误,校验不通过
                 Toast.fail('请检查数据是否填写正确', 2)
             } else {
                 let obj = {
                     // 这里的号码格式是139 9999 9999 ，提交之前把中间的空格去掉
-                    username: this.state.username.replace(/\s/g, ''),
-                    password: this.state.password
+                    username: value.username.replace(/\s/g, ''),
+                    password: value.password
                   }
                 submitLogin(obj).then(res => {
                     // 解构赋值
-                    const {meta: {status, msg}, message: {token}} = res.data
+                    console.log(res);
+                    const {meta: {status, msg}, message} = res.data
                     // 状态码为200的即登录成功
                     if (status === 200) {
                         // 登录成功将token设置在请求头
+                        let {token} = message
                         axios.defaults.headers.common['Authorization'] = token
                         // 修改userReducer中的登录状态
                         this.props.changeLoginState({Login: true, token})
@@ -45,7 +48,10 @@ export class Login extends Component {
                             // 状态码200表示获取购物车数据成功
                             if (status === 200) {
                                 // 判断购物车是否为空
-                                if (Object.values(JSON.parse(message.cart_info)).length) {
+                                console.log(message);
+                                console.log('message.cart_info = ',message.cart_info);
+
+                                if (message.cart_info) {
                                     // 不为空的话同步购物车，修改CartReducer中购物车数量
                                     this.props.snycCartGoods(Object.values(JSON.parse(message.cart_info)))
                                 }
@@ -64,6 +70,8 @@ export class Login extends Component {
                         Toast.success(msg, 2, () => {
                             this.props.history.push(pathname)
                         })
+                    } else {
+                        Toast.fail(msg, 2)
                     }
                 })
             }
@@ -115,7 +123,7 @@ export class Login extends Component {
                         // 输入框尾部清空按钮
                         // defaultValue="13499999999"
                         clear
-                        {...getFieldProps('myusername', {
+                        {...getFieldProps('username', {
                             // 输入框失焦时验证
                             validateTrigger: 'onBlur',
                             // 验证规则
@@ -126,10 +134,10 @@ export class Login extends Component {
                         })
                         }
                         // 验证不通过时设置error为true
-                        error={getFieldError('myusername') ? true : false}
+                        error={getFieldError('username') ? true : false}
                         // 点击右侧的错误弹出提示
                         onErrorClick={() => {
-                            Toast.info(getFieldError('myusername')[0], 2)
+                            Toast.info(getFieldError('username')[0], 2)
                         }}
                         // 输入框输入改变时同步数据到state中的username
                         onChange={v => {

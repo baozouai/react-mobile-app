@@ -32,18 +32,14 @@ export class Register extends Component {
                 // 有错误,校验不通过
                 Toast.fail('请检查数据是否填写正确', 2)
             } else {
-
                 var mobile = this.state.mobile.replace(/\s/g, '')
-                console.log(mobile)
-                console.log(this.state)
                 submitRegister({ ...this.state, mobile }).then(res => {
-                    console.log(res);
                     const { meta: { status, msg } } = res.data
                     if (status === 200) {
                         // 提示注册成功
                         Toast.success(msg)
-                        // 注册成功后返回首页
-                        this.props.history.push('/')
+                        // 注册成功后返回登录页面
+                        this.props.history.push('/register')
                     }
                 })
             }
@@ -107,7 +103,7 @@ export class Register extends Component {
                         placeholder="请输入手机号码"
                         // 输入框尾部清空按钮
                         clear
-                        {...getFieldProps('phone', {
+                        {...getFieldProps('mobile', {
                             // 输入框失焦时验证
                             validateTrigger: 'onBlur',
                             // 验证规则
@@ -118,10 +114,10 @@ export class Register extends Component {
                         })
                         }
                         // 验证不通过时设置error为true
-                        error={getFieldError('phone') ? true : false}
+                        error={getFieldError('mobile') ? true : false}
                         // 点击右侧的错误弹出提示
                         onErrorClick={() => {
-                            Toast.info(getFieldError('phone')[0], 2)
+                            Toast.info(getFieldError('mobile')[0], 2)
                         }}
                         // 输入框输入改变时同步数据到state中的username
                         onChange={v => {
@@ -212,7 +208,7 @@ export class Register extends Component {
                         type="password"
                         placeholder="请输入密码"
                         clear
-                        {...getFieldProps('password', {
+                        {...getFieldProps('pwd', {
                             validateTrigger: 'onBlur',
                             rules: [
                                 {
@@ -224,9 +220,9 @@ export class Register extends Component {
                             ]
                         })}
 
-                        error={getFieldError('password') ? true : false}
+                        error={getFieldError('pwd') ? true : false}
                         onErrorClick={() => {
-                            Toast.fail(getFieldError('password')[0], 2)
+                            Toast.fail(getFieldError('pwd')[0], 2)
                         }}
                         onChange={v => {
                             this.setState({
