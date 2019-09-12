@@ -96,7 +96,7 @@ export class My extends Component {
         <TabBar.Item
           title="待付款"
           key="a"
-          icon={<i className="iconfont icon-daifahuo"></i>}
+          icon={<i className="iconfont icon-daifukuan"></i>}
           onPress={() => {this.props.history.push('/order/1')}}
         >
 
