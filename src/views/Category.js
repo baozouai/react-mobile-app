@@ -50,6 +50,7 @@ export class Category extends Component {
                 <Tabs className="tabs"
                     tabs={cates}
                     initalPage={0}
+                    animated={false}
                     useOnPan={true}
                     tabBarTextStyle={
                         {
@@ -63,7 +64,7 @@ export class Category extends Component {
                         }
                     }
                     onTabClick={v => console.log(cates.indexOf(v))}
-                    renderTabBar={props => <Tabs.DefaultTabBar {...props} page={15} />}
+                    renderTabBar={props => <Tabs.DefaultTabBar {...props} page={12} />}
                     tabBarPosition="left"
                     tabDirection="vertical"
                 >

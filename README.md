@@ -44,6 +44,7 @@
         ├── ErrorPage.js // 404页面
         ├── GoodsDetail.js // 商品详情页面
         ├── Home.js // 首页
+				├── Category.js // 商品分类
         ├── Login.js // 登录页面
         ├── My.js // 我的页面
         ├── OrderList.js // 订单列表页面
