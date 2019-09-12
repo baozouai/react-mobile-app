@@ -17,40 +17,40 @@
 └── src
     ├── App.js
     ├── api
-    │   └── index.js
+    │   └── index.js // 请求api总文件
     ├── assets
     │   └── imgs
-    │       └── cart_empty.png
+    │       └── cart_empty.png // 购物车为空图片
     ├── components
-    │   └── PrivateRoute.js
+    │   └── PrivateRoute.js // 私有路由
     ├── data
-    │   └── citys.js
+    │   └── citys.js // 城市信息
     ├── index.js
     ├── layout
-    │   └── Layout.js
+    │   └── Layout.js // 底部导航栏
     ├── store
     │   ├── reducers
-    │   │   ├── CartReducer.js
-    │   │   ├── UserReducer.js
-    │   │   └── reducer.js
+    │   │   ├── CartReducer.js // 存储购物车数据的reducer
+    │   │   ├── UserReducer.js // 存储用户数据的reducer
+    │   │   └── reducer.js // 总reducer
     │   └── store.js
     ├── style
     │   └── index.css
     ├── upload
-    │   └── avatar.png
+    │   └── avatar.png // 用户头像
     └── views
-        ├── AddressInfo.js
-        ├── Cart.js
-        ├── ErrorPage.js
-        ├── GoodsDetail.js
-        ├── Home.js
-        ├── Login.js
-        ├── My.js
-        ├── OrderList.js
-        ├── Pay.js
-        ├── Register.js
-        ├── SearchField.js
-        └── SearchGoods.js
+        ├── AddressInfo.js // 地址信息页面
+        ├── Cart.js // 购物车页面
+        ├── ErrorPage.js // 404页面
+        ├── GoodsDetail.js // 商品详情页面
+        ├── Home.js // 首页
+        ├── Login.js // 登录页面
+        ├── My.js // 我的页面
+        ├── OrderList.js // 订单列表页面
+        ├── Pay.js // 支付页面
+        ├── Register.js // 注册页面
+        ├── SearchField.js // 搜索区域页面
+        └── SearchGoods.js // 搜索商品结果页面
 ```
 
 ## 二、快速安装
