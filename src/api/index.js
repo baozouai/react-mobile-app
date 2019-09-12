@@ -9,6 +9,7 @@ axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('token')
 export const getHomeCarousel = () => axios.get('/home/swiperdata')
 // 获取首页商品列表数据
 export const getHomeGoodslist = () => axios.get('/home/goodslist')
+export const getCategory = () => axios.get('/categories')
 // 获取商品详情
 export const getGoogdDetail = (id) => axios.get('/goods/detail?goods_id=' + id)
 // 登录账号

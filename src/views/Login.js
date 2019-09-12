@@ -221,8 +221,8 @@ const mapActionToProps = (dispatch) => {
         changeLoginState: (newState) => {
             dispatch({type: 'CHANGE_LOGIN_STATE', payload: newState})
         },
-        snycCartGoods: (cartInfos) => {
-            dispatch({type: 'SYNC_CART_GOODS', payload: {cartInfos}})
+        snycCartGoods: (cart_Infos) => {
+            dispatch({type: 'SYNC_CART_GOODS', payload: {cart_Infos}})
         }
     }
 }

@@ -35,7 +35,7 @@
     │   │   └── reducer.js // 总reducer
     │   └── store.js
     ├── style
-    │   └── index.css
+    │   └── index.css // 全局样式
     ├── upload
     │   └── avatar.png // 用户头像
     └── views

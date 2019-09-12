@@ -22,9 +22,10 @@ export const CartReducer = (state = initState, action) => {
             return {...state, ...action.payload}
         case 'CLEAR': 
             return {}
-            default:
-            // 返回默认数据
-            return state
+        default:
+        // 返回默认数据
+        console.log(state);
+        return state
     }
     
 }
