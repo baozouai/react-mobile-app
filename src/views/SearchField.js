@@ -31,7 +31,7 @@ export class SearchField extends Component {
     handleSearchSimilar = (cid) => {
         this.props.history.push('/searchgoods/cid=' + cid)
     }
-    componentDidMount() {
+    UNSAFE_componentDidMount() {
         // 自动聚焦
         this.autoFocusInst.focus();
     }

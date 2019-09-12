@@ -17,6 +17,13 @@ export class Login extends Component {
             password: ''
         }
     }
+    UNSAFE_componentWillMount() {
+        // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
+        // 先判断是否有this.props.location.state，有的话以为着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
+        if(this.props.location.state && this.props.location.state.from.pathname !== '/login') {
+            Toast.info('请先登录', 1)
+        }
+    }
     // 点击登录
     handleLogin = () => {
         this.props.form.validateFields((error, value) => {
@@ -73,13 +80,7 @@ export class Login extends Component {
         })
         
     }
-    UNSAFE_componentWillMount() {
-        // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
-        // 先判断是否有this.props.location.state，有的话以为着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
-        if(this.props.location.state && this.props.location.state.from.pathname !== '/login') {
-            Toast.info('请先登录', 1)
-        }
-    }
+    
     render() {
         const { getFieldError, getFieldProps } = this.props.form;
         return (

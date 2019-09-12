@@ -72,11 +72,6 @@ export class Home extends Component {
         
     }
 
-    // 页面加载完后
-    componentDidMount() {
-
-
-    }
     // 找相似
     handleSearchSimilar = (cid) => {
         this.props.history.push('/searchgoods/' + qs.stringify({cid}))

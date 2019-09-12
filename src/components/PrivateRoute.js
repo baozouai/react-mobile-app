@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 function PrivateRoute({ component: Component, loginState, ...rest }) {
-    // console.log('loginState = ', loginState)
     return (
         <Route
             {...rest}

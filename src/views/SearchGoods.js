@@ -55,7 +55,7 @@ export class SearchGoods extends Component {
             }
         })
     }
-    componentDidMount() {
+    UNSAFE_componentDidMount() {
         const height = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
         this.setState({
             height
