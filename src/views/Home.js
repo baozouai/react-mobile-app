@@ -87,7 +87,7 @@ export class Home extends Component {
               />
                 <SearchBar placeholder={this.state.placeholderPre}
                     onFocus={() => this.props.history.push('/searchfield')}
-                    style={{position:'fixed', top: 0, left: 0, width: '100%'}}
+                    style={{position:'fixed', top: 0, left: 0, width: '100%',zIndex:999}}
                     />
                 
                 <Carousel
