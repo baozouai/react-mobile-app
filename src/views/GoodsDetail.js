@@ -27,7 +27,7 @@ export class GoodsDetail extends Component {
     }
 
     // 页面加载后获取数据
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 一开始设置等待
         this.setState({ animating: true })
         getGoogdDetail(this.state.id).then(res => {

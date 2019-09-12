@@ -11,8 +11,9 @@ import Register from './views/Register'
 import GoodsDetail from './views/GoodsDetail';
 import SearchField from './views/SearchField';
 import SearchGoods from './views/SearchGoods';
+import ErrorPage from './views/ErrorPage';
 import PrivateRoute from './components/PrivateRoute'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path='/goodsdetail/:id' render={props => <GoodsDetail {...props}></GoodsDetail>}></Route>
           <Route path='/searchfield' render={props => <SearchField {...props}></SearchField>}></Route>
           <Route path='/searchgoods/:goodsvalue' render={props => <SearchGoods {...props}></SearchGoods>}></Route>
+          <Route path='/404' render={props => <ErrorPage {...props}></ErrorPage>}></Route>
+          <Redirect to="/404"></Redirect>
         </Switch>
       </div>
     </Router>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import {withRouter} from 'react-router-dom'
-import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar, ActivityIndicator, Button } from 'antd-mobile';
+import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar, ActivityIndicator} from 'antd-mobile';
 import { getHomeCarousel, getHomeGoodslist } from '../api/index'
 import qs from 'querystring'
 export class Home extends Component {
@@ -21,12 +21,9 @@ export class Home extends Component {
             animating: false
         }
     }
-    componentWillUnmount() {
-
-      }
-      
+    
     // 在render之前获取数据
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 一开始设置等待
         this.setState({animating: true})
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {getUserInfo} from '../api/index'
-import avatar from '../upload/avatar.png'
-import {TabBar, NavBar, Icon, Card, Button, Modal} from 'antd-mobile'
+import {TabBar, Card, Button, Modal} from 'antd-mobile'
 import {connect} from 'react-redux'
 const alert = Modal.alert;
 export class My extends Component {
@@ -12,17 +11,15 @@ export class My extends Component {
             
         }
     }
-    componentWillMount() {
-       
+    UNSAFE_componentWillMount() {
         // 获取用户信息
         getUserInfo().then(res => {
-            console.log(res.data)
             const {meta: {status}, message} = res.data
-            this.setState({
-                phone: message.user_tel,
-                email: message.user_email,
-                sex: message.user_sex
-            })
+            if (status === 200) {
+                this.setState({
+                    phone: message.user_tel
+                })
+            }
         })
        
     }
@@ -43,7 +40,9 @@ export class My extends Component {
                     color: '#fff',
                     fontWeight: 700
                 }, onPress: () => {
+                    // 退出
                     this.props.loginOut()
+                    // 清除cartReducer中的数据
                     this.props.clearCartData()
                 }
             }
@@ -52,7 +51,6 @@ export class My extends Component {
     
     
     render() {
-        const { files } = this.state;
         return (
             <div>
                 <Card>
@@ -120,16 +118,18 @@ export class My extends Component {
         )
     }
 }
-
+// 创建映射函数
 const mapDispatchToProps = (dispatch) => {
     return {
+        // 退出
         loginOut: () => {
             dispatch({type: 'LOGINOUT'})
         },
+        // 清除cartReducer中的数据
         clearCartData: () => {
             dispatch({type: 'CLEAR'})
         }
     }
 }
-
+// 由于这里没有mapStateToProps，所以connect第一个参数设置为null
 export default connect(null, mapDispatchToProps)(My)

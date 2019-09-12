@@ -57,7 +57,6 @@ export class Register extends Component {
 
             getVerigyCode(mobile).then(res => {
                 // 将验证码赋值给输入框
-                console.log(res)
                 const { meta: { status }, message } = res.data
                 if (status === 200) {
                     this.setState({

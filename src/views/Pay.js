@@ -12,7 +12,7 @@ export class Pay extends Component {
             id: ''
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // render之前获取页面是否有id 如果是购物车跳转过来的话没有id，Number之后的NaN
         var id = Number(this.props.location.pathname.split('/').pop())
         if (id) {

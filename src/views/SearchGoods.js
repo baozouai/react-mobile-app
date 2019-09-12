@@ -18,7 +18,7 @@ export class SearchGoods extends Component {
             pagenum: 2,
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 一开始设置等待
         this.setState({ animating: true })
         // 获取搜索值

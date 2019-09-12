@@ -8,9 +8,8 @@ import {withRouter} from 'react-router-dom'
 // https://github.com/ant-design/ant-design-mobile/issues/307
 // https://github.com/ant-design/ant-design-mobile/issues/163
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let moneyKeyboardWrapProps;
 if (isIPhone) {
-  moneyKeyboardWrapProps = {
+  let moneyKeyboardWrapProps = {
     onTouchStart: e => e.preventDefault(),
   };
 }
@@ -43,7 +42,6 @@ export class AddressInfo extends Component {
 }
     
     render() {
-        const Item = List.Item;
         const { getFieldProps, getFieldError } = this.props.form;
         return (
             <div>

@@ -31,7 +31,7 @@ export class Cart extends Component {
             manage: true,
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // render之前获取购物车数据
         this.init()
     }
@@ -43,7 +43,6 @@ export class Cart extends Component {
             const { meta: { status }, message: { cart_info } } = res.data
             // 状态码200表示获取购物车数据成功
             if (status === 200) {
-                console.log(res)
                 // 判断购物车是否为空
                 if (cart_info) {
                     // 不为空的话设置其标志，以便是否显示购物车为空的图片标志，并将购物车数据解析后存入state的cart_infos
@@ -93,9 +92,11 @@ export class Cart extends Component {
     // 改变对应商品是否选择的状态
     changeSingleSelectedStatus = (e, goods_id) => {
         // 同步状态
-        this.state.cart_infos[goods_id].selectedStatus = e.target.checked
+        // let 
+        let cart_infos = this.state.cart_infos
+        cart_infos[goods_id].selectedStatus = e.target.checked
         this.setState({
-            cart_infos: this.state.cart_infos
+            cart_infos: cart_infos
         })
         // 判断所有商品是否都选中
         this.isAllSelected()

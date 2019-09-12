@@ -19,8 +19,7 @@ export const CartReducer = (state = initState, action) => {
             return {...state}
         // 点击结算时保存购物车数据
         case 'BUY_NOW':
-            var {totalPrice, selectedGoodsTotalNum} = action.payload
-            return {...state, totalPrice, selectedGoodsTotalNum}
+            return {...state, ...action.payload}
         case 'CLEAR': 
             return {}
             default:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs, NavBar, Icon, WingBlank, WhiteSpace } from 'antd-mobile';
+import { Tabs, NavBar, Icon, WingBlank } from 'antd-mobile';
 
 import { getOrder } from '../api/index'
 export class OrderList extends Component {
@@ -11,7 +11,7 @@ export class OrderList extends Component {
             orders: []
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
          // render之前获取页面是否有id 如果是提交订单后跳转过来的话没有id，Number之后的NaN
          var id = Number(this.props.location.pathname.split('/').pop())
          if (id) {
@@ -19,15 +19,13 @@ export class OrderList extends Component {
          }
         // 获取订单
         getOrder().then(res => {
-            console.log(res)
             const { meta: { status }, message: {count, orders} } = res.data
-            this.setState({
-                count,
-                orders
-            }, () => {
-                console.log(this.state.count)
-                console.log(this.state.orders)
-            })
+            if (status === 200) {
+                this.setState({
+                    count,
+                    orders
+                })
+            }
         })
         
     }

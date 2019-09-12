@@ -20,7 +20,7 @@ export class Login extends Component {
     // 点击登录
     handleLogin = () => {
         this.props.form.validateFields((error, value) => {
-            console.log(value);
+            // value为getFieldProps中指定的值
             if (error) {
                 // 有错误,校验不通过
                 Toast.fail('请检查数据是否填写正确', 2)
@@ -32,7 +32,6 @@ export class Login extends Component {
                   }
                 submitLogin(obj).then(res => {
                     // 解构赋值
-                    console.log(res);
                     const {meta: {status, msg}, message} = res.data
                     // 状态码为200的即登录成功
                     if (status === 200) {
@@ -42,15 +41,11 @@ export class Login extends Component {
                         // 修改userReducer中的登录状态
                         this.props.changeLoginState({Login: true, token})
                         getCartGoods().then(res => {
-                            // console.log(res)
                             // 将数据解构处理
                             const { meta: { status }, message } = res.data
                             // 状态码200表示获取购物车数据成功
                             if (status === 200) {
                                 // 判断购物车是否为空
-                                console.log(message);
-                                console.log('message.cart_info = ',message.cart_info);
-
                                 if (message.cart_info) {
                                     // 不为空的话同步购物车，修改CartReducer中购物车数量
                                     this.props.snycCartGoods(Object.values(JSON.parse(message.cart_info)))
@@ -78,7 +73,7 @@ export class Login extends Component {
         })
         
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
         // 先判断是否有this.props.location.state，有的话以为着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
         if(this.props.location.state && this.props.location.state.from.pathname !== '/login') {
