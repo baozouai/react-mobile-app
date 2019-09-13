@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { Carousel } from 'antd-mobile'
-import { getGoogdDetail } from '../api';
-import { NavBar, Icon, Badge, SegmentedControl, WingBlank, WhiteSpace, Toast } from 'antd-mobile';
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {addCart, getCartGoods} from '../api/index'
+import { connect } from 'react-redux'
+import { getGoodsDetail, addCart, getCartGoods } from '../api';
+import { NavBar, Carousel, Icon, Badge, SegmentedControl, WingBlank, WhiteSpace, Toast } from 'antd-mobile';
 export class GoodsDetail extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             message: {},
             id: this.props.match.params.id,
@@ -25,23 +22,24 @@ export class GoodsDetail extends Component {
             display2: 'none'
         }
     }
-
     // 页面加载后获取数据
     UNSAFE_componentWillMount() {
         // 一开始设置等待
         this.setState({ animating: true })
-        getGoogdDetail(this.state.id).then(res => {
+        // 获取商品详情
+        getGoodsDetail(this.state.id).then(res => {
             const { meta: { status }, message } = res.data
-            const {
-                pics,
-                goods_name,
-                goods_price,
-                add_time,
-                goods_number,
-                goods_introduce,
-                attrs } = message
             // 获取数据成功
             if (status === 200) {
+                // 解构赋值
+                const {
+                    pics,
+                    goods_name,
+                    goods_price,
+                    add_time,
+                    goods_number,
+                    goods_introduce,
+                    attrs } = message
                 // 将获取到的轮播图数据复制给carouselList
                 this.setState({
                     carouselList: pics,
@@ -58,6 +56,7 @@ export class GoodsDetail extends Component {
     }
     // 添加商品到购物车
     addGoodsToCart = () => {
+        // 如果已登录，则直接添加到购物车
         if (this.props.loginState) {
             let info = {}
             info.cat_id = this.state.message.cat_id
@@ -66,13 +65,14 @@ export class GoodsDetail extends Component {
             info.goods_number = this.state.message.goods_number
             info.goods_price = this.state.message.goods_price
             info.goods_small_logo = this.state.message.goods_small_logo
-            info.goods_weight = this.state.message.goods_weight        
-            addCart({info: JSON.stringify(info)}).then(res => {
-                const {meta: {status}} = res.data
+            info.goods_weight = this.state.message.goods_weight
+            addCart({ info: JSON.stringify(info) }).then(res => {
+                const { meta: { status } } = res.data
                 if (status === 200) {
                     // 商品数量+1，改变cartReducer中的商品总数
                     this.props.addCart()
                 }
+                // 同步购物车
                 getCartGoods()
             })
             Toast.success('添加成功，在购物车等亲', 2)
@@ -81,7 +81,6 @@ export class GoodsDetail extends Component {
                 this.props.history.push('/login')
             })
         }
-        
     }
     // 跳转到购物车
     jumpCart = () => {
@@ -90,11 +89,10 @@ export class GoodsDetail extends Component {
     // 立即购买
     jumpCart = () => {
         // 如果已登录，则跳转到支付页面
-            this.props.buyNow(1, this.state.message.goods_price)
-            this.props.history.push(`/pay/${this.state.message.goods_id}`)
+        // 立即购买的话设置商品总数量为1，价格为单价
+        this.props.buyNow(1, this.state.message.goods_price)
+        this.props.history.push(`/pay/${this.state.message.goods_id}`)
     }
-    
-
     render() {
         return (
             <div>
@@ -114,6 +112,7 @@ export class GoodsDetail extends Component {
                 >商品详情</NavBar>
                 {/* 轮播图区域 */}
                 <Carousel
+                    // 自动轮播
                     autoplay={true}
                     infinite
                     style={{
@@ -136,14 +135,12 @@ export class GoodsDetail extends Component {
                     <div className="good-describe">{this.state.goods_name}</div>
                     <div className="good-price"><span>&yen;</span>{this.state.goods_price}</div>
                 </div>
-
-
-                <WingBlank size="lg" className="sc-example">
+                <WingBlank size="lg" className="good-wrap">
                     <div className="good-select">
                         <ul>
                             <li>
                                 <span>上架时间</span>
-                                <span>{new Date(parseInt(this.state.add_time) * 1000).toLocaleString().replace(/\//g, '-').slice(0, 9)}</span>
+                                <span>{new Date(parseInt(this.state.add_time) * 1000).toLocaleString().replace(/\//g, '-').slice(0, 9).replace('8', '9')}</span>
                             </li>
                             <li>
                                 <span>库存</span>
@@ -175,16 +172,12 @@ export class GoodsDetail extends Component {
                         }}
                     />
                     <WhiteSpace />
-
-
                 </WingBlank>
                 {/* 图文详情 */}
                 <div style={{ display: this.state.display1 }} className="goods_info" dangerouslySetInnerHTML={{ __html: this.state.goods_introduce }}>
-
                 </div>
                 {/* 规格参数 */}
                 <div style={{ display: this.state.display2 }}>
-
                     {this.state.attrs.map(v => (
                         <div key={v.attr_id} className="good-param">
                             <div>{v.attr_name.split('-')[0]}</div>
@@ -194,14 +187,11 @@ export class GoodsDetail extends Component {
                             </div>
                         </div>
                     ))}
-
                 </div>
                 <WhiteSpace size="lg" />
                 <WhiteSpace size="lg" />
                 <WhiteSpace size="lg" />
                 <WhiteSpace size="lg" />
-
-
                 {/* 页面底部加入购物车 */}
                 <div className="goods-footer">
                     <div className="goods-footer-item contact">
@@ -227,8 +217,6 @@ export class GoodsDetail extends Component {
                                 }}>
                             </Badge>
                         </span>
-
-
                     </div>
                     <div className="goods-footer-item add" onClick={this.addGoodsToCart}>
                         <span>加入购物车</span>
@@ -238,8 +226,8 @@ export class GoodsDetail extends Component {
                     </div>
                 </div>
                 <style jsx>{`
-                .sc-example {
-                    margin: 13px 0;
+                    .good-wrap {
+                        margin: 13px 0;
                     }
                     .good-content {
                         padding: 10px;
@@ -253,7 +241,6 @@ export class GoodsDetail extends Component {
                             font-weight: bold;
                             span {
                                 font-size: 12px;
-                                
                             }
                         }
                     }
@@ -262,7 +249,7 @@ export class GoodsDetail extends Component {
                             display: flex;
                             padding: 10px;
                             font-size: 14px;
-                            border-bottom: 1px solid #333;
+                            border-bottom: 1px solid #999;
                             span:nth-of-type(1) {
                                 color: #ccc;
                                 flex: 1;
@@ -273,7 +260,7 @@ export class GoodsDetail extends Component {
                         }
                     }
                     .good-param {
-                        background-color: #eee;
+
                         div {
                             padding: 10px;
                         }
@@ -358,17 +345,17 @@ const mapStateToProps = state => {
     return {
         totalNum: state.CartModule.totalNum,
         loginState: state.userModule.loginState
-    }   
+    }
 }
 
 // 创建映射dispatch函数
 const mapDispatchToProps = dispatch => {
     return {
         addCart: () => {
-            dispatch({type: 'ADD_CART'})
+            dispatch({ type: 'ADD_CART' })
         },
         buyNow: (selectedGoodsTotalNum, totalPrice) => {
-            dispatch({type: 'BUY_NOW', payload: {selectedGoodsTotalNum, totalPrice}})
+            dispatch({ type: 'BUY_NOW', payload: { selectedGoodsTotalNum, totalPrice } })
         }
     }
 }

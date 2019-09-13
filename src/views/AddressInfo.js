@@ -4,15 +4,7 @@ import { List, InputItem , NavBar, Icon, Toast, Flex, Button, WhiteSpace, Picker
 import {cityData} from '../data/citys'
 import { createForm } from 'rc-form';
 import {withRouter} from 'react-router-dom'
-// 通过自定义 moneyKeyboardWrapProps 修复虚拟键盘滚动穿透问题
-// https://github.com/ant-design/ant-design-mobile/issues/307
-// https://github.com/ant-design/ant-design-mobile/issues/163
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-if (isIPhone) {
-  let moneyKeyboardWrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+
 export class AddressInfo extends Component {
     constructor(props) {
         super(props)
@@ -40,7 +32,6 @@ export class AddressInfo extends Component {
             }
     })
 }
-    
     render() {
         const { getFieldProps, getFieldError } = this.props.form;
         return (
@@ -49,7 +40,6 @@ export class AddressInfo extends Component {
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.goBack()}
-                    
                     style={{
                         position: 'fixed',
                         width: '100%',
@@ -67,8 +57,7 @@ export class AddressInfo extends Component {
                 >
                     <InputItem
                         placeholder="请输入收货人名字"
-                        // 输入框尾部清空按钮
-                        
+                        // 输入框尾部清空按钮 
                         clear
                         {...getFieldProps('name', {
                             // 输入框失焦时验证
@@ -102,7 +91,6 @@ export class AddressInfo extends Component {
                         type="phone"
                         placeholder="请输入手机号码"
                         // 输入框尾部清空按钮
-                        
                         clear
                         {...getFieldProps('phone', {
                             // 输入框失焦时验证
@@ -131,14 +119,12 @@ export class AddressInfo extends Component {
                     >
                        <span style={{color: 'red'}}>*</span> 手机号码
                     </InputItem>
-                    <Picker extra="请选择(可选)"
+                    <Picker
                         data={cityData}
                         title="Areas"
                         {...getFieldProps('district', {
                             initialValue: ["440000", "440100", "440106"],
                         })}
-                        onOk={e => console.log('ok', e)}
-                        onDismiss={e => console.log('dismiss', e)}
                         >
                         <List.Item arrow="horizontal"><span style={{color: 'red'}}>*</span>地区</List.Item>
                     </Picker>
@@ -178,7 +164,6 @@ export class AddressInfo extends Component {
                         placeholder="请输入邮编（非必须）"
                         // 输入框尾部清空按钮
                         clear
-                        
                         // 输入框输入改变时同步数据到state中的emailCode
                         onChange={v => {
                             this.setState({
@@ -191,28 +176,26 @@ export class AddressInfo extends Component {
                        邮编
                     </InputItem>
                     <TextareaItem
-                        
                         placeholder="备注信息"
                         rows={5}
                         count={100}
                     />
                     <WhiteSpace />
-                    <Flex justify="center">
-                    
-                    <Button type="primary"   size="small" 
-                    className="bottom-button"
-                    style={{marginRight: 10}}
-                    onClick={this.SaveAddressInfo}>
-                        保存
-                        
-                        </Button>
-                    <Button type="warning"  size="small" 
-                    className="bottom-button"
-                    onClick={() => this.props.history.goBack()}>
-                        取消
-                    </Button>     
-                          
-                    </Flex>
+                        <Flex justify="center">
+                            <Button type="primary"   size="small" 
+                                className="bottom-button"
+                                style={{marginRight: 10}}
+                                onClick={this.SaveAddressInfo}
+                            >
+                                保存
+                            </Button>
+                            <Button type="warning"  size="small" 
+                                className="bottom-button"
+                                onClick={this.props.history.goBack}
+                            >
+                                取消
+                            </Button>      
+                        </Flex>
                     <WhiteSpace/>     
                 </List>
             </div>

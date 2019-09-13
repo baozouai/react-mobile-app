@@ -11,7 +11,7 @@ export const getHomeCarousel = () => axios.get('/home/swiperdata')
 export const getHomeGoodslist = () => axios.get('/home/goodslist')
 export const getCategory = () => axios.get('/categories')
 // 获取商品详情
-export const getGoogdDetail = (id) => axios.get('/goods/detail?goods_id=' + id)
+export const getGoodsDetail = (id) => axios.get('/goods/detail?goods_id=' + id)
 // 登录账号
 export const submitLogin = (userInfoObj) => axios.post('/login', qs.stringify(userInfoObj))
 // 注册账号

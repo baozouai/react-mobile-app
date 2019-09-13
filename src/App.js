@@ -22,7 +22,7 @@ function App() {
       <div style={{ height: '100%' }}>
         <Switch>
           <Route path='/' exact render={props => <Layout {...props}><Home></Home></Layout>}></Route>
-          <Route path='/category' exact render={props => <Category {...props}></Category>}></Route>
+          <Route path='/category' render={props => <Category {...props}></Category>}></Route>
           <Route path='/login' render={props => <Layout {...props}><Login></Login></Layout>}></Route>
           <Route path='/my' render={props => <Layout {...props}><PrivateRoute component={My}></PrivateRoute></Layout>}></Route>
           <Route path='/cart' render={props => <Layout {...props}><PrivateRoute path="/cart" component={Cart}></PrivateRoute></Layout>}></Route>

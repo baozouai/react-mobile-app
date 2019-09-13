@@ -11,13 +11,12 @@ export class SearchField extends Component {
             suggestData: []
         }
     }
-    handleSearch = (value) => {
+    handleSearch = value => {
         this.props.history.push('/searchgoods/query=' + value)
     }
     // 搜索建议
-    handleSearchSuggest = (value) => {
+    handleSearchSuggest = value => {
         searchSuggest(value).then(res => {
-            console.log(res)
             const {meta: {status}, message: {goods}} = res.data
             if (status === 200) {
                 // 只获取前十条数据
@@ -28,7 +27,7 @@ export class SearchField extends Component {
         })
     }
     // 点击搜索建议跳转到商品列表页面    
-    handleSearchSimilar = (cid) => {
+    handleSearchSimilar = cid => {
         this.props.history.push('/searchgoods/cid=' + cid)
     }
     UNSAFE_componentDidMount() {
@@ -53,23 +52,20 @@ export class SearchField extends Component {
                         // 中文输入法下输入时会出现先英文，如n'i'h'a'o => 你好，中间会有'的标点，
                         // 通过判断是否带有此符号来判断是否继续获取搜索建议
                         if (v.indexOf("'") === -1) {
-                            console.log(v)
                             this.handleSearchSuggest(v)
                         }
                     }}
                 />
                 </div>
                 <WingBlank>
-
                     <ul className="suggest-list">
                         {this.state.suggestData.map(v => (
                             // 点击搜索建议跳转到商品列表页面
                             <li key={v.goods_id} onClick={() => this.handleSearchSimilar(v.cat_id)}>
-                            <span className="left">{v.goods_name.slice(0, 20)}...</span> 
-                            <span className="right">↖</span>
-                        </li>
+                                <span className="left">{v.goods_name.slice(0, 20)}...</span> 
+                                <span className="right">↖</span>
+                            </li>
                         ))}
-                        
                     </ul>
                 </WingBlank>
                 <style jsx>{`

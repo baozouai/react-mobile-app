@@ -19,7 +19,7 @@ export class Register extends Component {
         }
     }
     // 点击单选框时触发
-    onChange = (gender) => {
+    onChange = gender => {
         this.setState({
             gender
         });
@@ -46,7 +46,7 @@ export class Register extends Component {
 
         })
     }
-
+    // 获取验证码
     getCode = () => {
         // 这里的号码格式是139 9999 9999 ，提交之前把中间的空格去掉
         var mobile = this.state.mobile.replace(/\s/g, '')
@@ -54,7 +54,6 @@ export class Register extends Component {
         if (!/^1[3-9]\d{9}$/.test(mobile)) {
             Toast.fail('手机号码格式有误', 2)
         } else {
-
             getVerigyCode(mobile).then(res => {
                 // 将验证码赋值给输入框
                 const { meta: { status }, message } = res.data
@@ -71,10 +70,10 @@ export class Register extends Component {
     render() {
         const { getFieldError, getFieldProps } = this.props.form
         const RadioItem = Radio.RadioItem;
-
         return (
             <div>
-                <NavBar
+                {this.props.location.pathname === '/register'?
+                    <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.go(-1)}
@@ -87,15 +86,14 @@ export class Register extends Component {
                     }}
                 >
                     注册
-                </NavBar>
+                </NavBar>: ''
+                }
 
                 <List
                     style={{
                         marginTop: 45, position: 'relative'
                     }}
-
                 >
-
                     <InputItem
                         // 输入类型为手机号码
                         type="phone"
@@ -130,8 +128,6 @@ export class Register extends Component {
                         <span className="star">*</span>  手机号码
                     </InputItem>
                     <button className="get-code" onClick={this.getCode}>获取验证码</button>
-
-
                     <InputItem
                         // 输入类型为数字
                         type="number"
@@ -162,14 +158,10 @@ export class Register extends Component {
                         }}
                         // 将state中的username赋值给输入框
                         value={this.state.code}
-
                     >
                         <span className="star">*</span>
                         验证码
-
                     </InputItem>
-
-
                     <InputItem
                         // 输入类型为邮箱
                         type="email"
@@ -218,7 +210,6 @@ export class Register extends Component {
                                 }
                             ]
                         })}
-
                         error={getFieldError('pwd') ? true : false}
                         onErrorClick={() => {
                             Toast.fail(getFieldError('pwd')[0], 2)
@@ -247,7 +238,6 @@ export class Register extends Component {
                                 }
                             ]
                         })}
-
                         error={getFieldError('verifyPwd') ? true : false}
                         onErrorClick={() => {
                             Toast.fail(getFieldError('verifyPwd')[0], 2)
@@ -261,7 +251,6 @@ export class Register extends Component {
                     >
                         <span className="star">*</span>   确认密码
                     </InputItem>
-
                     <RadioItem key={1} checked={this.state.gender === '男'} onChange={() => this.onChange('男')}>
                         <span className="star">*</span>  男
                     </RadioItem>
@@ -269,41 +258,31 @@ export class Register extends Component {
                         <span className="star">*</span>   女
                     </RadioItem>
                     <WhiteSpace />
-                    <Flex justify="center">
-                        {/* 注册按钮 */}
-                        <Button type="primary" size="small" style={{ marginRight: 10 }}
-                            className="bottom-button"
-                            onClick={this.handleRegister}>
-                            立即注册
-                    </Button>
-                        {/* 取消注册按钮 */}
-                        <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px' }}
-                            onClick={() => this.props.history.push('/login')}>
-                            取消
-                    </Button>
+                        <Flex justify="center">
+                            {/* 注册按钮 */}
+                            <Button type="primary" size="small" style={{ marginRight: 10 }}
+                                className="bottom-button"
+                                onClick={this.handleRegister}>
+                                立即注册
+                            </Button>
+                            {/* 取消注册按钮 */}
+                            <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px' }}
+                                onClick={() => this.props.history.push('/login')}>
+                                取消
+                            </Button>
 
-                    </Flex>
+                        </Flex>
                     <WhiteSpace />
 
                 </List>
 
                 <style jsx>{`
-                .bottom-button {
-                    width: 30%;
-                    padding: 10px 0;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-                 .am-radio {
-                     position: absolute;
-                    padding: 10px;
-                    left: -5px;
-                    top: -2px;
-                    border: 1px solid #ccc;
-                    border-radius: 50%;
-                    color: red;
-                    margin-right: 5px;
+                    .bottom-button {
+                        width: 30%;
+                        padding: 10px 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
                     .star {
                         color: red;

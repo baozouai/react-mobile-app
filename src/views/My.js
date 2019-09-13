@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getUserInfo } from '../api/index'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { TabBar, Card, Button, Modal } from 'antd-mobile'
 import { connect } from 'react-redux'
 const alert = Modal.alert;
@@ -22,25 +22,26 @@ export class My extends Component {
                 })
             }
         })
-
     }
-
     // 退出
     logout = () => {
         alert('即将退出账号', '您确定吗?', [
             {
-                text: '我还没逛完', style: {
+                text: '我还没逛完', 
+                style: {
                     backgroundColor: '#777',
                     color: '#fff',
                     fontWeight: 700
                 }
             },
             {
-                text: '确定', style: {
+                text: '确定', 
+                style: {
                     backgroundColor: 'rgb(244, 51, 60)',
                     color: '#fff',
                     fontWeight: 700
-                }, onPress: () => {
+                }, 
+                onPress: () => {
                     // 退出
                     this.props.loginOut()
                     // 清除cartReducer中的数据
@@ -60,7 +61,6 @@ export class My extends Component {
                         style={{ fontSize: 15 }}
                         extra={<span style={{ fontSize: 13 }}>{this.state.phone}</span>}
                     />
-
                     <Card.Header
                         title="我的订单"
                         style={{ fontSize: 15 }}
@@ -71,34 +71,19 @@ export class My extends Component {
                     tintColor="#33A3F4"
                     barTintColor="white"
                 >
-                    {/* 
-          unselectedTintColor	未选中的字体颜色
-          tintColor	选中的字体颜色
-          barTintColor	tabbar背景色
-       */}
-                    {/*
-          title	标题文字
-          key	唯一标识
-          icon 未选中的图标
-          selectedIcon 选中的图标
-          selected 是否选中
-          badge 徽标
-        */}
                     <TabBar.Item
                         title="所有订单"
                         key="Home"
                         icon={<i className="iconfont icon-dingdan"></i>}
                         onPress={() => { this.props.history.push('/order/0') }}
                     >
-
                     </TabBar.Item>
                     <TabBar.Item
                         title="待付款"
-                        key="a"
+                        key="obligation"
                         icon={<i className="iconfont icon-daifukuan"></i>}
                         onPress={() => { this.props.history.push('/order/1') }}
                     >
-
                     </TabBar.Item>
                     <TabBar.Item
                         title="待发货"
@@ -106,13 +91,9 @@ export class My extends Component {
                         icon={<i className="iconfont icon-daifahuo"></i>}
                         onPress={() => { this.props.history.push('/order/2') }}
                     >
-
                     </TabBar.Item>
                 </TabBar>
                 <Button onClick={this.logout}>退出登录</Button>
-                <style jsx>{`
-
-                `}</style>
             </div>
         )
     }

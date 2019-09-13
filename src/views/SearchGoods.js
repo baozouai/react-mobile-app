@@ -44,6 +44,7 @@ export class SearchGoods extends Component {
                     goodsList: goods
                 })
             }
+            // 每一次获取的商品条数是20，如果第一次少于20，则加上底部文字
             if (goods.length < 20) {
                 this.setState({
                     bottom: true
@@ -57,33 +58,37 @@ export class SearchGoods extends Component {
             height
         })
     }
+    // 上拉获取更多商品
     getMoreGoods = () => {
         // 获取搜索值
         const query = this.props.match.params.goodsvalue
+        // 获取商品第几页
         const pagenum = this.state.pagenum
         const searchData = qs.stringify({ query, pagenum })
         searchGoods(searchData).then(res => {
-            console.log(res)
             // 解构赋值
             const { meta: { status }, message: { goods } } = res.data
             if (status === 200) {
+                // 如果没有更多数据，则停止上拉
                 if (!goods.length) {
-
                     this.setState({
                         refreshing: false,
                     })
                 }
+                // 如果获取的商品条数少于20，则加上底部文字
                 if (goods.length !== 20) {
                     this.setState({
                         bottom: true
                     })
                     Toast.info('没有更多数据了')
                 }
+                // 获取的商品追加到之前获取的商品列表中
                 this.setState({
                     goodsList: this.state.goodsList.concat(goods)
                 })
             }
         })
+        // 页码+1
         this.setState({
             pagenum: this.state.pagenum + 1
         })
@@ -91,48 +96,42 @@ export class SearchGoods extends Component {
     render() {
         return (
             <div>
+                {/* 页面未加载完显示加载标志 */}
                 <ActivityIndicator
                     toast
                     text="拼命加载啊..."
                     animating={this.state.animating}
                 />
-                <div style={{display: 'flex',backgroundColor: '#efeff4'}}>
+                {/* 搜索栏 */}
+                <div style={{display: 'flex',backgroundColor: '#efeff4',zIndex:999}}>
                     <i className="iconfont icon-arrow-left" 
                     style={{width: 30, alignSelf: 'center',  padding: '0 10px'}}
                     onClick={() => this.props.history.goBack()}
                     ></i>
                     <SearchBar placeholder="搜索你感兴趣的商品"
                     onFocus={() => this.props.history.push('/searchfield')}
-                    placeholder="搜索你感兴趣的商品"
                     style={{flex: 1}}
-                    onCancel={v => this.handleSearch(v)}
-                    onSubmit={v => this.handleSearch(v)}
-                    ref={ref => this.autoFocusInst = ref}
-                    cancelText="搜索"
-                    onChange={v => {
-                        // 中文输入法下输入时会出现先英文，如n'i'h'a'o => 你好，中间会有'的标点，
-                        // 通过判断是否带有此符号来判断是否继续获取搜索建议
-                        if (v.indexOf("'") === -1) {
-                            console.log(v)
-                            this.handleSearchSuggest(v)
-                        }
-                    }}
                 />
                 </div>
-
-                
+                {/* 商品列表区域 */}
                 <PullToRefresh
-                    damping={60}
+                // damping为拉动距离限制
+                    damping={100}
                     ref={el => this.ptr = el}
                     style={{
                         height: this.state.height,
                         overflow: 'auto',
                     }}
                     indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                    // direction：上拉还是下拉
                     direction={this.state.down ? 'down' : 'up'}
+                    // refreshing	是否显示刷新状态
                     refreshing={this.state.refreshing}
+                    // onRefresh	必选, 刷新回调函数
                     onRefresh={() => {
+                        // 设置刷新状态为true
                         this.setState({ refreshing: true });
+                        // 然后获取更多商品
                         this.getMoreGoods()
                     }}
                 >
@@ -144,7 +143,7 @@ export class SearchGoods extends Component {
                         >
                             {this.state.goodsList.map(v => (
                                 v.goods_small_logo ?
-                                    <div key={v.goods_id} className="pyg_good" onClick={() => this.props.history.push(`/goodsdetail/${v.goods_id}`)}>
+                                    <div key={v.goods_id} className="good" onClick={() => this.props.history.push(`/goodsdetail/${v.goods_id}`)}>
                                         <div className="good_content">
                                             <img src={v.goods_small_logo}
                                                 // 图片加载完取消等待
@@ -156,14 +155,15 @@ export class SearchGoods extends Component {
 
                                                 }}
                                                 alt="" />
-                                            <div className="pyg_describe ellipsis-1">{v.goods_name}</div>
-                                            <div className="pyg_price">&yen;{v.goods_price}</div>
+                                            <div className="describe ellipsis-1">{v.goods_name}</div>
+                                            <div className="price"><span>&yen;</span>{v.goods_price}</div>
                                         </div>
                                     </div> : ''
                             ))}
 
                         </Flex>
                     </WingBlank>
+                    {/* 根据bottom是否显示底部文字 */}
                     {this.state.bottom ?
                         <div className="goods-list-bottom">
                             <div className="line">
@@ -174,127 +174,65 @@ export class SearchGoods extends Component {
                 </PullToRefresh>
 
                 <style jsx>{`
-                .goods-list-bottom {
-                    height: 40px;
-                    line-height: 40px;
-                    text-align: center;
-                    font-size: 14px;
-                    color: #ccc;
-                    display: flex;
-                    position: relative;
-                    align-items: center;
-                    .line {
-                        width: 200px;
-                        height: 1px;
-                        vertical-align: middle;
-                        background-color: #ccc;
-                        margin: 0 auto;
+                    .goods-list-bottom {
+                        height: 40px;
+                        line-height: 40px;
                         text-align: center;
-                    span {
-                        background-color: #f5f5f9;
-                        padding: 0 10px;
-                        position: absolute;
-                        top: -50%;
-                        font-size: 10px;
-                        transform: translate(-50%, 50%);
-                    }
-                    }
-            }
-            .ellipsis-1 {
-                overflow: hidden; 
-                text-overflow: ellipsis; 
-                white-space: nowrap; 
-                
-            }
-            .goods-list-bottom {
-                text-align: center;
-                height: 50px;
-                line-height: 50px;
-                font-size: 16px;
-            }
-            .pyg_good {
-                    width: 49.5%;
-                    border-radius: 20px;
-                    padding: 10px;
-                    margin-top: 6px;
-                    background-color: #fff;
-
-                    .good_content {
-                        img {
-                            margin: 0 auto;
-                            width: 70%;
-                            display: block;
-                        }
-
-                        .pyg_describe {
-                            padding: 10px 5px;
-                            font-size: 13px;
-                            color: #333;
-                            
-                        }
-
-                        .pyg_price {
-                            font-size: 16px;
-                            color: red;
-                        }
-                    }
-
-                    .pyg_similar {
-                        width: 80%;
-                        display: block;
-                        margin: 5px auto 0;
-                    }
-
-            }
-            .goods-lists {
-                
-                li {
-                    background-color: #fff;
-                    border-radius: 10px;
-                    a {
-                        
-                        padding: 10px;
-                        width: 100%;
-                        height: auto;
-                        justify-content: space-between;
+                        font-size: 14px;
+                        color: #ccc;
                         display: flex;
-
-                        img {
-
-                            width: 40%;
-                            display: block;
-                        }
-                        .good-content { 
-                            flex: 1;
-                            margin: 30px;
-                            // padding-top: 30px;
-                            .good-describe {
-                                color: #333;
+                        position: relative;
+                        align-items: center;
+                        .line {
+                            width: 200px;
+                            height: 1px;
+                            vertical-align: middle;
+                            background-color: #ccc;
+                            margin: 0 auto;
+                            text-align: center;
+                            span {
+                                background-color: #f5f5f9;
+                                padding: 0 10px;
+                                position: absolute;
+                                top: -50%;
+                                font-size: 10px;
+                                transform: translate(-50%, 50%);
                             }
-                            .good-price {
-                                margin-top: 30px;
+                        }
+                    }
+                    .ellipsis-1 {
+                        overflow: hidden; 
+                        text-overflow: ellipsis; 
+                        white-space: nowrap; 
+                    }
+
+                    .good {
+                        width: 49.5%;
+                        border-radius: 20px;
+                        padding: 10px;
+                        margin-top: 6px;
+                        background-color: #fff;
+                        .good_content {
+                            img {
+                                margin: 0 auto;
+                                width: 70%;
+                                display: block;
+                            }
+                            .describe {
+                                padding: 10px 5px;
+                                font-size: 13px;
+                                color: #333;        
+                            }
+                            .price {
+                                font-size: 14px;
                                 color: red;
-                                font-weight: bold;
                                 span {
-                                    font-size: 12px;
+                                    font-size: 10px;
                                 }
                             }
                         }
-                        @media screen and (max-width: 500px) {
-                            img {
-                                width: 50%;
-                                height: 50%;
-                                display: block;
-                            }
-                            .good-content { 
-                                margin: 0;
-                                padding-top: 20px;
-                            }
-                        }
-                        
                     }
-                }
-            }    
+
             `}</style>
             </div>
         )

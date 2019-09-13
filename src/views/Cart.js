@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Modal, Icon, Checkbox, WingBlank, Stepper, SwipeAction, Toast } from 'antd-mobile'
 import emptyCart from '../assets/imgs/cart_empty.png'
-import { withRouter } from 'react-router-dom'
 import { getCartGoods, syncCart } from '../api/index'
 const CheckboxItem = Checkbox.CheckboxItem;
 const alert = Modal.alert;
@@ -13,7 +13,7 @@ export class Cart extends Component {
         this.state = {
             // 购物车数据 格式为{goods_id: 购物车信息}
             cart_infos: {},
-            // 购物车是否为空
+            // 购物车是否为空，否的话为空
             cart_infos_Status: true,
             // stepper改变数量的值
             num: '',
@@ -44,7 +44,7 @@ export class Cart extends Component {
             // 状态码200表示获取购物车数据成功
             if (status === 200) {
                 // 判断购物车是否为空
-                if (cart_info) {
+                if (Object.values(JSON.parse(cart_info)).length) {
                     // 不为空的话设置其标志，以便是否显示购物车为空的图片标志，并将购物车数据解析后存入state的cart_infos
                     let cart_infos = JSON.parse(cart_info)
                     // 给购物车信息加上是否选择标志
@@ -80,8 +80,6 @@ export class Cart extends Component {
         this.setState({
             num,
             cart_infos,
-            // 只要商品数量改变，则设置商品信息改变的状态为true
-            // cart_infos_change: true
         }, () => {
             // 计算总价
             this.calTotalPrice()
@@ -92,7 +90,6 @@ export class Cart extends Component {
     // 改变对应商品是否选择的状态
     changeSingleSelectedStatus = (e, goods_id) => {
         // 同步状态
-        // let 
         let cart_infos = this.state.cart_infos
         cart_infos[goods_id].selectedStatus = e.target.checked
         this.setState({
@@ -198,75 +195,68 @@ export class Cart extends Component {
         })
     }
     gotoPay = () => {
-       
         // 提交订单之前判断是否选择了商品
         if (!this.state.allSelectedNum) {
             Toast.fail('您还没有选择宝贝呢', 2)
             return
         }
-         // 将CartReducer中保存的数据更新
+        // 将CartReducer中保存的数据更新
         this.props.snycCartGoods(this.state.cart_infos, this.state.totalPrice, this.state.selectedGoodsTotalNum)
         this.props.history.push('/pay')
     }
-    
+
     render() {
         return (
             <div>
-
-
-                    <nav className="nav-header">
-                        <div className="nav-header-left"
-                            onClick={() => this.props.history.goBack()}
-                        >
-                            <Icon type='left'
-                            />
-                        </div>
-                        <div className="nav-header-center">
-                            购物车{this.state.totalNum ? `(${this.state.totalNum})` : ''}
-                        </div>
-                        <div className="nav-header-right"
-                        >
-                            <span onClick={() => this.setState({ manage: this.state.manage ? false : true })} className="manage">{this.state.manage ? '管理' : '完成'}</span>
-                        </div>
-                    </nav> 
-
+                {/* 顶部导航条 */}
+                <nav className="nav-header">
+                    <div className="nav-header-left" onClick={() => this.props.history.goBack()}>
+                        <Icon type='left' />
+                    </div>
+                    <div className="nav-header-center">
+                        购物车{this.state.totalNum ? `(${this.state.totalNum})` : ''}
+                    </div>
+                    <div className="nav-header-right">
+                        <span onClick={() => this.setState({ manage: this.state.manage ? false : true })} className="manage">
+                            {this.state.manage ? '管理' : '完成'}
+                        </span>
+                    </div>
+                </nav>
                 {this.state.cart_infos_Status ?
                     <WingBlank style={{ marginBottom: 60 }}>
-
                         <div className="order-list" style={{ marginTop: 55 }}>
                             {Object.values(this.state.cart_infos).map(v => (
                                 <SwipeAction
                                     key={v.goods_id}
                                     style={{ marginBottom: 5 }}
                                     autoClose
-                                    className='am-swipe-parent'
                                     right={[
                                         {
                                             text: '取消',
-
                                             style: { backgroundColor: '#ddd', color: 'white' },
                                         },
                                         {
                                             text: '删除',
-
+                                            style: { backgroundColor: '#F4333C', color: 'white' },
                                             onPress: () => alert('删除该宝贝', '确定吗?', [
                                                 {
-                                                    text: '我再想想', style: {
+                                                    text: '我再想想',
+                                                    style: {
                                                         backgroundColor: '#777',
                                                         color: '#fff',
                                                         fontWeight: 700
                                                     }
                                                 },
                                                 {
-                                                    text: '删除', style: {
+                                                    text: '删除',
+                                                    style: {
                                                         backgroundColor: 'rgb(244, 51, 60)',
                                                         color: '#fff',
                                                         fontWeight: 700
-                                                    }, onPress: () => this.handleDeleteSingleGoods(v.goods_id)
+                                                    },
+                                                    onPress: () => this.handleDeleteSingleGoods(v.goods_id)
                                                 },
                                             ]),
-
-                                            style: { backgroundColor: '#F4333C', color: 'white' },
                                         },
                                     ]}
                                 >
@@ -290,24 +280,19 @@ export class Cart extends Component {
                                                     max={v.goods_number}
                                                     min={1}
                                                     defaultValue={v.amount}
-                                                    onChange={(num) => this.handleUpdateNum(num, v.goods_id)}
+                                                    onChange={num => this.handleUpdateNum(num, v.goods_id)}
                                                 />
                                                 <div className="order-price">
-
                                                     <span>&yen;</span>
                                                     <span>{v.goods_price}.00</span>
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </CheckboxItem>
                                 </SwipeAction>
                             ))}
                         </div>
-
                     </WingBlank>
-
                     : <div className="empty-cart">
                         {/* 此处的图片不能直接写路径，只能通过import的方式将它引入进来 */}
                         <img src={emptyCart} alt="" className="empty-cart-img" />
@@ -322,14 +307,13 @@ export class Cart extends Component {
                     <div className="cart-footer-left" >
                         <CheckboxItem
                             checked={this.state.allStatus}
-                            onChange={e => {
+                            onChange={() => {
                                 this.setState({
                                     allStatus: !this.state.allStatus
                                 },
                                     // 这里由于异步，所以等全选状态改变后再执行handleAllChecked
                                     () => this.handleAllChecked())
                             }}
-
                         >
                             全选
                         </CheckboxItem>
@@ -338,16 +322,15 @@ export class Cart extends Component {
                         <div className="cart-footer-center">
                             <span>合计：</span>
                             <span className="total-price">￥ {this.state.totalPrice}</span>
-                        </div> : ''}
+                        </div> : ''
+                    }
                     {this.state.manage ?
-                        <div className="cart-footer-right"
-                        onClick={this.gotoPay}
-                        >
+                        <div className="cart-footer-right" onClick={this.gotoPay}>
                             <span className="goto-pay">结算{this.state.allSelectedNum ? `(${this.state.allSelectedNum}）` : ''}</span>
                         </div>
                         :
-                        <button className="delete-batch" type="warning"
-                            onClick={() => alert(`删除这${this.state.allSelectedNum}个宝贝`, '确定吗?', [
+                        <button className="delete-batch"
+                            onClick={() => this.state.selectedGoodsTotalNum? alert(`删除这${this.state.allSelectedNum}个宝贝`, '确定吗?', [
                                 {
                                     text: '我再想想', style: {
                                         backgroundColor: '#777',
@@ -362,7 +345,7 @@ export class Cart extends Component {
                                         fontWeight: 700
                                     }, onPress: () => this.handleDeleteBatchGoods()
                                 },
-                            ])}
+                            ]):Toast.fail('您还没选择宝贝呢',2)}
 
                         >删除</button>
                     }
@@ -370,7 +353,35 @@ export class Cart extends Component {
                 </div>
 
                 <style jsx>{`
-                    
+                    .nav-header {
+                        position: fixed;
+                        top:0;
+                        z-index: 999;
+                        display: flex;
+                        width: 100%;
+                        height: 45px;
+                        justify-content: space-between;
+                        padding: 0 10px;
+                        align-items: center;
+                        background-color: #108ee9;
+                        color: #fff;
+                        font-size: 16px;
+                        
+                        .nav-header-left {
+                            margin-left: 5px;
+                            display: flex;
+                            align-items: center;
+                        }
+                        .nav-header-center {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                        .nav-header-right {
+                            background-color: transparent;
+                        }
+                    }
                     .ellipsis-2 {
                         display: -webkit-box;
                         overflow: hidden;
@@ -410,10 +421,7 @@ export class Cart extends Component {
                             color: #fff;
                         }
                     }
-                    
-                
                     .order-list { 
-                        
                         .single-order {
                             background-color: #fff;
                             padding: 5px;
@@ -432,13 +440,11 @@ export class Cart extends Component {
 
                             .order-content {
                                 flex: 4;
-                                height: auto;
                                 .order-title {
                                     position: absolute;
                                     top: 15px;
                                     padding-right: 5px;
                                     font-size: 12px;
-
                                 }
 
                                 .order-price {
@@ -477,8 +483,7 @@ export class Cart extends Component {
                         }
                         .cart-footer-center {
                             .total-price {
-                            color: #ff5500;
-
+                                color: #ff5500;
                             }
                         }
                         .cart-footer-right {
@@ -492,35 +497,7 @@ export class Cart extends Component {
                             }
                         }
                     }
-                    .nav-header {
-                        position: fixed;
-                        top:0;
-                        z-index: 999;
-                        display: flex;
-                        width: 100%;
-                        height: 45px;
-                        justify-content: space-between;
-                        padding: 0 10px;
-                        align-items: center;
-                        background-color: #108ee9;
-                        color: #fff;
-                        font-size: 16px;
-                        
-                        .nav-header-left {
-                            margin-left: 5px;
-                            display: flex;
-                            align-items: center;
-                        }
-                        .nav-header-center {
-                            position: absolute;
-                            left: 50%;
-                            top: 50%;
-                            transform: translate(-50%, -50%);
-                        }
-                        .nav-header-right {
-                            background-color: transparent;
-                        }
-                    }
+                    
                     .delete-batch {
                         width: 70px;
                         height: 70%;

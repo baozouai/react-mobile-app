@@ -12,7 +12,7 @@ export class Category extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 页面加载前获取分类数据
         getCategory().then(res => {
             const { meta: { status }, message } = res.data
@@ -95,13 +95,10 @@ export class Category extends Component {
 
                 </Tabs>
                 <style jsx>{`
-                :global(.am-tabs-tab-bar-wrap) {
-                        padding-bottom: 41px;
-                    }
-                    /* 底部tabBars */
-                    :global(.am-tab-bar-bar) {
-                        position: fixed;
-                    }
+                    :global(.am-tabs-tab-bar-wrap) {
+                            padding-bottom: 41px;
+                        }
+                        
                     :global(.am-tabs-pane-wrap) {
                         background-color: #fff;
 
@@ -109,36 +106,6 @@ export class Category extends Component {
                     :global(.am-tabs) {
                         position: fixed;
                         top: 45px;
-                    }
-                    
-                    .nav-header {
-                        position: fixed;
-                        top:0;
-                        z-index: 2;
-                        display: flex;
-                        width: 100%;
-                        height: 45px;
-                        justify-content: space-between;
-                        padding: 0 10px;
-                        align-items: center;
-                        background-color: #108ee9;
-                        color: #fff;
-                        font-size: 16px;
-                        
-                        .nav-header-left {
-                            margin-left: 5px;
-                            display: flex;
-                            align-items: center;
-                        }
-                        .nav-header-center {
-                            position: absolute;
-                            left: 50%;
-                            top: 50%;
-                            transform: translate(-50%, -50%);
-                        }
-                        .nav-header-right {
-                            background-color: transparent;
-                        }
                     }
                     .cateItem {
                         background-color:#fff;
@@ -160,7 +127,6 @@ export class Category extends Component {
                                 margin-bottom: 10px;
                                 img {
                                     width: 70%;
-                                    
                                     display: inline-block;
                                 }
                                 @media screen and (max-width: 400px) {
@@ -176,7 +142,7 @@ export class Category extends Component {
                             }
                         }
                     }
-                    `}</style>
+                `}</style>
             </div>
         )
     }
