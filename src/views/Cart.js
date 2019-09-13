@@ -213,7 +213,7 @@ export class Cart extends Component {
         return (
             <div>
 
-                {this.props.location.pathname === '/cart' ?
+
                     <nav className="nav-header">
                         <div className="nav-header-left"
                             onClick={() => this.props.history.goBack()}
@@ -228,8 +228,7 @@ export class Cart extends Component {
                         >
                             <span onClick={() => this.setState({ manage: this.state.manage ? false : true })} className="manage">{this.state.manage ? '管理' : '完成'}</span>
                         </div>
-                    </nav> : ''
-                }
+                    </nav> 
 
                 {this.state.cart_infos_Status ?
                     <WingBlank style={{ marginBottom: 60 }}>

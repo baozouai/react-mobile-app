@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs,NavBar,Icon } from 'antd-mobile'
+import { Tabs, NavBar, Icon } from 'antd-mobile'
 import { getCategory } from '../api/index'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
@@ -12,7 +12,7 @@ export class Category extends Component {
         }
     }
 
-    UNSAFE_componentWillMount() {
+    componentWillMount() {
         // 页面加载前获取分类数据
         getCategory().then(res => {
             const { meta: { status }, message } = res.data
@@ -23,7 +23,7 @@ export class Category extends Component {
             }
         })
     }
-    
+
     render() {
         let cates = this.state.categories.map(v => {
             return {
@@ -34,10 +34,12 @@ export class Category extends Component {
         })
         return (
             <div>
+                {/* 顶部导航条 */}
+
                 <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.push('/')}
+                    onLeftClick={() => this.props.history.goBack()}
                     style={{
                         position: 'fixed',
                         width: '100%',
@@ -47,6 +49,7 @@ export class Category extends Component {
                         zIndex: 1000
                     }}
                 >商品分类</NavBar>
+
                 <Tabs className="tabs"
                     tabs={cates}
                     initalPage={0}
@@ -54,7 +57,7 @@ export class Category extends Component {
                     useOnPan={true}
                     tabBarTextStyle={
                         {
-                            width: '86px',
+                            width: 86,
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
@@ -63,51 +66,80 @@ export class Category extends Component {
                             fontSize: 13
                         }
                     }
-                    onTabClick={v => console.log(cates.indexOf(v))}
+                    // 一页显示12个
                     renderTabBar={props => <Tabs.DefaultTabBar {...props} page={12} />}
+                    // 靠左
                     tabBarPosition="left"
+                    // 内容垂直
                     tabDirection="vertical"
                 >
                     {cates.length ? cates.map(v => (
                         v.children.map(v1 => (
-                            v1.children?
-                            <div key={v1.cat_id} className="cateItem" style={{height: 'auto'}}>
-                                <div className="cate_title">{ v1.cat_name }</div>
-                                <div className="cate_content">
-                                    {v1.children.map(
-                                        (v2,i2) => (
-                                        <div key={i2} onClick={() => this.props.history.push('/searchgoods/' + qs.stringify({cid:v2.cat_id}))}>
-                                            <img src={v2.cat_icon} alt=""/>
-                                            <span className="cat_name">{ v2.cat_name }</span>
-                                        </div>
-                                        )
-                                    )}
+                            v1.children ?
+                                <div key={v1.cat_id} className="cateItem">
+                                    <div className="cate_title">{v1.cat_name}</div>
+                                    <div className="cate_content">
+                                        {v1.children.map(
+                                            v2 => (
+                                                <div key={v2.cat_id} onClick={() => this.props.history.push('/searchgoods/' + qs.stringify({ cid: v2.cat_id }))}>
+                                                    <img src={v2.cat_icon} alt="" />
+                                                    <span className="cat_name">{v2.cat_name}</span>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                            :''
+                                : ''
                         ))
-                                            
+                    )) : ''}
 
-                            )):''}
-                            
-                    </Tabs>
-                    <style jsx>{`
-                    
-                    :global(.am-tabs-default-bar) {
-                        padding-bottom: 95px;
+                </Tabs>
+                <style jsx>{`
+                :global(.am-tabs-tab-bar-wrap) {
+                        padding-bottom: 41px;
                     }
+                    /* 底部tabBars */
                     :global(.am-tab-bar-bar) {
                         position: fixed;
                     }
                     :global(.am-tabs-pane-wrap) {
                         background-color: #fff;
-                        padding-bottom: 70px;
+
                     }
                     :global(.am-tabs) {
-                            
-                            position: fixed;
-                            top: 45px;
+                        position: fixed;
+                        top: 45px;
+                    }
+                    
+                    .nav-header {
+                        position: fixed;
+                        top:0;
+                        z-index: 2;
+                        display: flex;
+                        width: 100%;
+                        height: 45px;
+                        justify-content: space-between;
+                        padding: 0 10px;
+                        align-items: center;
+                        background-color: #108ee9;
+                        color: #fff;
+                        font-size: 16px;
+                        
+                        .nav-header-left {
+                            margin-left: 5px;
+                            display: flex;
+                            align-items: center;
                         }
+                        .nav-header-center {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                        .nav-header-right {
+                            background-color: transparent;
+                        }
+                    }
                     .cateItem {
                         background-color:#fff;
                         margin-bottom:45px;
@@ -146,7 +178,7 @@ export class Category extends Component {
                     }
                     `}</style>
             </div>
-                )
-            }
-        }
+        )
+    }
+}
 export default withRouter(Category)

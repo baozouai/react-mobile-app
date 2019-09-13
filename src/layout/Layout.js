@@ -32,9 +32,9 @@ export class Layout extends Component {
           onPress={() => {this.props.history.push('/')}}
         >
           {/* 利用props.children接收Layout组件innerHTML位置的内容 */}
-          { this.props.location.pathname === '/' ? this.props.children : null }
+          {this.props.children}
         </TabBar.Item>
-        <TabBar.Item
+        {/* <TabBar.Item
           title="分类"
           key="Category"
           icon={<i className="iconfont icon-fenlei"></i>}
@@ -42,9 +42,9 @@ export class Layout extends Component {
           selected={this.props.location.pathname === '/category'}
           onPress={() => {this.props.history.push('/category')}}
         >
-          {/* 利用props.children接收Layout组件innerHTML位置的内容 */}
-          { this.props.location.pathname === '/category' ? this.props.children : null }
-        </TabBar.Item>
+
+          {this.props.children}
+        </TabBar.Item> */}
         <TabBar.Item
           title="购物车"
           key="Cart"
@@ -53,18 +53,17 @@ export class Layout extends Component {
           selected={this.props.location.pathname === '/cart'}
           onPress={() => {this.props.history.push('/cart')}}
         >
-          { this.props.location.pathname === '/cart' ? this.props.children : null }
+          {this.props.children}
         </TabBar.Item>
         <TabBar.Item
           title="我的"
           key="Mine"
           icon={<i className="iconfont iconweibiaoti2fuzhi12"></i>}
           selectedIcon={<i className="iconfont iconweibiaoti2fuzhi12" style={{color: '#33A3F4'}}></i>}
-
           selected={['/login', '/register', '/my'].includes(this.props.location.pathname)}
           onPress={() => {this.props.history.push('/my')}}
         >
-          { ['/login', '/register', '/my'].includes(this.props.location.pathname) ? this.props.children : null }
+          {this.props.children}
         </TabBar.Item>
       </TabBar>
       
