@@ -98,12 +98,12 @@ export class Home extends Component {
                     ))}
                 </Carousel>
                 {/* 分类 */}
-                <div className="catitems">
-                    <div><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_3@2x.png" alt="" /></div>
+            <div className="catitems">
+                    <div onClick={() => this.props.history.push('/searchgoods/query=秒杀')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_3@2x.png" alt="" /></div>
 
-                    <div><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_2@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=超市')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_2@2x.png" alt="" /></div>
 
-                    <div><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_1@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=母婴')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_1@2x.png" alt="" /></div>
 
                     <div onClick={()=>this.props.history.push('/category')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_4@2x.png" alt="" /></div>
                 </div>
