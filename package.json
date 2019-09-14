@@ -2,7 +2,6 @@
   "name": "mobile-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "antd-mobile": "^2.3.1",
     "antd-mobile-demo-data": "^0.3.0",
