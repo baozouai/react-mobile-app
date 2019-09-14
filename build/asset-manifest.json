@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "./static/css/main.23880460.chunk.css",
-    "main.js": "./static/js/main.9ebf1576.chunk.js",
-    "main.js.map": "./static/js/main.9ebf1576.chunk.js.map",
-    "runtime~main.js": "./static/js/runtime~main.97be6ba8.js",
-    "runtime~main.js.map": "./static/js/runtime~main.97be6ba8.js.map",
-    "static/css/2.12a9a36f.chunk.css": "./static/css/2.12a9a36f.chunk.css",
-    "static/js/2.3c4c196b.chunk.js": "./static/js/2.3c4c196b.chunk.js",
-    "static/js/2.3c4c196b.chunk.js.map": "./static/js/2.3c4c196b.chunk.js.map",
-    "index.html": "./index.html",
-    "precache-manifest.7f65a6208c063f18c0910e13b93a3584.js": "./precache-manifest.7f65a6208c063f18c0910e13b93a3584.js",
-    "service-worker.js": "./service-worker.js",
-    "static/css/2.12a9a36f.chunk.css.map": "./static/css/2.12a9a36f.chunk.css.map",
-    "static/css/main.23880460.chunk.css.map": "./static/css/main.23880460.chunk.css.map",
-    "static/media/cart_empty.png": "./static/media/cart_empty.9f725555.png"
+    "main.css": "/react-mobile-app/static/css/main.23880460.chunk.css",
+    "main.js": "/react-mobile-app/static/js/main.9ebf1576.chunk.js",
+    "main.js.map": "/react-mobile-app/static/js/main.9ebf1576.chunk.js.map",
+    "runtime~main.js": "/react-mobile-app/static/js/runtime~main.68af54ea.js",
+    "runtime~main.js.map": "/react-mobile-app/static/js/runtime~main.68af54ea.js.map",
+    "static/css/2.12a9a36f.chunk.css": "/react-mobile-app/static/css/2.12a9a36f.chunk.css",
+    "static/js/2.3c4c196b.chunk.js": "/react-mobile-app/static/js/2.3c4c196b.chunk.js",
+    "static/js/2.3c4c196b.chunk.js.map": "/react-mobile-app/static/js/2.3c4c196b.chunk.js.map",
+    "index.html": "/react-mobile-app/index.html",
+    "precache-manifest.27a08c5c198816b0f3ce0d9630dd1373.js": "/react-mobile-app/precache-manifest.27a08c5c198816b0f3ce0d9630dd1373.js",
+    "service-worker.js": "/react-mobile-app/service-worker.js",
+    "static/css/2.12a9a36f.chunk.css.map": "/react-mobile-app/static/css/2.12a9a36f.chunk.css.map",
+    "static/css/main.23880460.chunk.css.map": "/react-mobile-app/static/css/main.23880460.chunk.css.map",
+    "static/media/cart_empty.png": "/react-mobile-app/static/media/cart_empty.9f725555.png"
   }
 }
