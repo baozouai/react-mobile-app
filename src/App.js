@@ -14,7 +14,7 @@ import SearchField from './views/SearchField';
 import SearchGoods from './views/SearchGoods';
 import ErrorPage from './views/ErrorPage';
 import PrivateRoute from './components/PrivateRoute'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 function App() {
   return (
