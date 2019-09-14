@@ -1,6 +1,6 @@
 # 项目简介
 
-本项目是基于React、Antd Mobile的移动端电商App
+本项目是基于React、Antd Mobile、redux、axios的移动端电商App
 
 ## 一、目录结构
 
@@ -60,9 +60,9 @@
 
 `git clone https://github.com/baozouai/react-mobile-app.git`
 
-### 2、打开终端，在项目根目录运行以下命令
+### 2、打开终端，`cd react-mobile-app`,切换到项目根目录，在项目根目录运行以下命令
 
-`npm install`
+`npm install`，安装所需的package
 
 ### 3、然后运行`npm start`开启项目
 
