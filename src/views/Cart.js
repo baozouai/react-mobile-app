@@ -183,6 +183,11 @@ export class Cart extends Component {
                 delete cart_infos[goods_id]
             }
         }
+        if (!cart_infos.length) {
+            this.setState({
+                cart_infos_Status: false
+            })
+        }
         // 这里因为选中了商品，所以计算了所选中商品的总价和总商品数，故点击删除的时候要清零，否则删除后数字还在
         this.setState({
             cart_infos,
