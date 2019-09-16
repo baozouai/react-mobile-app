@@ -46,6 +46,7 @@ export class My extends Component {
                     this.props.loginOut()
                     // 清除cartReducer中的数据
                     this.props.clearCartData()
+                    this.props.history.push('/mynologin')
                 }
             }
         ])
