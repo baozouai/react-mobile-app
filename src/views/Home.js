@@ -107,7 +107,7 @@ export class Home extends Component {
 
                     <div onClick={() => this.props.history.push('/searchgoods/query=母婴')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_1@2x.png" alt="" /></div>
 
-                    <div onClick={()=>this.props.history.push('/category')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_4@2x.png" alt="" /></div>
+                    <div onClick={()=>this.props.history.push('/searchgoods/query=充值')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_5@2x.png" alt="" /></div>
                 </div>
                 {/* 首页商品列表区域 */}
                 <div className="goodsList">
