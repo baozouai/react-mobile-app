@@ -95,53 +95,57 @@ export class Category extends Component {
 
                         </Tabs>
                         <style jsx>{`
-                    :global(.am-tabs-tab-bar-wrap) {
-                            padding-bottom: 41px;
-                        }
-                        
-                    :global(.am-tabs-pane-wrap) {
-                        background-color: #fff;
-
-                    }
-                    :global(.am-tabs) {
-                        position: fixed;
-                        top: 45px;
-                    }
-                    .cateItem {
-                        background-color:#fff;
-                        margin-bottom:45px;
-                        .cate_title {
-                            color: steelblue;
-                            font-size: 20px;
-                            font-weight: bold;
-                            padding-top: 10px;
-                            text-indent: 1em; 
-                        }
-                        .cate_content {
-                            display: flex;
-                            flex-wrap: wrap;
-                            div {
-                                display: block;
-                                width: 33.3%;
-                                text-align: center;
-                                margin-bottom: 10px;
-                                img {
-                                    width: 70%;
-                                    display: inline-block;
+                            :global(.am-tabs-tab-bar-wrap) {
+                                    padding-bottom: 41px;
+                            }
+                                
+                            :global(.am-tabs-default-bar-left) {
+                                padding-bottom: 50px;
+                            }
+                                
+                            :global(.am-tabs-pane-wrap) {
+                                background-color: #fff;
+                                padding-bottom: 50px;
+                            }
+                            :global(.am-tabs) {
+                                position: fixed;
+                                top: 45px;
+                            }
+                            .cateItem {
+                                background-color:#fff;
+                                margin-bottom:45px;
+                                .cate_title {
+                                    color: steelblue;
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    padding-top: 10px;
+                                    text-indent: 1em; 
                                 }
-                                @media screen and (max-width: 400px) {
-                                    img {
-                                        width: 60%;
-                                    }
-                                }
-                                .cat_name {
+                            .cate_content {
+                                display: flex;
+                                flex-wrap: wrap;
+                                div {
                                     display: block;
-                                    font-size: 12px;
-                                    color: #666;
+                                    width: 33.3%;
+                                    text-align: center;
+                                    margin-bottom: 10px;
+                                    img {
+                                        width: 70%;
+                                        display: inline-block;
+                                    }
+                                    @media screen and (max-width: 400px) {
+                                        img {
+                                            width: 60%;
+                                        }
+                                    }
+                                    .cat_name {
+                                        display: block;
+                                        font-size: 12px;
+                                        color: #666;
+                                    }
                                 }
                             }
                         }
-                    }
                 `}</style>
                     </Fragment>
                     : ''}

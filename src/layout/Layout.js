@@ -9,7 +9,6 @@ export class Layout extends Component {
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
         barTintColor="white"
-        
       >
         {/* 
           unselectedTintColor	未选中的字体颜色
