@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile';
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 export class Layout extends Component {
   render() {
     return (
@@ -34,7 +35,7 @@ export class Layout extends Component {
           {/* 利用props.children接收Layout组件innerHTML位置的内容 */}
           {this.props.children}
         </TabBar.Item>
-        {/* <TabBar.Item
+        <TabBar.Item
           title="分类"
           key="Category"
           icon={<i className="iconfont icon-fenlei"></i>}
@@ -44,7 +45,7 @@ export class Layout extends Component {
         >
 
           {this.props.children}
-        </TabBar.Item> */}
+        </TabBar.Item>
         <TabBar.Item
           title="购物车"
           key="Cart"
@@ -56,12 +57,12 @@ export class Layout extends Component {
           {this.props.children}
         </TabBar.Item>
         <TabBar.Item
-          title="我的"
+          title={this.props.loginState?'我的': '未登录'}
           key="Mine"
           icon={<i className="iconfont iconweibiaoti2fuzhi12"></i>}
           selectedIcon={<i className="iconfont iconweibiaoti2fuzhi12" style={{color: '#33A3F4'}}></i>}
-          selected={['/login', '/register', '/my'].includes(this.props.location.pathname)}
-          onPress={() => {this.props.history.push('/my')}}
+          selected={['/login', '/register', '/my', '/mynologin'].includes(this.props.location.pathname)}
+          onPress={() => {this.props.loginState? this.props.history.push('/my'): this.props.history.push('/mynologin')}}
         >
           {this.props.children}
         </TabBar.Item>
@@ -71,4 +72,10 @@ export class Layout extends Component {
   }
 }
 
-export default withRouter(Layout)
+const mapStateToProps = state => {
+  return {
+    loginState: state.userModule.loginState
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(Layout))

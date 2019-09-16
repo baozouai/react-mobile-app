@@ -4,6 +4,7 @@ import Home from './views/Home'
 import Category from './views/Category'
 import Cart from './views/Cart'
 import My from './views/My'
+import MyNoLogin from './views/MyNoLogin'
 import Pay from './views/Pay'
 import AddressInfo from './views/AddressInfo'
 import OrderList from './views/OrderList'
@@ -22,9 +23,11 @@ function App() {
       <div style={{ height: '100%' }}>
         <Switch>
           <Route path='/' exact render={props => <Layout {...props}><Home></Home></Layout>}></Route>
-          <Route path='/category' render={props => <Category {...props}></Category>}></Route>
+          <Route path='/category' render={props => <Layout {...props}><Category></Category></Layout>}></Route>
+          {/* <Route path='/category' render={props => <Category {...props}></Category>}></Route> */}
           <Route path='/login' render={props => <Layout {...props}><Login></Login></Layout>}></Route>
           <Route path='/my' render={props => <Layout {...props}><PrivateRoute component={My}></PrivateRoute></Layout>}></Route>
+          <Route path='/mynologin' render={props => <Layout {...props}><MyNoLogin></MyNoLogin></Layout>}></Route>
           <Route path='/cart' render={props => <Layout {...props}><PrivateRoute path="/cart" component={Cart}></PrivateRoute></Layout>}></Route>
           <Route path='/pay' render={props => <PrivateRoute {...props} component={Pay}></PrivateRoute>}></Route>
           <Route path='/address' render={props => <PrivateRoute {...props} component={AddressInfo}></PrivateRoute>}></Route>

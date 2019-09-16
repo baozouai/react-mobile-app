@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Tabs, NavBar, Icon } from 'antd-mobile'
 import { getCategory } from '../api/index'
 import { withRouter } from 'react-router-dom'
@@ -34,67 +34,67 @@ export class Category extends Component {
         })
         return (
             <div>
-                {/* 顶部导航条 */}
+                {this.props.location.pathname === "/category" ?
+                    <Fragment>
+                        <NavBar
+                            mode="dark"
+                            leftContent={<Icon type='left' />}
+                            onLeftClick={() => this.props.history.goBack()}
+                            style={{
+                                position: 'fixed',
+                                width: '100%',
+                                left: 0,
+                                top: 0,
+                                right: 0,
+                                zIndex: 1000
+                            }}
+                        >商品分类</NavBar>
 
-                <NavBar
-                    mode="dark"
-                    leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.goBack()}
-                    style={{
-                        position: 'fixed',
-                        width: '100%',
-                        left: 0,
-                        top: 0,
-                        right: 0,
-                        zIndex: 1000
-                    }}
-                >商品分类</NavBar>
+                        <Tabs className="tabs"
+                            tabs={cates}
+                            initalPage={0}
+                            animated={false}
+                            useOnPan={true}
+                            tabBarTextStyle={
+                                {
+                                    width: 86,
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                    backgroundColor: '#f7f7f7',
+                                    color: '#666',
+                                    fontSize: 13
+                                }
+                            }
+                            // 一页显示12个
+                            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={12} />}
+                            // 靠左
+                            tabBarPosition="left"
+                            // 内容垂直
+                            tabDirection="vertical"
+                        >
+                            {cates.length ? cates.map(v => (
+                                v.children.map(v1 => (
+                                    v1.children ?
+                                        <div key={v1.cat_id} className="cateItem">
+                                            <div className="cate_title">{v1.cat_name}</div>
+                                            <div className="cate_content">
+                                                {v1.children.map(
+                                                    v2 => (
+                                                        <div key={v2.cat_id} onClick={() => this.props.history.push('/searchgoods/' + qs.stringify({ cid: v2.cat_id }))}>
+                                                            <img src={v2.cat_icon} alt="" />
+                                                            <span className="cat_name">{v2.cat_name}</span>
+                                                        </div>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                        : ''
+                                ))
+                            )) : ''}
 
-                <Tabs className="tabs"
-                    tabs={cates}
-                    initalPage={0}
-                    animated={false}
-                    useOnPan={true}
-                    tabBarTextStyle={
-                        {
-                            width: 86,
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            backgroundColor: '#f7f7f7',
-                            color: '#666',
-                            fontSize: 13
-                        }
-                    }
-                    // 一页显示12个
-                    renderTabBar={props => <Tabs.DefaultTabBar {...props} page={12} />}
-                    // 靠左
-                    tabBarPosition="left"
-                    // 内容垂直
-                    tabDirection="vertical"
-                >
-                    {cates.length ? cates.map(v => (
-                        v.children.map(v1 => (
-                            v1.children ?
-                                <div key={v1.cat_id} className="cateItem">
-                                    <div className="cate_title">{v1.cat_name}</div>
-                                    <div className="cate_content">
-                                        {v1.children.map(
-                                            v2 => (
-                                                <div key={v2.cat_id} onClick={() => this.props.history.push('/searchgoods/' + qs.stringify({ cid: v2.cat_id }))}>
-                                                    <img src={v2.cat_icon} alt="" />
-                                                    <span className="cat_name">{v2.cat_name}</span>
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
-                                </div>
-                                : ''
-                        ))
-                    )) : ''}
-
-                </Tabs>
-                <style jsx>{`
+                        </Tabs>
+                        <style jsx>{`
                     :global(.am-tabs-tab-bar-wrap) {
                             padding-bottom: 41px;
                         }
@@ -143,6 +143,11 @@ export class Category extends Component {
                         }
                     }
                 `}</style>
+                    </Fragment>
+                    : ''}
+                {/* 顶部导航条 */}
+
+
             </div>
         )
     }

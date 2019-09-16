@@ -79,10 +79,12 @@ export class Home extends Component {
                     animating={this.state.animating}
                 />
                 {/* 搜索栏 */}
-                <SearchBar placeholder={this.state.placeholderPre}
+                {this.props.location.pathname === '/'? 
+                    <SearchBar placeholder={this.state.placeholderPre}
                     onFocus={() => this.props.history.push('/searchfield')}
                     style={{ position: 'fixed', top: 0, left: 0, width: '100%'}}
-                />
+                />: ''
+                }
                 {/* 轮播图 */}
                 <Carousel
                     autoplay={true}
