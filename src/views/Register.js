@@ -15,7 +15,7 @@ export class Register extends Component {
             pwd: '',
             verifyPwd: '',
             gender: '男',
-
+            codeText: '点击获取验证码'
         }
     }
     // 点击单选框时触发
@@ -47,13 +47,27 @@ export class Register extends Component {
         })
     }
     // 获取验证码
-    getCode = () => {
+    getCode = (e) => {
         // 这里的号码格式是139 9999 9999 ，提交之前把中间的空格去掉
         var mobile = this.state.mobile.replace(/\s/g, '')
         // 判断手机号码是否符合要求
         if (!/^1[3-9]\d{9}$/.test(mobile)) {
             Toast.fail('手机号码格式有误', 2)
+            return
         } else {
+            // 设置倒计时
+            let num = 30
+            let timeId = setInterval(() => {
+                this.setState({
+                    codeText: `倒计时（${num--}）秒`
+                })
+                if (num === -1) {
+                    clearInterval(timeId)
+                    this.setState({
+                        codeText: '点击获取验证码'
+                    })
+                }
+            }, 1000);
             getVerigyCode(mobile).then(res => {
                 // 将验证码赋值给输入框
                 const { meta: { status }, message } = res.data
@@ -72,21 +86,21 @@ export class Register extends Component {
         const RadioItem = Radio.RadioItem;
         return (
             <div>
-                {this.props.location.pathname === '/register'?
+                {this.props.location.pathname === '/register' ?
                     <NavBar
-                    mode="dark"
-                    leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.go(-1)}
-                    style={{
-                        position: 'fixed',
-                        width: '100%',
-                        left: 0,
-                        top: 0,
-                        zIndex: 1,
-                    }}
-                >
-                    注册
-                </NavBar>: ''
+                        mode="dark"
+                        leftContent={<Icon type='left' />}
+                        onLeftClick={() => this.props.history.go(-1)}
+                        style={{
+                            position: 'fixed',
+                            width: '100%',
+                            left: 0,
+                            top: 0,
+                            zIndex: 1,
+                        }}
+                    >
+                        注册
+                </NavBar> : ''
                 }
 
                 <List
@@ -127,7 +141,8 @@ export class Register extends Component {
                     >
                         <span className="star">*</span>  手机号码
                     </InputItem>
-                    <button className="get-code" onClick={this.getCode}>获取验证码</button>
+                    {/* 这里根据codeText来判断是否禁用button */}
+                    <button disabled={this.state.codeText === '点击获取验证码' ? false : true} className="get-code" onClick={this.getCode}>{this.state.codeText}</button>
                     <InputItem
                         // 输入类型为数字
                         type="number"
@@ -258,20 +273,20 @@ export class Register extends Component {
                         <span className="star">*</span>   女
                     </RadioItem>
                     <WhiteSpace />
-                        <Flex justify="center">
-                            {/* 注册按钮 */}
-                            <Button type="primary" size="small" style={{ marginRight: 10 }}
-                                className="bottom-button"
-                                onClick={this.handleRegister}>
-                                立即注册
+                    <Flex justify="center">
+                        {/* 注册按钮 */}
+                        <Button type="primary" size="small" style={{ marginRight: 10 }}
+                            className="bottom-button"
+                            onClick={this.handleRegister}>
+                            立即注册
                             </Button>
-                            {/* 取消注册按钮 */}
-                            <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px' }}
-                                onClick={() => this.props.history.push('/login')}>
-                                取消
+                        {/* 取消注册按钮 */}
+                        <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px' }}
+                            onClick={() => this.props.history.push('/login')}>
+                            取消
                             </Button>
 
-                        </Flex>
+                    </Flex>
                     <WhiteSpace />
 
                 </List>
@@ -289,14 +304,13 @@ export class Register extends Component {
                     }
                     .get-code {
                         display: block;
-                        width: auto;
+                        width: 117px;
                         height: 40px;
                         position: absolute;
                         right: 5px;
                        top: -17px;
                         transform: translateY(47%);
-                        padding: 0 5px;
-                        background-Color: #ccc;
+                        background-color: #ccc;
                         color: white;
                         font-size: 14px;
                     }
