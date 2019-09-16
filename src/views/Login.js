@@ -87,7 +87,7 @@ export class Login extends Component {
         const { getFieldError, getFieldProps } = this.props.form;
         return (
             <div>
-                    <NavBar
+                    {this.props.location.pathname === '/login'? <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.push('/')}
@@ -100,7 +100,7 @@ export class Login extends Component {
                     }}
                 >
                     登录
-                </NavBar>
+                </NavBar>: ''}
                 <List
                     style={{
                         marginTop: 45
