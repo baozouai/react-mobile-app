@@ -61,7 +61,6 @@ export class Category extends Component {
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
-                                    backgroundColor: '#f7f7f7',
                                     color: '#666',
                                     fontSize: 13
                                 }
@@ -96,16 +95,17 @@ export class Category extends Component {
                         </Tabs>
                         <style jsx>{`
                             :global(.am-tabs-tab-bar-wrap) {
-                                    padding-bottom: 41px;
+                                    padding-bottom: 45px;
                             }
                                 
                             :global(.am-tabs-default-bar-left) {
-                                padding-bottom: 50px;
+                                padding-bottom: 51px;
+                                background-color: #f7f7f7 !important;
                             }
                                 
                             :global(.am-tabs-pane-wrap) {
                                 background-color: #fff;
-                                padding-bottom: 50px;
+                                padding-bottom: 52px;
                             }
                             :global(.am-tabs) {
                                 position: fixed;
