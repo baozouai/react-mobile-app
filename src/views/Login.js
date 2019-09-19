@@ -54,7 +54,8 @@ export class Login extends Component {
                             // 状态码200表示获取购物车数据成功
                             if (status === 200) {
                                 // 判断购物车是否为空
-                                if (Object.values(JSON.parse(message.cart_info)).length) {
+                                console.log(message.cart_info);
+                                if (message.cart_info) {
                                     // 不为空的话同步购物车，修改CartReducer中购物车数量
                                     this.props.snycCartGoods(Object.values(JSON.parse(message.cart_info)))
                                 }

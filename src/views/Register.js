@@ -34,12 +34,16 @@ export class Register extends Component {
             } else {
                 var mobile = this.state.mobile.replace(/\s/g, '')
                 submitRegister({ ...this.state, mobile }).then(res => {
+                    console.log(res);
                     const { meta: { status, msg } } = res.data
                     if (status === 200) {
                         // 提示注册成功
                         Toast.success(msg)
                         // 注册成功后返回登录页面
-                        this.props.history.push('/register')
+                        this.props.history.push('/login')
+                    } else {
+                        // 提示注册成功
+                        Toast.success(msg)
                     }
                 })
             }
@@ -69,12 +73,11 @@ export class Register extends Component {
                 }
             }, 1000);
             getVerigyCode(mobile).then(res => {
+                console.log(res);
                 // 将验证码赋值给输入框
                 const { meta: { status }, message } = res.data
                 if (status === 200) {
-                    this.setState({
-                        code: message
-                    })
+                    Toast.success(message, 3)
                 }
             })
         }

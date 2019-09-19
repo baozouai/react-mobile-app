@@ -44,7 +44,7 @@ export class Cart extends Component {
             // 状态码200表示获取购物车数据成功
             if (status === 200) {
                 // 判断购物车是否为空
-                if (Object.values(JSON.parse(cart_info)).length) {
+                if (cart_info) {
                     // 不为空的话设置其标志，以便是否显示购物车为空的图片标志，并将购物车数据解析后存入state的cart_infos
                     let cart_infos = JSON.parse(cart_info)
                     // 给购物车信息加上是否选择标志
