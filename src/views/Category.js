@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Tabs, NavBar, Icon } from 'antd-mobile'
+import { Tabs, NavBar, Icon, ActivityIndicator } from 'antd-mobile'
 import { getCategory } from '../api/index'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
@@ -9,10 +9,13 @@ export class Category extends Component {
 
         this.state = {
             categories: [],
+            animating: false
         }
     }
 
     UNSAFE_componentWillMount() {
+        // 一开始设置等待
+        this.setState({ animating: true })
         // 页面加载前获取分类数据
         getCategory().then(res => {
             const { meta: { status }, message } = res.data
@@ -36,6 +39,12 @@ export class Category extends Component {
             <div>
                 {this.props.location.pathname === "/category" ?
                     <Fragment>
+                        {/* 页面未加载完显示加载标志 */}
+                        <ActivityIndicator
+                            toast
+                            text="拼命加载啊..."
+                            animating={this.state.animating}
+                        />
                         <NavBar
                             mode="dark"
                             leftContent={<Icon type='left' />}
@@ -81,7 +90,11 @@ export class Category extends Component {
                                                 {v1.children.map(
                                                     v2 => (
                                                         <div key={v2.cat_id} onClick={() => this.props.history.push('/searchgoods/' + qs.stringify({ cid: v2.cat_id }))}>
-                                                            <img src={v2.cat_icon} alt="" />
+                                                            <img src={v2.cat_icon}
+                                                                onLoad={() => {
+                                                                    this.setState({ animating: false })
+                                                                }}
+                                                                alt="" />
                                                             <span className="cat_name">{v2.cat_name}</span>
                                                         </div>
                                                     )
