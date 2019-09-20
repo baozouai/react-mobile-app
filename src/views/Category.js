@@ -14,12 +14,16 @@ export class Category extends Component {
 
     UNSAFE_componentWillMount() {
         // 页面加载前获取分类数据
+        // 判断回话是否存储了数据
         if (sessionStorage.getItem('categories')) {
+            // 有的话直接从回话拉取数据
             this.setState({
+                // 数据先解析
                 categories: JSON.parse(sessionStorage.getItem('categories'))
             })
             
         } else {
+            // 否则请求接口获取分类数据
             getCategory().then(res => {
                 const { meta: { status }, message } = res.data
                 if (status === 200) {
@@ -27,6 +31,7 @@ export class Category extends Component {
                         categories: message
                     })
                 }
+                // 这里数据要先用json转换，否则sessionStorage中的是'[Object Object]'
                 sessionStorage.setItem('categories', JSON.stringify(message))
             })
             
