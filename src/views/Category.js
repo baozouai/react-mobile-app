@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Tabs, NavBar, Icon, ActivityIndicator } from 'antd-mobile'
+import { Tabs, NavBar, Icon } from 'antd-mobile'
 import { getCategory } from '../api/index'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'

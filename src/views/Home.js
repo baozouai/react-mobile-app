@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar, ActivityIndicator } from 'antd-mobile';
+import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar } from 'antd-mobile';
 import { getHomeCarousel, getHomeGoodslist } from '../api/index'
 import qs from 'querystring'
 export class Home extends Component {
@@ -16,27 +16,30 @@ export class Home extends Component {
             // 底部文字是否显示
             bottom: false,
             // 搜索框预设初值
-            placeholderPre: '',
-            animating: false
+            placeholderPre: ''
         }
     }
     // 在render之前获取数据
     UNSAFE_componentWillMount() {
-        // 一开始设置等待
-        this.setState({ animating: true })
-
-        // 获取轮播图数据
-        getHomeCarousel().then(res => {
-            // 解构赋值
-            const { message, meta: { status } } = res.data
-            // 状态码为200的时候
-            if (status === 200) {
-                // 将获取到的轮播图数据复制给carouselList
-                this.setState({
-                    carouselList: message
-                })
-            }
-        })
+        if (sessionStorage.getItem('carousel')) {
+            this.setState({
+                carouselList: JSON.parse(sessionStorage.getItem('carousel'))
+            })
+        } else {
+            // 获取轮播图数据
+            getHomeCarousel().then(res => {
+                // 解构赋值
+                const { message, meta: { status } } = res.data
+                // 状态码为200的时候
+                if (status === 200) {
+                    // 将获取到的轮播图数据复制给carouselList
+                    this.setState({
+                        carouselList: message
+                    })
+                    sessionStorage.setItem('carousel', JSON.stringify(message))
+                }
+            })
+        }
         // 获取商品列表数据
         getHomeGoodslist().then(res => {
             // 解构赋值
@@ -72,18 +75,12 @@ export class Home extends Component {
         return (
             // 轮播图区域
             <div>
-                {/* 页面未加载完显示加载标志 */}
-                <ActivityIndicator
-                    toast
-                    text="拼命加载啊..."
-                    animating={this.state.animating}
-                />
                 {/* 搜索栏 */}
-                {this.props.location.pathname === '/'? 
+                {this.props.location.pathname === '/' ?
                     <SearchBar placeholder={this.state.placeholderPre}
-                    onFocus={() => this.props.history.push('/searchfield')}
-                    style={{ position: 'fixed', top: 0, left: 0, width: '100%'}}
-                />: ''
+                        onFocus={() => this.props.history.push('/searchfield')}
+                        style={{ position: 'fixed', top: 0, left: 0, width: '100%' }}
+                    /> : ''
                 }
                 {/* 轮播图 */}
                 <Carousel
@@ -100,14 +97,14 @@ export class Home extends Component {
                     ))}
                 </Carousel>
                 {/* 分类 */}
-            <div className="catitems">
+                <div className="catitems">
                     <div onClick={() => this.props.history.push('/searchgoods/query=秒杀')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_3@2x.png" alt="" /></div>
 
                     <div onClick={() => this.props.history.push('/searchgoods/query=超市')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_2@2x.png" alt="" /></div>
 
                     <div onClick={() => this.props.history.push('/searchgoods/query=母婴')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_1@2x.png" alt="" /></div>
 
-                    <div onClick={()=>this.props.history.push('/searchgoods/query=充值')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_5@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=充值')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_5@2x.png" alt="" /></div>
                 </div>
                 {/* 首页商品列表区域 */}
                 <div className="goodsList">
@@ -115,15 +112,10 @@ export class Home extends Component {
                         <div key={item.group_img} className="goods">
                             {/* WhiteSpace：上下留白 size表示留白的程度 */}
                             <WhiteSpace size="sm" />
-                            <img src={item.group_img}
-                                // 图片加载完取消等待
-                                onLoad={() => {
-                                    this.setState({ animating: false })
-                                }}
-                                alt="" />
+                            <img src={item.group_img} alt="" />
                             {/* WingBlank：左右留白 size表示留白的程度 */}
                             <WingBlank size="sm">
-                                 {/* 采用flex布局 */}
+                                {/* 采用flex布局 */}
                                 <Flex
                                     justify="between"
                                     wrap="wrap"

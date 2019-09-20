@@ -155,6 +155,7 @@ export class Cart extends Component {
         // 删除对应id的商品
         delete cart_infos[goods_id]
         // 如果购物车为空，则设置购物车信息状态为false，表示购物车清空了
+        console.log(Object.values(cart_infos));
         if (!Object.values(cart_infos).length) {
             this.setState({
                 cart_infos_Status: false
@@ -183,7 +184,8 @@ export class Cart extends Component {
                 delete cart_infos[goods_id]
             }
         }
-        if (!cart_infos.length) {
+        console.log(cart_infos);
+        if (!Object.values(cart_infos).length) {
             this.setState({
                 cart_infos_Status: false
             })
@@ -280,7 +282,7 @@ export class Cart extends Component {
                                                     {v.goods_name}
                                                 </div>
                                                 <Stepper
-                                                    style={{ width: '100%', maxWidth: 100, position: 'absolute', right: 5, bottom: -5, fontSize: 8 }}
+                                                    style={{ width: '100%', maxWidth: 95, position: 'absolute', right: 5, bottom: -5, fontSize: 8 }}
                                                     showNumber
                                                     max={v.goods_number}
                                                     min={1}
