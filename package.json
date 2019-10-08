@@ -1,6 +1,7 @@
 {
   "name": "mobile-app",
   "version": "0.1.0",
+  "homepage": "https://baozouai.github.io/react-mobile-app/",
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.3.1",
@@ -25,7 +26,10 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+
   },
   "eslintConfig": {
     "extends": "react-app"

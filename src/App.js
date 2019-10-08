@@ -19,7 +19,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div style={{ height: '100%' }}>
         <Switch>
           <Route path='/' exact render={props => <Layout {...props}><Home></Home></Layout>}></Route>
