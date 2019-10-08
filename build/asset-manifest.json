@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/react-mobile-app/static/css/main.23880460.chunk.css",
-    "main.js": "/react-mobile-app/static/js/main.635c0072.chunk.js",
-    "main.js.map": "/react-mobile-app/static/js/main.635c0072.chunk.js.map",
+    "main.css": "/react-mobile-app/static/css/main.da4debcf.chunk.css",
+    "main.js": "/react-mobile-app/static/js/main.2ca0279d.chunk.js",
+    "main.js.map": "/react-mobile-app/static/js/main.2ca0279d.chunk.js.map",
     "runtime~main.js": "/react-mobile-app/static/js/runtime~main.68af54ea.js",
     "runtime~main.js.map": "/react-mobile-app/static/js/runtime~main.68af54ea.js.map",
-    "static/css/2.1edd7420.chunk.css": "/react-mobile-app/static/css/2.1edd7420.chunk.css",
-    "static/js/2.29f7af08.chunk.js": "/react-mobile-app/static/js/2.29f7af08.chunk.js",
-    "static/js/2.29f7af08.chunk.js.map": "/react-mobile-app/static/js/2.29f7af08.chunk.js.map",
+    "static/css/2.29fab1a3.chunk.css": "/react-mobile-app/static/css/2.29fab1a3.chunk.css",
+    "static/js/2.df0bf40d.chunk.js": "/react-mobile-app/static/js/2.df0bf40d.chunk.js",
+    "static/js/2.df0bf40d.chunk.js.map": "/react-mobile-app/static/js/2.df0bf40d.chunk.js.map",
     "index.html": "/react-mobile-app/index.html",
-    "precache-manifest.7661814d2ef983cfe65af3ceaef75d16.js": "/react-mobile-app/precache-manifest.7661814d2ef983cfe65af3ceaef75d16.js",
+    "precache-manifest.4d74eeb5cbde8f11deaf3056cc65bcc7.js": "/react-mobile-app/precache-manifest.4d74eeb5cbde8f11deaf3056cc65bcc7.js",
     "service-worker.js": "/react-mobile-app/service-worker.js",
-    "static/css/2.1edd7420.chunk.css.map": "/react-mobile-app/static/css/2.1edd7420.chunk.css.map",
-    "static/css/main.23880460.chunk.css.map": "/react-mobile-app/static/css/main.23880460.chunk.css.map",
+    "static/css/2.29fab1a3.chunk.css.map": "/react-mobile-app/static/css/2.29fab1a3.chunk.css.map",
+    "static/css/main.da4debcf.chunk.css.map": "/react-mobile-app/static/css/main.da4debcf.chunk.css.map",
     "static/media/cart_empty.png": "/react-mobile-app/static/media/cart_empty.9f725555.png"
   }
 }

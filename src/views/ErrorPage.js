@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { WingBlank } from 'antd-mobile'
+import '../style/errorpage.css'
 export class ErrorPage extends Component {
     render() {
         return (
@@ -24,36 +25,7 @@ export class ErrorPage extends Component {
                         </p>
                     </div>
                 </WingBlank>
-                <style jsx>{`
-                    .tips {
-                        font-size: 25px;
-                        margin: 20px auto;
-                    }
-                    .reason {
-                        line-height: 1.6em;
-                        margin-bottom: 25px;
-                        li {
-                            span {
-                                color: #ccc;
-                                padding-left: 5px;
-                            .gt {
-                                font-size: 10px;
-                                }
-                            }
-                        }
-                    }
-                    .links {
-                        color: #ccc;
-                        line-height: 2em;
-                        :global(a) {
-                            color: #0B72A4;
-                        }
-                        span {
-                            color: #ccc;
-                            padding: 0 3px;
-                        }
-                    }
-                `}</style>
+                
             </div>
         )
     }

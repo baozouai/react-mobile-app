@@ -1,0 +1,89 @@
+.ellipsis-2 {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal!important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.single-order-list {
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.single-order-list .single-order {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.single-order-list .single-order img {
+  width: 30%;
+  flex: 1;
+  padding: 10px;
+}
+.single-order-list .single-order .order-content {
+  flex: 4;
+}
+.single-order-list .single-order .order-content .order-title {
+  position: absolute;
+  top: 15px;
+  font-size: 15px;
+  color: #333;
+  padding-right: 5px;
+}
+.single-order-list .single-order .order-content .num-price {
+  font-size: 12px;
+  color: #666;
+  margin-top: 20px;
+}
+.single-order-list .single-order .order-content .order-price {
+  position: absolute;
+  bottom: 15px;
+  color: red;
+}
+.single-order-list .single-order .order-content .order-price span {
+  font-size: 12px;
+}
+.single-order-list .single-order .order-content .order-price span:nth-of-type(1) {
+  margin-right: 5px;
+}
+.single-order-list .order-infos {
+  padding: 10px;
+}
+.single-order-list .order-infos .title {
+  font-size: 13px;
+  color: black;
+  margin: 10px 0;
+  position: relative;
+  left: 10px;
+}
+.single-order-list .order-infos .title:before {
+  content: '';
+  width: 2px;
+  height: 16px;
+  background-color: red;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.single-order-list .order-infos .order-infos-content > div {
+  display: flex;
+  font-size: 14px;
+  color: #3e3e3e;
+  padding-top: 5px;
+}
+.single-order-list .order-infos .order-infos-content > div span:nth-of-type(1) {
+  flex: 1;
+}
+.single-order-list .order-infos .order-infos-content > div span:nth-of-type(2) {
+  flex: 2;
+}
+.single-order-list .order-infos .order-infos-content > div span.total-price {
+  color: red;
+}
+.single-order-list .order-infos .order-infos-content > div span.total-price::first-letter {
+  font-size: 10px;
+}

@@ -3,6 +3,7 @@ import { Tabs, NavBar, Icon } from 'antd-mobile'
 import { getCategory } from '../api/index'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
+import '../style/category.css'
 export class Category extends Component {
     constructor(props) {
         super(props)
@@ -54,14 +55,7 @@ export class Category extends Component {
                             mode="dark"
                             leftContent={<Icon type='left' />}
                             onLeftClick={() => this.props.history.goBack()}
-                            style={{
-                                position: 'fixed',
-                                width: '100%',
-                                left: 0,
-                                top: 0,
-                                right: 0,
-                                zIndex: 1000
-                            }}
+                            className="nav-bar-style"
                         >商品分类</NavBar>
 
                         <Tabs className="tabs"
@@ -108,57 +102,22 @@ export class Category extends Component {
 
                         </Tabs>
                         <style jsx>{`
-                            :global(.am-tabs-tab-bar-wrap) {
-                                    padding-bottom: 45px;
-                            }
-                                
-                            :global(.am-tabs-default-bar-left) {
-                                padding-bottom: 51px;
-                                background-color: #f7f7f7 !important;
-                            }
-                                
-                            :global(.am-tabs-pane-wrap) {
-                                background-color: #fff;
-                                padding-bottom: 52px;
-                            }
-                            :global(.am-tabs) {
-                                position: fixed;
-                                top: 45px;
-                            }
-                            .cateItem {
-                                background-color:#fff;
-                                margin-bottom:45px;
-                                .cate_title {
-                                    color: steelblue;
-                                    font-size: 20px;
-                                    font-weight: bold;
-                                    padding-top: 10px;
-                                    text-indent: 1em; 
-                                }
-                            .cate_content {
-                                display: flex;
-                                flex-wrap: wrap;
-                                div {
-                                    display: block;
-                                    width: 33.3%;
-                                    text-align: center;
-                                    margin-bottom: 10px;
-                                    img {
-                                        width: 70%;
-                                        display: inline-block;
-                                    }
-                                    @media screen and (max-width: 400px) {
-                                        img {
-                                            width: 60%;
-                                        }
-                                    }
-                                    .cat_name {
-                                        display: block;
-                                        font-size: 12px;
-                                        color: #666;
-                                    }
-                                }
-                            }
+                        :global(.am-tabs-tab-bar-wrap) {
+                            padding-bottom: 45px;
+                        }
+
+                        :global(.am-tabs-default-bar-left) {
+                        padding-bottom: 51px;
+                        background-color: #f7f7f7 !important;
+                        }
+
+                        :global(.am-tabs-pane-wrap) {
+                        background-color: #fff;
+                        padding-bottom: 52px;
+                        }
+                        :global(.am-tabs) {
+                        position: fixed;
+                        top: 45px;
                         }
                 `}</style>
                     </Fragment>

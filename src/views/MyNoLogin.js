@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import {WingBlank, Flex, TabBar} from 'antd-mobile'
+import '../style/mynologin.css'
 export class MyNoLogin extends Component {
     render() {
         return (
@@ -48,61 +49,7 @@ export class MyNoLogin extends Component {
                     >
                     </TabBar.Item>
                 </TabBar>
-                <style jsx>{`
-                    header {
-                        height: 120px;
-                        width: 100%;
-                        background-color: #33A3F4;
-                       .title {
-                           text-align: center;
-                           padding-top: 10px;
-                           font-size: 18px;
-                           color: #fff;
-                       }
-                            .avatar {
-                               
-                                display: flex;
-                                align-items: center;
-                                .wrapper {
-                                    width: 55px;
-                                    height: 55px;
-                                    background-color: #fff;
-                                    border-radius: 50%;
-                                    display: flex;
-                                    margin-left: 5px;
-                                    content-justify: center;
-                                    .icon-icontouxiang {
-                                        font-size: 40px;
-                                        margin: 0 auto;
-                                        color: skyblue;
-                                    }
-                                }
-                                span {
-                                    color: #fff;
-                                    font-size: 18px;
-                                    margin-left: 5px;
-                                }
-                            
-                            }
-                            
-                            .goto-login {
-                                width: 100px;
-                                color: #fff;
-                                border: 1px solid #fff;
-                                background-color: inherit;
-                                padding: 10px;
-                                border-radius: 5px;
-                            }
-                    }
-                    .my-order {
-                                height: 50px;
-                                background-color: #fff;
-                                line-height: 50px;
-                                padding-left: 10px;
-                                color: #5f5b5b;
-                                font-size: 16px;
-                            }
-                `}</style>
+                
             </div>
         )
     }

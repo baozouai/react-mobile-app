@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { SearchBar } from 'antd-mobile';
 import { searchSuggest } from '../api/index'
 import {WingBlank} from 'antd-mobile'
+import '../style/searchfield.css'
 export class SearchField extends Component {
     constructor(props) {
         super(props)
@@ -68,22 +69,6 @@ export class SearchField extends Component {
                         ))}
                     </ul>
                 </WingBlank>
-                <style jsx>{`
-                    .suggest-list {
-                        li {
-                            color: #444;
-                            font-size: 14px;
-                            padding: 14px 0;
-                            border-bottom: 1px solid rgba(232, 229, 229, 0.7);
-                            display: flex;
-                            justify-content: space-between;
-                            .right {
-                                font-weight: bold;
-                                color: #666;
-                            }
-                        }
-                    }
-                `}</style>
             </div>
         )
     }

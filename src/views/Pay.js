@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { NavBar, Icon, Toast } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { createOrder, syncCart, getGoodsDetail, getCartGoods } from '../api/index'
+import '../style/pay.css'
 export class Pay extends Component {
     constructor(props) {
         super(props)
@@ -89,14 +90,7 @@ export class Pay extends Component {
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.goBack()}
-                    style={{
-                        position: 'fixed',
-                        width: '100%',
-                        left: 0,
-                        top: 0,
-                        right: 0,
-                        zIndex: 1000
-                    }}
+                    className="nav-bar-style"
                 >确认订单</NavBar>
                 <div style={{ margin: '60px 10px 0' }}>
                     <div className="default-address"
@@ -148,132 +142,7 @@ export class Pay extends Component {
                         <span className="submit-order">提交订单</span>
                     </div>
                 </div>
-                <style jsx>{`
-                    .ellipsis-2 {
-                        display: -webkit-box;
-                        overflow: hidden;
-                        white-space: normal!important;
-                        text-overflow: ellipsis;
-                        word-wrap: break-word;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                    }
-                    .default-address {
-                        height: 50px;
-                        background-color: #fff;
-                        border-radius: 10px;
-                        display: flex;
-                        align-items: center;
-
-                    .left-icon, .right-icon {
-                        flex:1;
-                        i {
-                            font-size: 26px;
-                        }
-                        
-                    }
-                    .left-icon {
-                        padding-left: 10px;
-                    }
-                    .address-info {
-                        flex: 8;
-                        .address-info-top {
-
-                        .name {
-                            padding: 0 10px;
-                        }
-                        .phone {
-                            color: #666;
-                        }
-                        }
-                        .address-info-bottom {
-                            margin-top: 5px;
-                            font-size: 10px;
-                            padding-left: 10px;
-                            color: #666;
-                        }
-                    }
-                    }
-                    .single-order {
-                        background-color: #fff;
-                        padding: 5px;
-                        display: flex;
-                        align-items: center;
-                        border-radius: 10px;
-                        position: relative;
-                        margin-top: 5px;
-        
-                        img {
-                            width: 30%;
-                            flex: 1;
-                            padding: 10px;
-                        }
-        
-                        .order-content {
-                            flex: 4;
-        
-                            .order-title {
-                                position: absolute;
-                                top: 15px;
-                                padding-right: 5px;
-                            }
-        
-                            .order-price {
-                                position: absolute;
-                                bottom: 15px;
-                                right: 10px;
-                                font-size: 12px;
-                                span:nth-of-type(1) {
-                                    color: #ccc;
-                                    margin-right: 1px;
-                                }
-                                span:nth-of-type(3) {
-                                    color: red;
-                                    margin-left: 1px;
-                                }
-                            }
-                        }
-        
-                    }
-                    .submit-order-footer {
-                        position: fixed;
-                        bottom: 0px;
-                        display: flex;
-                        justify-content: space-between;
-                        height: 50px;
-                        line-height: 50px;
-                        width: 100%;
-                        border-top: 1px solid #e7e7e7;
-                        background-color: #fff;
-                        .submit-order-footer-left {
-                            padding-left: 100px;
-                            color: #999;
-                            
-                        }
-                        .submit-order-footer-center {
-                            .total-price {
-                            color: #ff5500;
-                            span {
-                                font-size: 10px;
-                            }
-                            }
-                        }
-                        .submit-order-footer-right {
-                            display: flex;
-                            height: 40px;
-                            border-radius: 20px;
-                            align-self: center;
-                            line-height: 40px;
-                            flex-direction: column;
-                            padding: 0 20px;
-                            margin-right: 5px;
-                            background-color: #ff5500;
-                            .submit-order {
-                            color: #fff;
-                            }
-                        }
-                    }
-                 `}</style>
+                
             </div>
         )
     }

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import { SearchBar, WingBlank, Flex, ActivityIndicator, PullToRefresh, Toast } from 'antd-mobile'
 import { searchGoods } from '../api/index'
 import qs from 'querystring'
+import '../style/searchgoods.css'
 export class SearchGoods extends Component {
     constructor(props) {
         super(props)
@@ -78,9 +79,9 @@ export class SearchGoods extends Component {
                 // 如果获取的商品条数少于20，则加上底部文字
                 if (goods.length !== 20) {
                     this.setState({
-                        bottom: true
+                        bottom: true,
                     })
-                    Toast.info('没有更多数据了')
+                    Toast.info('没有更多数据了', 1)
                 }
                 // 获取的商品追加到之前获取的商品列表中
                 this.setState({
@@ -173,67 +174,6 @@ export class SearchGoods extends Component {
                     }
                 </PullToRefresh>
 
-                <style jsx>{`
-                    .goods-list-bottom {
-                        height: 40px;
-                        line-height: 40px;
-                        text-align: center;
-                        font-size: 14px;
-                        color: #ccc;
-                        display: flex;
-                        position: relative;
-                        align-items: center;
-                        .line {
-                            width: 200px;
-                            height: 1px;
-                            vertical-align: middle;
-                            background-color: #ccc;
-                            margin: 0 auto;
-                            text-align: center;
-                            span {
-                                background-color: #f5f5f9;
-                                padding: 0 10px;
-                                position: absolute;
-                                top: -50%;
-                                font-size: 10px;
-                                transform: translate(-50%, 50%);
-                            }
-                        }
-                    }
-                    .ellipsis-1 {
-                        overflow: hidden; 
-                        text-overflow: ellipsis; 
-                        white-space: nowrap; 
-                    }
-
-                    .good {
-                        width: 49.5%;
-                        border-radius: 20px;
-                        padding: 10px;
-                        margin-top: 6px;
-                        background-color: #fff;
-                        .good_content {
-                            img {
-                                margin: 0 auto;
-                                width: 70%;
-                                display: block;
-                            }
-                            .describe {
-                                padding: 10px 5px;
-                                font-size: 13px;
-                                color: #333;        
-                            }
-                            .price {
-                                font-size: 14px;
-                                color: red;
-                                span {
-                                    font-size: 10px;
-                                }
-                            }
-                        }
-                    }
-
-            `}</style>
             </div>
         )
     }

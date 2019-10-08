@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { List, InputItem, WhiteSpace, NavBar, Icon, Button, Toast, Flex, Radio } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import { submitRegister } from '../api/index'
-import { getVerigyCode } from '../api/index'
+import { submitRegister, getVerigyCode } from '../api/index'
+import '../style/register.css'
 export class Register extends Component {
     constructor(props) {
         super(props)
@@ -94,13 +94,7 @@ export class Register extends Component {
                         mode="dark"
                         leftContent={<Icon type='left' />}
                         onLeftClick={() => this.props.history.go(-1)}
-                        style={{
-                            position: 'fixed',
-                            width: '100%',
-                            left: 0,
-                            top: 0,
-                            zIndex: 1,
-                        }}
+                        className="nav-bar-style"
                     >
                         注册
                 </NavBar> : ''
@@ -293,31 +287,6 @@ export class Register extends Component {
                     <WhiteSpace />
 
                 </List>
-
-                <style jsx>{`
-                    .bottom-button {
-                        width: 30%;
-                        padding: 10px 0;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                    .star {
-                        color: red;
-                    }
-                    .get-code {
-                        display: block;
-                        width: 117px;
-                        height: 40px;
-                        position: absolute;
-                        right: 5px;
-                       top: -17px;
-                        transform: translateY(47%);
-                        background-color: #ccc;
-                        color: white;
-                        font-size: 14px;
-                    }
-                `}</style>
 
             </div>
         )

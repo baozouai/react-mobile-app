@@ -1,0 +1,35 @@
+.cateItem {
+  background-color: #fff;
+  margin-bottom: 45px;
+}
+.cateItem .cate_title {
+  color: steelblue;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 10px;
+  text-indent: 1em;
+}
+.cateItem .cate_content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cateItem .cate_content div {
+  display: block;
+  width: 33.3%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.cateItem .cate_content div img {
+  width: 70%;
+  display: inline-block;
+}
+@media screen and (max-width: 400px) {
+  .cateItem .cate_content div img {
+    width: 60%;
+  }
+}
+.cateItem .cate_content div .cat_name {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}

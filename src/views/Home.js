@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar } from 'antd-mobile';
 import { getHomeCarousel, getHomeGoodslist } from '../api/index'
 import qs from 'querystring'
+import '../style/home.css'
 export class Home extends Component {
     constructor(props) {
         super(props)
@@ -77,11 +78,10 @@ export class Home extends Component {
             <div>
                 {/* 搜索栏 */}
                 {this.props.location.pathname === '/' ?
-                    <SearchBar placeholder={this.state.placeholderPre}
-                        onFocus={() => this.props.history.push('/searchfield')}
-                        style={{ position: 'fixed', top: 0, left: 0, width: '100%' }}
-                    /> : ''
-                }
+                <SearchBar placeholder={this.state.placeholderPre}
+                    onFocus={() => this.props.history.push('/searchfield')}
+                    style={{ position: 'fixed', top: 0, left: 0, width: '100%' }}
+                /> : ''}
                 {/* 轮播图 */}
                 <Carousel
                     autoplay={true}
@@ -151,111 +151,7 @@ export class Home extends Component {
                     </div>
 
                 </div> : ''}
-                {/* 商品列表的CSS样式 */}
-                <style jsx>{`
-                .search-similar {
-                    border: 1px solid rgb(16, 142, 233);
-                    width: 55%;
-                    display: block;
-                    margin: 10px auto;
-                    background-color: #fff;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    color: rgb(16, 142, 233);
-                }
-                .goods-list-bottom {
-                    height: 40px;
-                    line-height: 40px;
-                    text-align: center;
-                    font-size: 14px;
-                    color: #ccc;
-                    display: flex;
-                    position: relative;
-                    align-items: center;
-                    .line {
-                        width: 300px;
-                        height: 1px;
-                        vertical-align: middle;
-                        background-color: #ccc;
-                        margin: 0 auto;
-                        text-align: center;
-                        span {
-                            background-color: #f5f5f9;
-                            padding: 0 20px;
-                            position: absolute;
-                            top: -50%;
-                            transform: translate(-50%, 50%);
-                        }
-                    }
-                }
-                .ellipsis-1 {
-                    overflow: hidden; 
-                    text-overflow: ellipsis; 
-                    white-space: nowrap;
-                }
-
-                .catitems {
-                    display: flex;
-                    background-color: #fff;
-                    padding: 10px;
-
-                    div {
-                        flex: 1;
-                        text-align: center;
-
-                        img {
-                            margin: 0 auto;
-                            width: 50%;
-                        }
-                    }
-                }
                 
-                .goodsList {
-                    .goods {
-
-                        >img {
-                            display: block;
-                        }
-                        
-                        .good {
-                            width: 49.5%;
-                            border-radius: 20px;
-                            padding: 10px;
-                            margin-top: 6px;
-                            background-color: #fff;
-
-                            .good_content {
-                                
-                                img {
-                                    
-                                    width: 60%;
-                                    margin: 0 auto;
-                                    display: block;
-                                }
-
-                                .describe {
-                                    font-size: 13px;
-                                    color: #333;
-                                    padding: 10px 5px;
-                                }
-
-                                .price {
-                                    font-size: 13px;
-                                    color: red;
-                                }
-                            }
-
-                            .similar {
-                                width: 80%;
-                                display: block;
-                                margin: 5px auto 0;
-                            }
-
-                        }
-                        
-                    }
-                }
-                `}</style>
             </div>
         )
     }

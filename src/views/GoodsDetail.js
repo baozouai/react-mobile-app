@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getGoodsDetail, addCart, getCartGoods } from '../api';
 import { NavBar, Carousel, Icon, Badge, SegmentedControl, WingBlank, WhiteSpace, Toast } from 'antd-mobile';
+import '../style/goodsdetail.css'
 export class GoodsDetail extends Component {
     constructor(props) {
         super(props)
@@ -101,14 +102,7 @@ export class GoodsDetail extends Component {
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.goBack()}
-                    style={{
-                        position: 'fixed',
-                        width: '100%',
-                        left: 0,
-                        top: 0,
-                        right: 0,
-                        zIndex: 1000
-                    }}
+                    className="nav-bar-style"
                 >商品详情</NavBar>
                 {/* 轮播图区域 */}
                 <Carousel
@@ -225,115 +219,7 @@ export class GoodsDetail extends Component {
                         <span>立即购买</span>
                     </div>
                 </div>
-                <style jsx>{`
-                    .good-wrap {
-                        margin: 13px 0;
-                    }
-                    .good-content {
-                        padding: 10px;
-                        .good-describe {
-                            font-size: 15px;
-                        }
-                        .good-price {
-                            margin-top: 10px;
-                            color: red;
-                            font-size: 20px;
-                            font-weight: bold;
-                            span {
-                                font-size: 12px;
-                            }
-                        }
-                    }
-                    .good-select {
-                        li {
-                            display: flex;
-                            padding: 10px;
-                            font-size: 14px;
-                            border-bottom: 1px solid #999;
-                            span:nth-of-type(1) {
-                                color: #ccc;
-                                flex: 1;
-                            }
-                            span:nth-of-type(2) {
-                                flex: 4;
-                            }
-                        }
-                    }
-                    .good-param {
-
-                        div {
-                            padding: 10px;
-                        }
-                        div:nth-of-type(1) {
-                            font-weight: bold;
-                            border-bottom: 1px solid #333;
-                        }
-                        div:nth-of-type(2) {
-                            font-size: 14px;
-                            display: flex;
-                            span:nth-of-type(1) {
-                                flex: 1;
-                            }
-                            span:nth-of-type(2) {
-                                flex: 2;
-                            }
-                        }
-                    }
-                    .goods-footer {
-                        display: flex;
-                        position: fixed;
-                        bottom: 0;
-                        left: 0;
-                        height: 50px;
-                        width: 100%;
-                        border-top: 1px solid #e7e7e7;
-                        background-color: #fff;
-
-                        .goods-footer-item {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        }
-
-                        .contact,
-                        .cart {
-                        width: 40%;
-                        font-size: 12px;
-                        position: relative;
-                        }
-
-                        .badge {
-                        position: absolute;
-                        top: 3%;
-                        left: 50%;
-                        padding: 2px 5px;
-                        border-radius: 100%;
-                        background-color: #e4393c;
-                        text-align: center;
-
-                        color: white;
-                        }
-
-                        .add,
-                        .buy {
-                        width: 60%;
-                        color: white;
-
-                        &>span {
-                            font-size: 20px;
-                        }
-                        }
-
-                        .add {
-                        background-color: #ff976a;
-                        }
-
-                        .buy {
-                        background-color: #ff4444;
-                        }
-  }
-            `}</style>
+               
             </div>
 
         )

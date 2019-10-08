@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs, NavBar, Icon, WingBlank } from 'antd-mobile';
 import { getOrder } from '../api/index'
+import '../style/orderlist.css'
 export class OrderList extends Component {
     constructor(props) {
         super(props)
@@ -50,14 +51,7 @@ export class OrderList extends Component {
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.push('/my')}
-                    style={{
-                        position: 'fixed',
-                        width: '100%',
-                        left: 0,
-                        top: 0,
-                        right: 0,
-                        zIndex: 1000
-                    }}
+                    className="nav-bar-style"
                 >
                     我的订单{this.state.count ? `(${this.state.count})` : ''}
                 </NavBar>
@@ -197,116 +191,11 @@ export class OrderList extends Component {
                     </div>
                 </Tabs>
 
-
                 <style jsx>{`
-                        :global(.am-tabs) {
-                            position: fixed;
-                            top: 45px;
-                        }
-                        .ellipsis-2 {
-                            display: -webkit-box;
-                            overflow: hidden;
-                            white-space: normal!important;
-                            text-overflow: ellipsis;
-                            word-wrap: break-word;
-                            -webkit-line-clamp: 2;
-                            -webkit-box-orient: vertical;
-                        }
-                        .single-order-list {
-                            margin-bottom: 10px;
-                            background-color: #fff;
-                            border-radius: 10px;
-                            .single-order {
-                                padding: 5px;
-                                display: flex;
-                                align-items: center;
-                                position: relative;
-
-                                img {
-                                    width: 30%;
-                                    flex: 1;
-                                    padding: 10px;
-                                }
-
-                                .order-content {
-                                    flex: 4;
-                                    .order-title {
-                                        position: absolute;
-                                        top: 15px;
-                                        font-size: 15px;
-                                        color: #333;
-                                        padding-right: 5px;
-                                    }
-                                    .num-price {
-                                        font-size: 12px;
-                                        color:#666;
-                                        margin-top: 20px;
-                                    }
-                                    .order-price {
-                                        position: absolute;
-                                        bottom: 15px;
-                                        color: red;
-
-                                        span {
-                                            font-size: 12px;
-                                            &:nth-of-type(1) {
-                                                margin-right: 5px;
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }
-
-                            .order-infos {
-                                padding: 10px;
-
-                                .title {
-                                    font-size: 13px;
-                                    color: black;
-                                    margin: 10px 0;
-                                    position: relative;
-                                    left: 10px;
-                
-                                    &:before {
-                                        content: '';
-                                        width: 2px;
-                                        height: 16px;
-                                        background-color: red;
-                                        position: absolute;
-                                        left: -10px;
-                                        top: 50%;
-                                        transform: translateY(-50%);
-                                    }
-                                }
-
-                                .order-infos-content {
-                                    >div {
-                                        display: flex;
-                                        font-size: 14px;
-                                        color: #3e3e3e;
-                                        padding-top: 5px;
-
-                                        span:nth-of-type(1) {
-                                            flex: 1;
-                                        }
-
-                                        span:nth-of-type(2) {
-                                            flex: 2;
-                                        }
-
-                                        span.total-price {
-                                            color: red;
-
-                                            &::first-letter {
-                                                font-size: 10px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
+                    :global(.am-tabs) {
+                        position: fixed;
+                        top: 45px;
+                    }
                     `}</style>
             </div>
         )

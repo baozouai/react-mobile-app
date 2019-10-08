@@ -40,13 +40,7 @@ export class AddressInfo extends Component {
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.goBack()}
-                    style={{
-                        position: 'fixed',
-                        width: '100%',
-                        left: 0,
-                        top: 0,
-                        zIndex: 1,
-                    }}
+                    className="nav-bar-style"
                 >
                     编辑收货地址
                 </NavBar>

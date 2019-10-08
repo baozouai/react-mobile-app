@@ -1,0 +1,82 @@
+.search-similar {
+  border: 1px solid #108ee9;
+  width: 55%;
+  display: block;
+  margin: 10px auto;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #108ee9;
+}
+.goods-list-bottom {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+.goods-list-bottom .line {
+  width: 300px;
+  height: 1px;
+  vertical-align: middle;
+  background-color: #ccc;
+  margin: 0 auto;
+  text-align: center;
+}
+.goods-list-bottom .line span {
+  background-color: #f5f5f9;
+  padding: 0 20px;
+  position: absolute;
+  top: -50%;
+  transform: translate(-50%, 50%);
+}
+.ellipsis-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.catitems {
+  display: flex;
+  background-color: #fff;
+  padding: 10px;
+}
+.catitems div {
+  flex: 1;
+  text-align: center;
+}
+.catitems div img {
+  margin: 0 auto;
+  width: 50%;
+}
+.goodsList .goods > img {
+  display: block;
+}
+.goodsList .goods .good {
+  width: 49.5%;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 6px;
+  background-color: #fff;
+}
+.goodsList .goods .good .good_content img {
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+}
+.goodsList .goods .good .good_content .describe {
+  font-size: 13px;
+  color: #333;
+  padding: 10px 5px;
+}
+.goodsList .goods .good .good_content .price {
+  font-size: 13px;
+  color: red;
+}
+.goodsList .goods .good .similar {
+  width: 80%;
+  display: block;
+  margin: 5px auto 0;
+}

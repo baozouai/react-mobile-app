@@ -1,0 +1,65 @@
+.goods-list-bottom {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    .line {
+        width: 200px;
+        height: 1px;
+        vertical-align: middle;
+        background-color: #ccc;
+        margin: 0 auto;
+        text-align: center;
+
+        span {
+            background-color: #f5f5f9;
+            padding: 0 10px;
+            position: absolute;
+            top: -50%;
+            font-size: 10px;
+            transform: translate(-50%, 50%);
+        }
+    }
+}
+
+.ellipsis-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.good {
+    width: 49.5%;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 6px;
+    background-color: #fff;
+
+    .good_content {
+        img {
+            margin: 0 auto;
+            width: 70%;
+            display: block;
+        }
+
+        .describe {
+            padding: 10px 5px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .price {
+            font-size: 14px;
+            color: red;
+
+            span {
+                font-size: 10px;
+            }
+        }
+    }
+}
