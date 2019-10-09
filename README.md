@@ -1,6 +1,6 @@
 # 项目简介
 
-本项目是基于React、Antd Mobile、redux、axios的移动端电商App，api文档请见![api文档](./接口文档/api.md)
+本项目是基于React、Antd Mobile、redux、axios的移动端电商App，api文档请见[api文档](./接口文档/api.md)
 
 ## 一、目录结构
 
