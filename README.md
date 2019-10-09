@@ -1,6 +1,6 @@
 # 项目简介
 
-本项目是基于React、Antd Mobile、redux、axios的移动端电商App
+本项目是基于React、Antd Mobile、redux、axios的移动端电商App，api文档请见![api文档](./接口文档/api.md)
 
 ## 一、目录结构
 
@@ -34,8 +34,30 @@
     │   │   ├── UserReducer.js // 存储用户数据的reducer
     │   │   └── reducer.js // 总reducer
     │   └── store.js
-    ├── style
-    │   └── index.css // 全局样式
+    ├── style // 样式
+│   │   ├── cart.css
+│   │   ├── cart.less
+│   │   ├── category.css
+│   │   ├── category.less
+│   │   ├── errorpage.css
+│   │   ├── errorpage.less
+│   │   ├── goodsdetail.css
+│   │   ├── goodsdetail.less
+│   │   ├── home.css
+│   │   ├── home.less
+│   │   ├── index.css
+│   │   ├── mynologin.css
+│   │   ├── mynologin.less
+│   │   ├── orderlist.css
+│   │   ├── orderlist.less
+│   │   ├── pay.css
+│   │   ├── pay.less
+│   │   ├── register.css
+│   │   ├── register.less
+│   │   ├── searchfield.css
+│   │   ├── searchfield.less
+│   │   ├── searchgoods.css
+│   │   └── searchgoods.less
     ├── upload
     │   └── avatar.png // 用户头像
     └── views
@@ -46,6 +68,7 @@
         ├── Home.js // 首页
 	├── Category.js // 商品分类
         ├── Login.js // 登录页面
+        |—— MyNoLogin.js // 未登录前我的页面
         ├── My.js // 我的页面
         ├── OrderList.js // 订单列表页面
         ├── Pay.js // 支付页面
@@ -62,7 +85,7 @@
 
 ### 2、打开终端，`cd react-mobile-app`,切换到项目根目录，在项目根目录运行以下命令
 
-`npm install`，安装所需的package
+`npm install`，安装所需的依赖
 
 ### 3、然后运行`npm start`开启项目
 
