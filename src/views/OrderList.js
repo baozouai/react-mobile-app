@@ -13,7 +13,7 @@ export class OrderList extends Component {
     }
     UNSAFE_componentWillMount() {
         // render之前获取页面是否有id 如果是提交订单后跳转过来的话没有id，Number之后的NaN
-        var id = Number(this.props.location.pathname.split('/').pop())
+        let id = Number(this.props.location.pathname.split('/').pop())
         if (id) {
             this.setState({ id })
         }
@@ -28,15 +28,21 @@ export class OrderList extends Component {
             }
         })
     }
+    componentWillUpdate() {
+        const that = this;
+        window.addEventListener("popstate", function(e) {
+            that.props.history.push('/my')
+            }, false);
+    }
     // 将时间戳转换为2019-9-12 22:36:35格式
     convertTime = (create_time) => {
-        var time = new Date(parseInt(create_time) * 1000)
-        var y = time.getFullYear(); //getFullYear方法以四位数字返回年份
-        var M = time.getMonth() + 1; // getMonth方法从 Date 对象返回月份 (0 ~ 11)，返回结果需要手动加一
-        var d = time.getDate(); // getDate方法从 Date 对象返回一个月中的某一天 (1 ~ 31)
-        var h = time.getHours(); // getHours方法返回 Date 对象的小时 (0 ~ 23)
-        var m = time.getMinutes(); // getMinutes方法返回 Date 对象的分钟 (0 ~ 59)
-        var s = time.getSeconds(); // getSeconds方法返回 Date 对象的秒数 (0 ~ 59)
+        let time = new Date(parseInt(create_time) * 1000)
+        let y = time.getFullYear(); //getFullYear方法以四位数字返回年份
+        let M = time.getMonth() + 1; // getMonth方法从 Date 对象返回月份 (0 ~ 11)，返回结果需要手动加一
+        let d = time.getDate(); // getDate方法从 Date 对象返回一个月中的某一天 (1 ~ 31)
+        let h = time.getHours(); // getHours方法返回 Date 对象的小时 (0 ~ 23)
+        let m = time.getMinutes(); // getMinutes方法返回 Date 对象的分钟 (0 ~ 59)
+        let s = time.getSeconds(); // getSeconds方法返回 Date 对象的秒数 (0 ~ 59)
         return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s;
     }
     render() {
@@ -196,7 +202,8 @@ export class OrderList extends Component {
                         position: fixed;
                         top: 45px;
                     }
-                    `}</style>
+                    `}
+                </style>
             </div>
         )
     }

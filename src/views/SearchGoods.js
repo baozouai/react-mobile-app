@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import { SearchBar, WingBlank, Flex, ActivityIndicator, PullToRefresh, Toast } from 'antd-mobile'
 import { searchGoods } from '../api/index'
-import qs from 'querystring'
+
 import '../style/searchgoods.css'
 export class SearchGoods extends Component {
     constructor(props) {
@@ -15,10 +15,11 @@ export class SearchGoods extends Component {
             animating: false,
             refreshing: false,
             down: false,
-            height: document.documentElement.clientHeight,
+            height: window.screen.height,
             pagenum: 2,
         }
     }
+
     UNSAFE_componentWillMount() {
         // 一开始设置等待
         this.setState({ animating: true })
@@ -58,6 +59,7 @@ export class SearchGoods extends Component {
         this.setState({
             height
         })
+
     }
     // 上拉获取更多商品
     getMoreGoods = () => {
@@ -65,7 +67,7 @@ export class SearchGoods extends Component {
         const query = this.props.match.params.goodsvalue
         // 获取商品第几页
         const pagenum = this.state.pagenum
-        const searchData = qs.stringify({ query, pagenum })
+        const searchData = query+'&pagenum='+pagenum
         searchGoods(searchData).then(res => {
             // 解构赋值
             const { meta: { status }, message: { goods } } = res.data
@@ -75,13 +77,13 @@ export class SearchGoods extends Component {
                     this.setState({
                         refreshing: false,
                     })
+                    Toast.info('没有更多数据了', 1)
                 }
                 // 如果获取的商品条数少于20，则加上底部文字
                 if (goods.length !== 20) {
                     this.setState({
                         bottom: true,
                     })
-                    Toast.info('没有更多数据了', 1)
                 }
                 // 获取的商品追加到之前获取的商品列表中
                 this.setState({
@@ -121,7 +123,7 @@ export class SearchGoods extends Component {
                     ref={el => this.ptr = el}
                     style={{
                         height: this.state.height,
-                        overflow: 'auto',
+                        overflow: 'auto'
                     }}
                     indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
                     // direction：上拉还是下拉
@@ -173,8 +175,10 @@ export class SearchGoods extends Component {
                         </div> : ''
                     }
                 </PullToRefresh>
-
+                
             </div>
+            
+
         )
     }
 }

@@ -18,10 +18,13 @@ export class Login extends Component {
         }
     }
     UNSAFE_componentWillMount() {
-        if(this.props.location.state && this.props.location.state.from.pathname !== '/login') {
+        if(!this.props.loginState && this.props.location.state && this.props.location.state.from.pathname !== '/login') {
             // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
         // 先判断是否有this.props.location.state，有的话意味着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
             Toast.info('请先登录', 1)
+        }
+        if (this.props.loginState) {
+            this.props.history.push('/')
         }
     }
     // 点击登录
@@ -54,7 +57,6 @@ export class Login extends Component {
                             // 状态码200表示获取购物车数据成功
                             if (status === 200) {
                                 // 判断购物车是否为空
-                                console.log(message.cart_info);
                                 if (message.cart_info) {
                                     // 不为空的话同步购物车，修改CartReducer中购物车数量
                                     this.props.snycCartGoods(Object.values(JSON.parse(message.cart_info)))

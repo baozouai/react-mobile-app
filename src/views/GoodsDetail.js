@@ -101,7 +101,7 @@ export class GoodsDetail extends Component {
                 <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.goBack()}
+                    onLeftClick={() => this.props.history.go(-1)}
                     className="nav-bar-style"
                 >商品详情</NavBar>
                 {/* 轮播图区域 */}

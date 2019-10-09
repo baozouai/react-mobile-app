@@ -1,6 +1,6 @@
 .nav-header {
     position: fixed;
-    top:0;
+    top: 0;
     z-index: 999;
     display: flex;
     width: 100%;
@@ -11,31 +11,32 @@
     background-color: #108ee9;
     color: #fff;
     font-size: 16px;
-    
-    .nav-header-left {
-        margin-left: 5px;
-        display: flex;
-        align-items: center;
-    }
+
+
     .nav-header-center {
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
     }
+
     .nav-header-right {
+        position: absolute;
+        right: 20px;
         background-color: transparent;
     }
 }
+
 .ellipsis-2 {
     display: -webkit-box;
     overflow: hidden;
-    white-space: normal!important;
+    white-space: normal !important;
     text-overflow: ellipsis;
     word-wrap: break-word;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
 .empty-cart {
     display: flex;
     flex-direction: column;
@@ -43,19 +44,23 @@
     justify-content: center;
     margin-top: 100px;
     height: 100%;
+
     .empty-cart-img {
         height: 90px;
         width: 90px;
     }
+
     .empty-cart-text1 {
         font-size: 18px;
         color: #666;
         padding: 15px 0;
     }
+
     .empty-cart-text2 {
         color: #888;
         margin-bottom: 10px;
     }
+
     .btn {
         font-size: 20px;
         padding: 15px 55px;
@@ -66,7 +71,8 @@
         color: #fff;
     }
 }
-.order-list { 
+
+.order-list {
     .single-order {
         background-color: #fff;
         padding: 5px;
@@ -85,6 +91,7 @@
 
         .order-content {
             flex: 4;
+
             .order-title {
                 position: absolute;
                 top: 15px;
@@ -95,7 +102,7 @@
             .order-price {
                 position: absolute;
                 bottom: 40px;
-                right: 50px;
+                right: unset;
                 color: red;
 
                 span {
@@ -105,7 +112,7 @@
         }
 
     }
-} 
+}
 
 .cart-footer {
     position: fixed;
@@ -117,29 +124,34 @@
     width: 100%;
     border-top: 1px solid #e7e7e7;
     background-color: #fff;
+
     .cart-footer-left {
         display: flex;
         justify-content: center;
         align-items: center;
+
         span {
-        display: block;
-        height: 20px;
-        padding: 0 5px;
+            display: block;
+            height: 20px;
+            padding: 0 5px;
         }
     }
+
     .cart-footer-center {
         .total-price {
             color: #ff5500;
         }
     }
+
     .cart-footer-right {
         display: flex;
         width: 100px;
         flex-direction: column;
         text-align: center;
         background-color: #ff5500;
+
         .goto-pay {
-        color: #fff;
+            color: #fff;
         }
     }
 }

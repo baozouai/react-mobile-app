@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Modal, Icon, Checkbox, WingBlank, Stepper, SwipeAction, Toast } from 'antd-mobile'
+import { Modal, Checkbox, WingBlank, Stepper, SwipeAction, Toast } from 'antd-mobile'
 import emptyCart from '../assets/imgs/cart_empty.png'
 import { getCartGoods, syncCart } from '../api/index'
 import '../style/cart.css'
@@ -34,12 +34,22 @@ export class Cart extends Component {
         }
     }
     UNSAFE_componentWillMount() {
+        
         // render之前获取购物车数据
         this.init()
     }
-
+    // // 手机端点击返回时回到首页
+    // UNSAFE_componentWillUpdate() {
+    //     const that = this;
+    //     window.addEventListener("popstate", function(e) {
+    //         that.props.history.push('/')
+    //         }, false);
+    // }
+    
     // 初始化
     init = () => {
+        console.log(this.props)
+
         getCartGoods().then(res => {
             // 将数据解构处理
             const { meta: { status }, message: { cart_info } } = res.data
@@ -50,7 +60,7 @@ export class Cart extends Component {
                     // 不为空的话设置其标志，以便是否显示购物车为空的图片标志，并将购物车数据解析后存入state的cart_infos
                     let cart_infos = JSON.parse(cart_info)
                     // 给购物车信息加上是否选择标志
-                    for (var goods_id in cart_infos) {
+                    for (let goods_id in cart_infos) {
                         cart_infos[goods_id].selectedStatus = false
                     }
                     this.setState({
@@ -110,7 +120,7 @@ export class Cart extends Component {
         // 先预设全选状态为true
         let allSelected = true
         // 循环判断每个商品是否都选中
-        for (var goods_id in this.state.cart_infos) {
+        for (let goods_id in this.state.cart_infos) {
             if (!this.state.cart_infos[goods_id].selectedStatus) {
                 // 如果有一个没选中，则设置全选状态为false，并跳出循环
                 allSelected = false
@@ -126,7 +136,7 @@ export class Cart extends Component {
         // 获取商品信息
         let cart_infos = this.state.cart_infos
         // 循环遍历每个商品，设置是否选中,与allStatus同步
-        for (var goods_id in cart_infos) {
+        for (let goods_id in cart_infos) {
             cart_infos[goods_id].selectedStatus = this.state.allStatus
         }
         this.setState({
@@ -140,7 +150,7 @@ export class Cart extends Component {
     calTotalPrice = () => {
         let totalPrice = 0
         let selectedGoodsTotalNum = 0
-        for (var goods_id in this.state.cart_infos) {
+        for (let goods_id in this.state.cart_infos) {
             if (this.state.cart_infos[goods_id].selectedStatus) {
                 totalPrice += this.state.cart_infos[goods_id].amount * this.state.cart_infos[goods_id].goods_price
                 selectedGoodsTotalNum += this.state.cart_infos[goods_id].amount
@@ -157,7 +167,6 @@ export class Cart extends Component {
         // 删除对应id的商品
         delete cart_infos[goods_id]
         // 如果购物车为空，则设置购物车信息状态为false，表示购物车清空了
-        console.log(Object.values(cart_infos));
         if (!Object.values(cart_infos).length) {
             this.setState({
                 cart_infos_Status: false
@@ -180,13 +189,12 @@ export class Cart extends Component {
         // 获取副本
         let cart_infos = this.state.cart_infos
         // 循环判断哪些商品被选中，选中的直接删除
-        for (var goods_id in cart_infos) {
+        for (let goods_id in cart_infos) {
             // 如果selectedStatus，即被选中，删除掉
             if (cart_infos[goods_id].selectedStatus) {
                 delete cart_infos[goods_id]
             }
         }
-        console.log(cart_infos);
         if (!Object.values(cart_infos).length) {
             this.setState({
                 cart_infos_Status: false
@@ -219,9 +227,7 @@ export class Cart extends Component {
             <div>
                 {/* 顶部导航条 */}
                 <nav className="nav-header">
-                    <div className="nav-header-left" onClick={() => this.props.history.goBack()}>
-                        <Icon type='left' />
-                    </div>
+                    
                     <div className="nav-header-center">
                         购物车{this.state.totalNum ? `(${this.state.totalNum})` : ''}
                     </div>

@@ -12,11 +12,6 @@
   color: #fff;
   font-size: 16px;
 }
-.nav-header .nav-header-left {
-  margin-left: 5px;
-  display: flex;
-  align-items: center;
-}
 .nav-header .nav-header-center {
   position: absolute;
   left: 50%;
@@ -24,12 +19,14 @@
   transform: translate(-50%, -50%);
 }
 .nav-header .nav-header-right {
+  position: absolute;
+  right: 20px;
   background-color: transparent;
 }
 .ellipsis-2 {
   display: -webkit-box;
   overflow: hidden;
-  white-space: normal!important;
+  white-space: normal !important;
   text-overflow: ellipsis;
   word-wrap: break-word;
   -webkit-line-clamp: 2;
@@ -92,7 +89,7 @@
 .order-list .single-order .order-content .order-price {
   position: absolute;
   bottom: 40px;
-  right: 50px;
+  right: unset;
   color: red;
 }
 .order-list .single-order .order-content .order-price span {
