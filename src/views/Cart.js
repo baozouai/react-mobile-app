@@ -92,11 +92,11 @@ export class Cart extends Component {
     }
     // 改变对应商品是否选择的状态
     changeSingleSelectedStatus = (e, goods_id) => {
-        console.log(111)
+
         // 同步状态
         let cart_infos = this.state.cart_infos
         cart_infos[goods_id].selectedStatus = e.target.checked
-        console.log(cart_infos)
+
         this.setState({
             cart_infos: cart_infos
         })
@@ -121,7 +121,6 @@ export class Cart extends Component {
                 break
             }
         }
-        console.log(allSelected)
         this.setState({
             allStatus: allSelected
         })
@@ -170,7 +169,7 @@ export class Cart extends Component {
         // 再更新state中的cart_infos
         this.setState({
             cart_infos,
-            totalNum: this.state.cart_infos.length,
+            totalNum: Object.values(this.state.cart_infos).length,
             allSelectedNum: this.state.allSelectedNum ? this.state.allSelectedNum - 1 : 0
         }, () => {
             // 同步购物车
