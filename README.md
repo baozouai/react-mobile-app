@@ -1,6 +1,6 @@
 # 项目简介
 
-本项目是基于React、Antd Mobile、redux、axios的移动端电商App，api文档请见[api文档](./接口文档/api.md)
+本项目是基于React、Antd Mobile、redux、axios的移动端电商App，api文档请见[api文档](./接口文档/api.md)，项目已上线，有兴趣的可预览[UGo Mall ](baozouai.com/react-mobile-app)。目前还有许多需要优化的地方，比如性能、体验、UI方面，我会一步步将这些加以改善
 
 ## 一、目录结构
 
