@@ -10,3 +10,6 @@
   font-weight: bold;
   color: #666;
 }
+.am-search-input .am-search-synthetic-ph {
+  line-height: 17px;
+}

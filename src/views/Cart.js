@@ -33,30 +33,21 @@ export class Cart extends Component {
             manage: true,
         }
     }
-    UNSAFE_componentWillMount() {
+    componentWillMount() {
         
         // render之前获取购物车数据
         this.init()
     }
-    // // 手机端点击返回时回到首页
-    // UNSAFE_componentWillUpdate() {
-    //     const that = this;
-    //     window.addEventListener("popstate", function(e) {
-    //         that.props.history.push('/')
-    //         }, false);
-    // }
     
     // 初始化
     init = () => {
-        console.log(this.props)
-
         getCartGoods().then(res => {
             // 将数据解构处理
             const { meta: { status }, message: { cart_info } } = res.data
             // 状态码200表示获取购物车数据成功
             if (status === 200) {
                 // 判断购物车是否为空
-                if (cart_info) {
+                if (Object.values(JSON.parse(cart_info)).length) {
                     // 不为空的话设置其标志，以便是否显示购物车为空的图片标志，并将购物车数据解析后存入state的cart_infos
                     let cart_infos = JSON.parse(cart_info)
                     // 给购物车信息加上是否选择标志
@@ -101,9 +92,11 @@ export class Cart extends Component {
     }
     // 改变对应商品是否选择的状态
     changeSingleSelectedStatus = (e, goods_id) => {
+        console.log(111)
         // 同步状态
         let cart_infos = this.state.cart_infos
         cart_infos[goods_id].selectedStatus = e.target.checked
+        console.log(cart_infos)
         this.setState({
             cart_infos: cart_infos
         })
@@ -119,6 +112,7 @@ export class Cart extends Component {
     isAllSelected = () => {
         // 先预设全选状态为true
         let allSelected = true
+
         // 循环判断每个商品是否都选中
         for (let goods_id in this.state.cart_infos) {
             if (!this.state.cart_infos[goods_id].selectedStatus) {
@@ -127,6 +121,7 @@ export class Cart extends Component {
                 break
             }
         }
+        console.log(allSelected)
         this.setState({
             allStatus: allSelected
         })
@@ -175,6 +170,7 @@ export class Cart extends Component {
         // 再更新state中的cart_infos
         this.setState({
             cart_infos,
+            totalNum: this.state.cart_infos.length,
             allSelectedNum: this.state.allSelectedNum ? this.state.allSelectedNum - 1 : 0
         }, () => {
             // 同步购物车
@@ -238,12 +234,12 @@ export class Cart extends Component {
                     </div>
                 </nav>
                 {this.state.cart_infos_Status ?
-                    <WingBlank style={{ marginBottom: 60 }}>
-                        <div className="order-list" style={{ marginTop: 55 }}>
+                    <WingBlank style={{ marginBottom: '1.6rem' }}>
+                        <div className="order-list" style={{ marginTop: '1.46666666rem' }}>
                             {Object.values(this.state.cart_infos).map(v => (
                                 <SwipeAction
                                     key={v.goods_id}
-                                    style={{ marginBottom: 5 }}
+                                    style={{ marginBottom: '0.13333333rem' }}
                                     autoClose
                                     right={[
                                         {
@@ -290,16 +286,16 @@ export class Cart extends Component {
                                                     {v.goods_name}
                                                 </div>
                                                 <Stepper
-                                                    style={{ width: '100%', maxWidth: 95, position: 'absolute', right: 5, bottom: -5, fontSize: 8 }}
                                                     showNumber
                                                     max={v.goods_number}
                                                     min={1}
                                                     defaultValue={v.amount}
                                                     onChange={num => this.handleUpdateNum(num, v.goods_id)}
                                                 />
+                                                
                                                 <div className="order-price">
                                                     <span>&yen;</span>
-                                                    <span>{v.goods_price}.00</span>
+                                                    <span>{v.goods_price}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -311,12 +307,11 @@ export class Cart extends Component {
                     : <div className="empty-cart">
                         {/* 此处的图片不能直接写路径，只能通过import的方式将它引入进来 */}
                         <img src={emptyCart} alt="" className="empty-cart-img" />
-                        <div className="empty-cart-text1">购物车竟然是空的</div>
+                        <div className="empty-cart-text1">购物车竟然是空的！</div>
                         <div className="empty-cart-text2">再忙，也要记得买点什么犒劳自己~</div>
                         <div className="btn" onClick={() => this.props.history.push('/')}>去逛逛</div>
                     </div>
                 }
-
 
                 <div className="cart-footer">
                     <div className="cart-footer-left" >
@@ -364,7 +359,6 @@ export class Cart extends Component {
 
                         >删除</button>
                     }
-
                 </div>
             </div >
         )

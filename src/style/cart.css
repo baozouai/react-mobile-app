@@ -37,72 +37,87 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 2.666667rem;
   height: 100%;
 }
 .empty-cart .empty-cart-img {
-  height: 90px;
-  width: 90px;
+  height: 2.4rem;
+  width: 2.4rem;
 }
 .empty-cart .empty-cart-text1 {
   font-size: 18px;
   color: #666;
-  padding: 15px 0;
+  padding: .4rem 0;
 }
 .empty-cart .empty-cart-text2 {
   color: #888;
-  margin-bottom: 10px;
+  font-size: .533333rem;
+  margin-bottom: .266667rem;
 }
 .empty-cart .btn {
   font-size: 20px;
-  padding: 15px 55px;
+  padding: .4rem 1.466667rem;
   text-align: center;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: .266667rem;
   background: #ed601b;
   color: #fff;
 }
 .order-list .single-order {
   background-color: #fff;
-  padding: 5px;
+  padding: .133333rem;
   display: flex;
   align-items: center;
-  border-radius: 10px;
+  border-radius: .266667rem;
   position: relative;
-  margin-top: 5px;
+  margin-top: .133333rem;
 }
 .order-list .single-order img {
   width: 40%;
   height: 40%;
   flex: 1;
-  padding: 10px;
+  padding: .266667rem;
 }
 .order-list .single-order .order-content {
   flex: 4;
 }
 .order-list .single-order .order-content .order-title {
   position: absolute;
-  top: 15px;
-  padding-right: 5px;
-  font-size: 12px;
+  top: .4rem;
+  padding-right: .133333rem;
+  font-size: .32rem;
 }
 .order-list .single-order .order-content .order-price {
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   right: unset;
   color: red;
 }
 .order-list .single-order .order-content .order-price span {
   font-size: 12px;
 }
+.order-list .single-order .order-content .am-stepper {
+  max-width: 95px;
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+}
+.order-list .single-order .order-content .am-stepper .am-stepper-input {
+  font-size: 12px;
+}
+.order-list .am-swipe-actions-right {
+  font-size: .426667rem;
+}
 .cart-footer {
   position: fixed;
   bottom: 50px;
+  font-size: 14px;
   display: flex;
   justify-content: space-between;
   height: 50px;
   line-height: 50px;
   width: 100%;
+  max-width: 10rem;
   border-top: 1px solid #e7e7e7;
   background-color: #fff;
 }
@@ -115,6 +130,9 @@
   display: block;
   height: 20px;
   padding: 0 5px;
+}
+.cart-footer .cart-footer-left .am-list-content {
+  font-size: 14px;
 }
 .cart-footer .cart-footer-center .total-price {
   color: #ff5500;

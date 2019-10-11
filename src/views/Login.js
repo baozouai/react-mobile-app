@@ -5,6 +5,7 @@ import { List, InputItem, WhiteSpace, NavBar, Icon, Button, Toast, Flex } from '
 import { createForm } from 'rc-form';
 import {submitLogin, getCartGoods} from '../api/index'
 import axios from 'axios'
+
 export class Login extends Component {
     constructor(props) {
         super(props)
@@ -22,9 +23,6 @@ export class Login extends Component {
             // 如果跳转之前的不是登录页面，跳转到登录页面时提示请登录
         // 先判断是否有this.props.location.state，有的话意味着是从其他需要登录才能访问的页面跳转过来，否则就是直接访问登录页面
             Toast.info('请先登录', 1)
-        }
-        if (this.props.loginState) {
-            this.props.history.push('/')
         }
     }
     // 点击登录
@@ -69,6 +67,7 @@ export class Login extends Component {
                         const {from} = this.props.location.state || {from: {pathname: '/'}}
                         // 获取pathname
                         let pathname = from.pathname
+                        console.log(pathname)
                         if (pathname === '/login') {
                             pathname = '/'
                         }
@@ -96,9 +95,10 @@ export class Login extends Component {
                     onLeftClick={() => this.props.history.push('/')}
                     style={{
                         position: 'fixed',
-                        width: '100%',
-                        left: 0,
+                        width: '10rem',
+                        left: '50%',
                         top: 0,
+                        transform: 'translateX(-50%)',
                         zIndex: 1,
                     }}
                 >

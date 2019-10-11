@@ -41,6 +41,7 @@
 .single-order-list .single-order .order-content .order-price {
   position: absolute;
   bottom: 15px;
+  right: unset;
   color: red;
 }
 .single-order-list .single-order .order-content .order-price span {

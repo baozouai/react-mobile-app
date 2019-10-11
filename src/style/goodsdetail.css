@@ -1,25 +1,25 @@
 .good-wrap {
-  margin: 13px 0;
+  margin: .346667rem 0;
 }
 .good-content {
-  padding: 10px;
+  padding: .266667rem;
 }
 .good-content .good-describe {
-  font-size: 15px;
+  font-size: .4rem;
 }
 .good-content .good-price {
-  margin-top: 10px;
+  margin-top: .266667rem;
   color: red;
-  font-size: 20px;
+  font-size: .533333rem;
   font-weight: bold;
 }
 .good-content .good-price span {
-  font-size: 12px;
+  font-size: .32rem;
 }
 .good-select li {
   display: flex;
-  padding: 10px;
-  font-size: 14px;
+  padding: .266667rem;
+  font-size: .373333rem;
   border-bottom: 1px solid #999;
 }
 .good-select li span:nth-of-type(1) {
@@ -30,14 +30,14 @@
   flex: 4;
 }
 .good-param div {
-  padding: 10px;
+  padding: .266667rem;
 }
 .good-param div:nth-of-type(1) {
   font-weight: bold;
   border-bottom: 1px solid #333;
 }
 .good-param div:nth-of-type(2) {
-  font-size: 14px;
+  font-size: .373333rem;
   display: flex;
 }
 .good-param div:nth-of-type(2) span:nth-of-type(1) {
@@ -50,9 +50,11 @@
   display: flex;
   position: fixed;
   bottom: 0;
-  left: 0;
-  height: 50px;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1.333333rem;
+  max-height: 80px;
+  width: 10rem;
   border-top: 1px solid #e7e7e7;
   background-color: #fff;
 }
@@ -65,14 +67,14 @@
 .goods-footer .contact,
 .goods-footer .cart {
   width: 40%;
-  font-size: 12px;
+  font-size: .32rem;
   position: relative;
 }
 .goods-footer .badge {
   position: absolute;
   top: 3%;
   left: 50%;
-  padding: 2px 5px;
+  padding: .053333rem .133333rem;
   border-radius: 100%;
   background-color: #e4393c;
   text-align: center;
@@ -85,7 +87,7 @@
 }
 .goods-footer .add > span,
 .goods-footer .buy > span {
-  font-size: 20px;
+  font-size: .533333rem;
 }
 .goods-footer .add {
   background-color: #ff976a;

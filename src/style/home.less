@@ -1,32 +1,33 @@
-.search-similar {
-    border: 1px solid rgb(16, 142, 233);
-    width: 55%;
-    display: block;
-    margin: 10px auto;
-    background-color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: rgb(16, 142, 233);
+.search-area {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10rem;
+    .am-search-input .am-search-synthetic-ph {
+        line-height: 17px;
+    }
 }
+
 .goods-list-bottom {
-    height: 40px;
-    line-height: 40px;
+    height: 1.066667rem;
+    line-height: 1.066667rem;
     text-align: center;
-    font-size: 14px;
+    font-size: .373333rem;
     color: #ccc;
     display: flex;
     position: relative;
     align-items: center;
     .line {
-        width: 300px;
+        width: 8rem;
         height: 1px;
         vertical-align: middle;
-        background-color: #ccc;
+        background-color: #f2f2f2;
         margin: 0 auto;
         text-align: center;
         span {
-            background-color: #f5f5f9;
-            padding: 0 20px;
+            background-color: inherit;
+            padding: 0 .533333rem;
             position: absolute;
             top: -50%;
             transform: translate(-50%, 50%);
@@ -42,7 +43,7 @@
 .catitems {
     display: flex;
     background-color: #fff;
-    padding: 10px;
+    padding: .266667rem;
 
     div {
         flex: 1;
@@ -64,9 +65,9 @@
         
         .good {
             width: 49.5%;
-            border-radius: 20px;
-            padding: 10px;
-            margin-top: 6px;
+            border-radius: .533333rem;
+            padding: .266667rem;
+            margin-top: .16rem;
             background-color: #fff;
 
             .good_content {
@@ -79,21 +80,27 @@
                 }
 
                 .describe {
-                    font-size: 13px;
+                    font-size: .346667rem;
                     color: #333;
-                    padding: 10px 5px;
+                    padding: .266667rem .133333rem;
                 }
 
                 .price {
-                    font-size: 13px;
+                    font-size: .346667rem;
                     color: red;
                 }
             }
 
-            .similar {
-                width: 80%;
+            .search-similar {
+                border: 1px solid rgb(16, 142, 233);
+
                 display: block;
-                margin: 5px auto 0;
+                margin: 10px auto;
+                background-color: #fff;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: .373333rem;
+                color: rgb(16, 142, 233);
             }
 
         }

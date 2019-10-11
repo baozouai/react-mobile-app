@@ -88,7 +88,7 @@ export class GoodsDetail extends Component {
         this.props.history.push('/my/cart')
     }
     // 立即购买
-    jumpCart = () => {
+    buyNow = () => {
         // 如果已登录，则跳转到支付页面
         // 立即购买的话设置商品总数量为1，价格为单价
         this.props.buyNow(1, this.state.message.goods_price)
@@ -101,7 +101,7 @@ export class GoodsDetail extends Component {
                 <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.go(-1)}
+                    onLeftClick={() => this.props.history.goBack()}
                     className="nav-bar-style"
                 >商品详情</NavBar>
                 {/* 轮播图区域 */}
@@ -215,7 +215,7 @@ export class GoodsDetail extends Component {
                     <div className="goods-footer-item add" onClick={this.addGoodsToCart}>
                         <span>加入购物车</span>
                     </div>
-                    <div className="goods-footer-item buy" onClick={this.jumpCart}>
+                    <div className="goods-footer-item buy" onClick={this.buyNow}>
                         <span>立即购买</span>
                     </div>
                 </div>

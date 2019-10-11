@@ -1,10 +1,10 @@
 .cateItem {
   background-color: #fff;
-  margin-bottom: 45px;
+  margin-bottom: 1.2rem;
 }
 .cateItem .cate_title {
   color: steelblue;
-  font-size: 20px;
+  font-size: .533333rem;
   font-weight: bold;
   padding-top: 10px;
   text-indent: 1em;
@@ -17,7 +17,7 @@
   display: block;
   width: 33.3%;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: .266667rem;
 }
 .cateItem .cate_content div img {
   width: 70%;
@@ -30,6 +30,6 @@
 }
 .cateItem .cate_content div .cat_name {
   display: block;
-  font-size: 12px;
+  font-size: .32rem;
   color: #666;
 }

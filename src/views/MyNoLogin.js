@@ -8,7 +8,7 @@ export class MyNoLogin extends Component {
             <div>
                 <header>
                     <div className="title">我的</div>
-                    <WingBlank style={{ marginTop: 20}}>
+                    <WingBlank style={{ marginTop: '0.53333333333rem'}}>
 
                         <Flex justify="between">
                             <div className="avatar">

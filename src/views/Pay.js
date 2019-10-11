@@ -15,7 +15,7 @@ export class Pay extends Component {
     }
     UNSAFE_componentWillMount() {
         // render之前获取页面是否有id 如果是购物车跳转过来的话没有id，Number之后的NaN
-        var id = Number(this.props.location.pathname.split('/').pop())
+        let id = Number(this.props.location.pathname.split('/').pop())
         if (id) {
             this.setState({
                 id
@@ -31,12 +31,18 @@ export class Pay extends Component {
                 cart_infos_Array: Object.values(this.props.cart_Infos)
             })
         }
+        // 防止手机提交订单后点击返回按钮，又回到提交订单页面，所以这里判断是否还有提交的商品，提交了订单的话提交的商品数量就为0
+        setTimeout(() => {
+            if (!this.state.cart_infos_Array.length) {
+                this.props.history.push('/my')
+            }
+        })
     }
     // 提交订单
     submitOrder = () => {
         // 初始化goods数组
         let goods = []
-        var cart_infos
+        let cart_infos
         //因为有可能从商品详情的立即购买跳转过来，也可能从购物车的结算跳转过来，所以分两条路径判断
         // 从商品详情的立即购买跳转过来location带有参数，购物车没有
         if (!this.state.id) {
@@ -78,6 +84,7 @@ export class Pay extends Component {
                 })
                 // 提交订单后同步购物车 cart_infos中的数据是未被提交的订单
                 syncCart({ infos: JSON.stringify(cart_infos) })
+                this.props.snycCartGoods(cart_infos)
             }
         })
     }
@@ -157,4 +164,13 @@ const mapStateToProps = (state) => {
         address: state.userModule.address
     }
 }
-export default connect(mapStateToProps)(withRouter(Pay))
+
+const mapActionToProps = (dispatch) => {
+    return {
+        // 同步购物车数据
+        snycCartGoods: (cart_Infos) => {
+            dispatch({ type: 'SYNC_CART_GOODS', payload: { cart_Infos } })
+        }
+    }
+}
+export default connect(mapStateToProps, mapActionToProps)(withRouter(Pay))

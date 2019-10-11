@@ -28,12 +28,7 @@ export class OrderList extends Component {
             }
         })
     }
-    componentWillUpdate() {
-        const that = this;
-        window.addEventListener("popstate", function(e) {
-            that.props.history.push('/my')
-            }, false);
-    }
+    
     // 将时间戳转换为2019-9-12 22:36:35格式
     convertTime = (create_time) => {
         let time = new Date(parseInt(create_time) * 1000)

@@ -7,8 +7,7 @@ import qs from 'querystring'
 axios.defaults.baseURL = 'https://api.zbztb.cn/api/public/v1'
 // 设置请求头token
 axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('token')
-// 获取首页轮播图
-export const getHomeCarousel = () => axios.get('/home/swiperdata')
+
 // 获取首页商品列表数据
 export const getHomeGoodslist = () => axios.get('/home/goodslist')
 // 获取分类

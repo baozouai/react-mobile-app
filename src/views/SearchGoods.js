@@ -3,14 +3,15 @@ import { withRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import { SearchBar, WingBlank, Flex, ActivityIndicator, PullToRefresh, Toast } from 'antd-mobile'
 import { searchGoods } from '../api/index'
-
 import '../style/searchgoods.css'
+
 export class SearchGoods extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             goodsList: [],
+            allGoodsList: [],
             bottom: false,
             animating: false,
             refreshing: false,
@@ -24,9 +25,19 @@ export class SearchGoods extends Component {
         // 一开始设置等待
         this.setState({ animating: true })
         // 获取搜索值
-        var searchValue = this.props.match.params.goodsvalue
+        let searchValue = this.props.match.params.goodsvalue
+        this.init(searchValue)
         
-        // // 商品商品
+    }
+    UNSAFE_componentDidMount() {
+        const height = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
+        this.setState({
+            height
+        })
+    }
+
+    init = (searchValue) => {
+        // 商品商品
         searchGoods(searchValue).then(res => {
             // 解构赋值
             const { meta: { status }, message: { goods, total } } = res.data
@@ -40,7 +51,6 @@ export class SearchGoods extends Component {
                     })
                      // 2秒后跳转回首页
                     Toast.info('没有这类商品，正在跳转回首页...', 2, () => this.props.history.push('/'))
-                   
                 }
                 this.setState({
                     goodsList: goods
@@ -54,13 +64,7 @@ export class SearchGoods extends Component {
             }
         })
     }
-    UNSAFE_componentDidMount() {
-        const height = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-        this.setState({
-            height
-        })
 
-    }
     // 上拉获取更多商品
     getMoreGoods = () => {
         // 获取搜索值
@@ -76,6 +80,7 @@ export class SearchGoods extends Component {
                 if (!goods.length) {
                     this.setState({
                         refreshing: false,
+                        down: true
                     })
                     Toast.info('没有更多数据了', 1)
                 }
@@ -83,6 +88,7 @@ export class SearchGoods extends Component {
                 if (goods.length !== 20) {
                     this.setState({
                         bottom: true,
+                        down: true
                     })
                 }
                 // 获取的商品追加到之前获取的商品列表中
@@ -106,7 +112,7 @@ export class SearchGoods extends Component {
                     animating={this.state.animating}
                 />
                 {/* 搜索栏 */}
-                <div style={{display: 'flex',backgroundColor: '#efeff4',zIndex:999}}>
+                <div className="search-content">
                     <i className="iconfont icon-arrow-left" 
                     style={{width: 30, alignSelf: 'center',  padding: '0 10px'}}
                     onClick={() => this.props.history.goBack()}
@@ -123,19 +129,26 @@ export class SearchGoods extends Component {
                     ref={el => this.ptr = el}
                     style={{
                         height: this.state.height,
-                        overflow: 'auto'
+                        overflow: 'auto',
+                        padding: '50px 0 20px',
+                        fontSize: 12
                     }}
-                    indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+
                     // direction：上拉还是下拉
                     direction={this.state.down ? 'down' : 'up'}
                     // refreshing	是否显示刷新状态
                     refreshing={this.state.refreshing}
                     // onRefresh	必选, 刷新回调函数
                     onRefresh={() => {
-                        // 设置刷新状态为true
-                        this.setState({ refreshing: true });
-                        // 然后获取更多商品
-                        this.getMoreGoods()
+                        if (this.state.down) {
+
+                        } else {
+
+                            // 设置刷新状态为true
+                            this.setState({ refreshing: true });
+                            // 然后获取更多商品
+                            this.getMoreGoods()
+                        }
                     }}
                 >
                     {/* WingBlank：左右留白 size表示留白的程度 */}
@@ -178,7 +191,6 @@ export class SearchGoods extends Component {
                 
             </div>
             
-
         )
     }
 }

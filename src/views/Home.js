@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar } from 'antd-mobile';
-import { getHomeCarousel, getHomeGoodslist } from '../api/index'
+import { getHomeGoodslist } from '../api/index'
 import qs from 'querystring'
 import '../style/home.css'
+import banner1 from '../upload/banner1.png'
+import banner2 from '../upload/banner2.png'
+import banner3 from '../upload/banner3.png'
 export class Home extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            // Carousel这个组件必须在初始化的时候就有一个长度>1的默认数组才能触发他的autoplay自动轮播属性。
-            carouselList: [{ goods_id: 1 }, { goods_id: 2 }],
+           
             imgHeight: '',
             // 商品列表
             goodsList: [],
@@ -22,25 +24,6 @@ export class Home extends Component {
     }
     // 在render之前获取数据
     UNSAFE_componentWillMount() {
-        if (sessionStorage.getItem('carousel')) {
-            this.setState({
-                carouselList: JSON.parse(sessionStorage.getItem('carousel'))
-            })
-        } else {
-            // 获取轮播图数据
-            getHomeCarousel().then(res => {
-                // 解构赋值
-                const { message, meta: { status } } = res.data
-                // 状态码为200的时候
-                if (status === 200) {
-                    // 将获取到的轮播图数据复制给carouselList
-                    this.setState({
-                        carouselList: message
-                    })
-                    sessionStorage.setItem('carousel', JSON.stringify(message))
-                }
-            })
-        }
         // 获取商品列表数据
         getHomeGoodslist().then(res => {
             // 解构赋值
@@ -80,7 +63,7 @@ export class Home extends Component {
                 {this.props.location.pathname === '/' ?
                 <SearchBar placeholder={this.state.placeholderPre}
                     onFocus={() => this.props.history.push('/searchfield')}
-                    style={{ position: 'fixed', top: 0, left: 0, width: '100%' }}
+                    className="search-area"
                 /> : ''}
                 {/* 轮播图 */}
                 <Carousel
@@ -88,13 +71,9 @@ export class Home extends Component {
                     infinite
                     style={{ marginTop: 44 }}
                 >
-                    {this.state.carouselList.map(val => (
-                        <img key={val.goods_id}
-                            src={val.image_src}
-                            alt=""
-                            style={{ width: '100%', verticalAlign: 'top', imgHeight: this.state.imgHeight }}
-                        />
-                    ))}
+                    <img src={banner1} alt=""/>
+                    <img src={banner2} alt=""/>
+                    <img src={banner3} alt=""/>
                 </Carousel>
                 {/* 分类 */}
                 <div className="catitems">

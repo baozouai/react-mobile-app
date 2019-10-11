@@ -15,7 +15,7 @@ export class Register extends Component {
             pwd: '',
             verifyPwd: '',
             gender: '男',
-            codeText: '点击获取验证码'
+            codeText: '获取验证码'
         }
     }
     // 点击单选框时触发
@@ -63,12 +63,12 @@ export class Register extends Component {
             let num = 30
             let timeId = setInterval(() => {
                 this.setState({
-                    codeText: `倒计时（${num--}）秒`
+                    codeText: `倒计时（${num--}）`
                 })
                 if (num === -1) {
                     clearInterval(timeId)
                     this.setState({
-                        codeText: '点击获取验证码'
+                        codeText: '获取验证码'
                     })
                 }
             }, 1000);
@@ -139,7 +139,7 @@ export class Register extends Component {
                         <span className="star">*</span>  手机号码
                     </InputItem>
                     {/* 这里根据codeText来判断是否禁用button */}
-                    <button disabled={this.state.codeText === '点击获取验证码' ? false : true} className="get-code" onClick={this.getCode}>{this.state.codeText}</button>
+                    <button disabled={this.state.codeText === '获取验证码' ? false : true} className="get-code" onClick={this.getCode}>{this.state.codeText}</button>
                     <InputItem
                         // 输入类型为数字
                         type="number"
@@ -272,13 +272,13 @@ export class Register extends Component {
                     <WhiteSpace />
                     <Flex justify="center">
                         {/* 注册按钮 */}
-                        <Button type="primary" size="small" style={{ marginRight: 10 }}
+                        <Button type="primary" size="small" style={{ marginRight: 10, maxWidth: 120 }}
                             className="bottom-button"
                             onClick={this.handleRegister}>
                             立即注册
                             </Button>
                         {/* 取消注册按钮 */}
-                        <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px' }}
+                        <Button type="warning" size="small" className="bottom-button" style={{ padding: '0 25px', maxWidth: 120 }}
                             onClick={() => this.props.history.push('/login')}>
                             取消
                             </Button>

@@ -9,11 +9,13 @@ export class SearchField extends Component {
         super(props)
 
         this.state = {
-            suggestData: []
+            suggestData: [],
+            height: document.documentElement.clientHeight
         }
     }
     handleSearch = value => {
         this.props.history.push('/searchgoods/query=' + value)
+
     }
     // 搜索建议
     handleSearchSuggest = value => {

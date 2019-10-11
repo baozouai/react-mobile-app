@@ -3,6 +3,7 @@ import { getUserInfo } from '../api/index'
 import { withRouter } from 'react-router-dom'
 import { TabBar, Card, Button, Modal } from 'antd-mobile'
 import { connect } from 'react-redux'
+import avatar from '../upload/avatar.png'
 const alert = Modal.alert;
 export class My extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ export class My extends Component {
                 <Card>
                     <Card.Header
                         title="暴走"
-                        thumb="https://baozouai.com/img/avatar.png"
+                        thumb={avatar}
                         thumbStyle={{ width: 43 }}
                         style={{ fontSize: 15 }}
                         extra={<span style={{ fontSize: 13 }}>{this.state.phone}</span>}
