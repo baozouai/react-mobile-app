@@ -92,19 +92,17 @@ export class Cart extends Component {
     }
     // 改变对应商品是否选择的状态
     changeSingleSelectedStatus = (e, goods_id) => {
-
         // 同步状态
         let cart_infos = this.state.cart_infos
         cart_infos[goods_id].selectedStatus = e.target.checked
-
-        this.setState({
-            cart_infos: cart_infos
-        })
         // 判断所有商品是否都选中
         this.isAllSelected()
         // 计算总价
         this.calTotalPrice()
         this.setState({
+            // 更新购物车商品信息
+            cart_infos: cart_infos,
+            // 判断是增函数减选择的商品数量
             allSelectedNum: e.target.checked ? this.state.allSelectedNum + 1 : this.state.allSelectedNum - 1
         })
     }
@@ -156,21 +154,17 @@ export class Cart extends Component {
         })
     }
     // 删除单个商品
-    handleDeleteSingleGoods = (goods_id) => {
+    handleDeleteSingleGoods = goods_id => {
         let cart_infos = this.state.cart_infos
         // 删除对应id的商品
         delete cart_infos[goods_id]
-        // 如果购物车为空，则设置购物车信息状态为false，表示购物车清空了
-        if (!Object.values(cart_infos).length) {
-            this.setState({
-                cart_infos_Status: false
-            })
-        }
         // 再更新state中的cart_infos
         this.setState({
             cart_infos,
             totalNum: Object.values(this.state.cart_infos).length,
-            allSelectedNum: this.state.allSelectedNum ? this.state.allSelectedNum - 1 : 0
+            allSelectedNum: this.state.allSelectedNum ? this.state.allSelectedNum - 1 : 0,
+            // 如果购物车为空，则设置购物车信息状态为false，表示购物车清空了
+            cart_infos_Status: !Object.values(cart_infos).length? false: true
         }, () => {
             // 同步购物车
             this.syncCartGoodsData()
@@ -190,18 +184,15 @@ export class Cart extends Component {
                 delete cart_infos[goods_id]
             }
         }
-        if (!Object.values(cart_infos).length) {
-            this.setState({
-                cart_infos_Status: false
-            })
-        }
         // 这里因为选中了商品，所以计算了所选中商品的总价和总商品数，故点击删除的时候要清零，否则删除后数字还在
         this.setState({
             cart_infos,
             totalPrice: 0,
             allSelectedNum: 0,
             selectedGoodsTotalNum: 0,
-            totalNum: Object.values(cart_infos).length
+            totalNum: Object.values(cart_infos).length,
+            // 如果购物车为空，则设置购物车信息状态为false，表示购物车清空了
+            cart_infos_Status: !Object.values(cart_infos).length? false: true
         }, () => {
             this.syncCartGoodsData()
         })

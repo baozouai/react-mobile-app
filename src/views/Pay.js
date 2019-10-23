@@ -14,29 +14,27 @@ export class Pay extends Component {
         }
     }
     UNSAFE_componentWillMount() {
+
         // render之前获取页面是否有id 如果是购物车跳转过来的话没有id，Number之后的NaN
         let id = Number(this.props.location.pathname.split('/').pop())
+        let cart_infos_Array
         if (id) {
             this.setState({
                 id
             })
             getGoodsDetail(id).then(res => {
                 res.data.message.selectedStatus = true
+                cart_infos_Array = [res.data.message]
                 this.setState({
-                    cart_infos_Array: [res.data.message]
+                    cart_infos_Array
                 })
             })
         } else if (this.props.cart_Infos) {
+            cart_infos_Array = Object.values(this.props.cart_Infos)
             this.setState({
-                cart_infos_Array: Object.values(this.props.cart_Infos)
+                cart_infos_Array
             })
         }
-        // 防止手机提交订单后点击返回按钮，又回到提交订单页面，所以这里判断是否还有提交的商品，提交了订单的话提交的商品数量就为0
-        setTimeout(() => {
-            if (!this.state.cart_infos_Array.length) {
-                this.props.history.push('/my')
-            }
-        })
     }
     // 提交订单
     submitOrder = () => {

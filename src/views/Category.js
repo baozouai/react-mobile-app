@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Tabs, NavBar, Icon } from 'antd-mobile'
 import { getCategory } from '../api/index'
-import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
 import '../style/category.css'
+
 export class Category extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +16,7 @@ export class Category extends Component {
 
     UNSAFE_componentWillMount() {
         // 页面加载前获取分类数据
-        // 判断回话是否存储了数据
+        // 判断sessionStorage是否存储了数据
         if (sessionStorage.getItem('categories')) {
             // 有的话直接从回话拉取数据
             this.setState({

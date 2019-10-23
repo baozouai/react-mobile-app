@@ -31,7 +31,7 @@ export class Login extends Component {
             // value为getFieldProps中指定的值
             if (error) {
                 // 有错误,校验不通过
-                Toast.fail('请检查数据是否填写正确', 2)
+                Toast.fail('请检查数据是否填写正确', 1)
             } else {
                 let obj = {
                     // 这里的号码格式是139 9999 9999 ，提交之前把中间的空格去掉
@@ -67,17 +67,16 @@ export class Login extends Component {
                         const {from} = this.props.location.state || {from: {pathname: '/'}}
                         // 获取pathname
                         let pathname = from.pathname
-                        console.log(pathname)
                         if (pathname === '/login') {
                             pathname = '/'
                         }
-                        // 登录成功的话弹框提示，2秒后消失
-                        Toast.success(msg, 2, () => {
+                        // 登录成功的话弹框提示，1秒后消失
+                        Toast.success(msg, 1, () => {
                             this.props.history.push(pathname)
                         })
                     } else {
                         // 否则提示错误信息
-                        Toast.fail(msg, 2)
+                        Toast.fail(msg, 1)
                     }
                 })
             }
@@ -89,7 +88,8 @@ export class Login extends Component {
         const { getFieldError, getFieldProps } = this.props.form;
         return (
             <div>
-                    {this.props.location.pathname === '/login'? <NavBar
+                {this.props.location.pathname === '/login'? 
+                <NavBar
                     mode="dark"
                     leftContent={<Icon type='left' />}
                     onLeftClick={() => this.props.history.push('/')}
@@ -220,5 +220,5 @@ const mapActionToProps = dispatch => {
         }
     }
 }
-// 这里目前由于没有mapStateToProps，故将其设为null
+
 export default connect(mapStateToProps, mapActionToProps)(createForm()(withRouter(Login)))

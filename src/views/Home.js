@@ -30,29 +30,25 @@ export class Home extends Component {
             const { message, meta: { status } } = res.data
             // 状态码为200的时候
             if (status === 200) {
-                // 将获取到的商品列表数据赋值给goodsList
-                this.setState({
-                    goodsList: message
-                })
                 //  首页商品是16 => 4 * 4个，随机获取0~15索引值
                 const index = Math.floor((Math.random() * 16))
                 // 计算行和列
                 const i = Math.floor(index / 4)
                 const j = index % 4
-                // 搜索框预设初值
+                
                 this.setState({
-                    placeholderPre: message[i].goods[j].goods_name.slice(0, 10) + '...'
+                    // 将获取到的商品列表数据赋值给goodsList
+                    goodsList: message,
+                    // 搜索框预设初值
+                    placeholderPre: message[i].goods[j].goods_name.slice(0, 10) + '...',
+                    // 获取商品列表后显示底部文字
+                    bottom: true
                 })
             }
-        }).then(() => {
-            // 获取商品列表后显示底部文字
-            this.setState({
-                bottom: true
-            })
         })
     }
     // 找相似
-    handleSearchSimilar = (cid) => {
+    handleSearchSimilar = cid => {
         this.props.history.push('/searchgoods/' + qs.stringify({ cid }))
     }
     render() {

@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Layout from './layout/Layout'
 import Home from './views/Home'
 import Category from './views/Category'
@@ -10,12 +11,12 @@ import AddressInfo from './views/AddressInfo'
 import OrderList from './views/OrderList'
 import Login from './views/Login'
 import Register from './views/Register'
-import GoodsDetail from './views/GoodsDetail';
-import SearchField from './views/SearchField';
-import SearchGoods from './views/SearchGoods';
-import ErrorPage from './views/ErrorPage';
+import GoodsDetail from './views/GoodsDetail'
+import SearchField from './views/SearchField'
+import SearchGoods from './views/SearchGoods'
+import ErrorPage from './views/ErrorPage'
 import PrivateRoute from './components/PrivateRoute'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+
 
 function App() {
   return (
@@ -24,7 +25,6 @@ function App() {
         <Switch>
           <Route path='/' exact render={props => <Layout {...props}><Home></Home></Layout>}></Route>
           <Route path='/category' render={props => <Layout {...props}><Category></Category></Layout>}></Route>
-          {/* <Route path='/category' render={props => <Category {...props}></Category>}></Route> */}
           <Route path='/login' render={props => <Layout {...props}><Login></Login></Layout>}></Route>
           <Route path='/my' render={props => <Layout {...props}><PrivateRoute component={My}></PrivateRoute></Layout>}></Route>
           <Route path='/mynologin' render={props => <Layout {...props}><MyNoLogin></MyNoLogin></Layout>}></Route>
