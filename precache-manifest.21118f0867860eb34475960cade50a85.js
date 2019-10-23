@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf79de31883915236458852ab39ffb72",
+    "revision": "97739e719dfae2be939024c294d20759",
     "url": "/react-mobile-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-mobile-app/static/css/2.29fab1a3.chunk.css"
   },
   {
-    "revision": "4483fbf71a553b7655b8",
+    "revision": "b2f4a168c07a71de923e",
     "url": "/react-mobile-app/static/css/main.15c71170.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-mobile-app/static/js/2.a04a8a15.chunk.js"
   },
   {
-    "revision": "4483fbf71a553b7655b8",
-    "url": "/react-mobile-app/static/js/main.e5c5b95f.chunk.js"
+    "revision": "b2f4a168c07a71de923e",
+    "url": "/react-mobile-app/static/js/main.6bd9a8bd.chunk.js"
   },
   {
     "revision": "0ca03546409fb956576e",
