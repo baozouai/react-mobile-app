@@ -19,8 +19,11 @@ export class OrderList extends Component {
         }
         // 获取订单
         getOrder().then(res => {
-            const { meta: { status }, message: { count, orders } } = res.data
+            const { meta: { status }, message: {orders } } = res.data
             if (status === 200) {
+                let count = 0
+                // 计算总订单数量
+                orders.forEach(order => count += order.total_count)
                 this.setState({
                     count,
                     orders
