@@ -9,7 +9,7 @@ export const UserReducer = (state = initState, action) => {
     switch (action.type) {
         // 如果改变了登录状态
         case 'CHANGE_LOGIN_STATE':
-            // 登录成功则将token存入回话存储
+            // 登录成功则将token存入会话存储
             if (action.payload.Login) {
                 sessionStorage.setItem('token', action.payload.token)
             }

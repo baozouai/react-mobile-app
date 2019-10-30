@@ -15,11 +15,10 @@ function PrivateRoute({ component: Component, loginState, ...rest }) {
     )
 }
 // 映射函数
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         loginState: state.userModule.loginState
     }
 }
-
 
 export default connect(mapStateToProps)(withRouter(PrivateRoute))
