@@ -188,10 +188,6 @@ export class GoodsDetail extends Component {
                 <WhiteSpace size="lg" />
                 {/* 页面底部加入购物车 */}
                 <div className="goods-footer">
-                    <div className="goods-footer-item contact">
-                        <span className="iconfont iconkefu1"></span>
-                        <span>联系客服</span>
-                    </div>
                     <div className="goods-footer-item cart" onClick={() => this.props.history.push('/cart')}>
                         <span className="iconfont icongouwuche1">
                             <Badge
