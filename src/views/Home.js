@@ -7,12 +7,15 @@ import '../style/home.css'
 import banner1 from '../upload/banner1.png'
 import banner2 from '../upload/banner2.png'
 import banner3 from '../upload/banner3.png'
+
+import { baseUrl } from '../api/index';
+
 export class Home extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-           
+
             imgHeight: '',
             // 商品列表
             goodsList: [],
@@ -35,7 +38,7 @@ export class Home extends Component {
                 // 计算行和列
                 const i = Math.floor(index / 4)
                 const j = index % 4
-                
+
                 this.setState({
                     // 将获取到的商品列表数据赋值给goodsList
                     goodsList: message,
@@ -57,29 +60,29 @@ export class Home extends Component {
             <div>
                 {/* 搜索栏 */}
                 {this.props.location.pathname === '/' ?
-                <SearchBar placeholder={this.state.placeholderPre}
-                    onFocus={() => this.props.history.push('/searchfield')}
-                    className="search-area"
-                /> : ''}
+                    <SearchBar placeholder={this.state.placeholderPre}
+                        onFocus={() => this.props.history.push('/searchfield')}
+                        className="search-area"
+                    /> : ''}
                 {/* 轮播图 */}
                 <Carousel
                     autoplay={true}
                     infinite
                     style={{ marginTop: 44 }}
                 >
-                    <img src={banner1} alt=""/>
-                    <img src={banner2} alt=""/>
-                    <img src={banner3} alt=""/>
+                    <img src={banner1} alt="" />
+                    <img src={banner2} alt="" />
+                    <img src={banner3} alt="" />
                 </Carousel>
                 {/* 分类 */}
                 <div className="catitems">
-                    <div onClick={() => this.props.history.push('/searchgoods/query=秒杀')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_3@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=秒杀')}><img src={`${baseUrl}/pyg/icon_index_nav_4@2x.png`} alt="" /></div>
 
-                    <div onClick={() => this.props.history.push('/searchgoods/query=超市')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_2@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=超市')}><img src={`${baseUrl}/pyg/icon_index_nav_2@2x.png`} alt="" /></div>
 
-                    <div onClick={() => this.props.history.push('/searchgoods/query=母婴')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_1@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=母婴')}><img src={`${baseUrl}/pyg/icon_index_nav_1@2x.png`} alt="" /></div>
 
-                    <div onClick={() => this.props.history.push('/searchgoods/query=充值')}><img src="https://www.zhengzhicheng.cn/pyg/icon_index_nav_5@2x.png" alt="" /></div>
+                    <div onClick={() => this.props.history.push('/searchgoods/query=充值')}><img src={`${baseUrl}/pyg/icon_index_nav_5@2x.png`} alt="" /></div>
                 </div>
                 {/* 首页商品列表区域 */}
                 <div className="goodsList">
@@ -126,7 +129,7 @@ export class Home extends Component {
                     </div>
 
                 </div> : ''}
-                
+
             </div>
         )
     }

@@ -1,9 +1,10 @@
 # 1. 电商移动前端API文档
+说明：如果接口不能用，可以去github搜索'/api/public/v1/home/swiperdata',查询最新的代码，找到前缀如'https://api-hmugo-web.itheima.net',测试是否可用
 ## 1.1. 路径说明
-- 基准路径为https://api.zbztb.cn/api/public/v1/
+- 基准路径为https://api-hmugo-web.itheima.net/api/public/v1
 - 访问路径分为两种（其中私有路径必须登录后才可以访问）
-    + 公开路径https://api.zbztb.cn/api/public/v1/
-    + 私有路径https://api.zbztb.cn/api/public/v1/my
+    + 公开路径https://api-hmugo-web.itheima.net/api/public/v1
+    + 私有路径https://api-hmugo-web.itheima.net/api/public/v1/my
 
 - 登录认证模式采用**jwt**(json web token)，实现流程为
   1. 请求登录
@@ -17,7 +18,7 @@
 ## 1.2. 公开路径
 ### 1.2.1. 主页API
 #### 1.2.1.1. 获取首页轮播图数据
-- 请求路径https://api.zbztb.cn/api/public/v1/home/swiperdata
+- 请求路径https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata
 - 请求方法：get
 - 响应参数
 
@@ -56,7 +57,7 @@
 ```
 
 #### 1.2.1.2. 获取首页分类菜单数据
-- 请求路径：https://api.zbztb.cn/api/public/v1/home/catitems
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/home/catitems
 - 请求方法：get
 - 响应参数
 
@@ -106,7 +107,7 @@
 ```
 
 #### 1.2.1.3. 获取首页商品列表数据
-- 请求路径：https://api.zbztb.cn/api/public/v1/home/goodslist
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/home/goodslist
 - 请求方法：get
 - 响应参数
 
@@ -148,7 +149,7 @@
 
 ### 1.2.2. 商品API
 #### 1.2.2.1. 搜索建议查询
-- 请求路径：https://api.zbztb.cn/api/public/v1/goods/qsearch
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/goods/qsearch
 - 请求方法：get
 
 - 请求参数
@@ -167,7 +168,7 @@
 
 
 #### 1.2.2.2. 商品列表搜索
-- 请求路径：https://api.zbztb.cn/api/public/v1/goods/search
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/goods/search
 - 请求方法：get
 
 - 请求参数
@@ -203,7 +204,7 @@
 
 
 #### 1.2.2.3. 商品详情
-- 请求路径：https://api.zbztb.cn/api/public/v1/goods/detail
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/goods/detail
 - 请求方法：get
 
 - 请求参数
@@ -243,7 +244,7 @@
 
 ### 1.2.3. 分类API
 #### 1.2.3.1. 获取分类数据
-- 请求路径：https://api.zbztb.cn/api/public/v1/categories
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/categories
 - 请求方法：get
 - 响应参数
 
@@ -260,7 +261,7 @@
 
 ### 1.2.4. 用户API
 #### 1.2.4.1. 获取验证码
-- 请求路径：https://api.zbztb.cn/api/public/v1/users/get_reg_code
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/users/get_reg_code
 - 请求方法：post
 
 - 请求参数
@@ -278,7 +279,7 @@
 
 
 #### 1.2.4.2. 注册
-- 请求路径：https://api.zbztb.cn/api/public/v1/users/reg
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/users/reg
 - 请求方法：post
 
 - 请求参数
@@ -303,7 +304,7 @@
 ```
 
 #### 1.2.4.3. 登录
-- 请求路径：https://api.zbztb.cn/api/public/v1/login
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/login
 - 请求方法：post
 
 - 请求参数
@@ -329,7 +330,7 @@
 ## 1.3. 私有路径
 ### 1.3.1. 用户API
 #### 1.3.1.1. 获取用户信息
-- 请求路径：https://api.zbztb.cn/api/public/v1/my/users/userinfo
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/my/users/userinfo
 - 请求方法：get
 - 响应参数
 
@@ -343,12 +344,12 @@
 
 ### 1.3.2. 购物车API（登录后访问）
 #### 1.3.2.1. 查询购物车数据
-- 请求路径：https://api.zbztb.cn/api/public/v1/my/cart/all
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/my/cart/all
 - 请求方法：get
 - 响应参数
 
 #### 1.3.2.2. 购物车添加商品
-- 请求路径：https://api.zbztb.cn/api/public/v1/my/cart/add
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/my/cart/add
 - 请求方法：post
 - 请求参数
 
@@ -390,7 +391,7 @@
 | updated_at       |   更新时间 |          |
 
 #### 1.3.2.3. 同步购物车
-- 请求路径：https://api.zbztb.cn/api/public/v1/my/cart/sync
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/my/cart/sync
 - 请求方法：post
 - 请求参数
 
@@ -417,7 +418,7 @@
 
 ### 1.3.3. 订单API
 #### 1.3.3.1. 创建订单
-- 请求路径：https://api.zbztb.cn/api/public/v1/my/orders/create
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/my/orders/create
 - 请求方法：post
 
 - 请求参数
@@ -456,7 +457,7 @@
 | pay_status       | 订单支付状态   |          |
 
 #### 1.3.3.2. 订单查询
-- 请求路径：https://api.zbztb.cn/api/public/v1/my/orders/all
+- 请求路径：https://api-hmugo-web.itheima.net/api/public/v1/my/orders/all
 - 请求方法：get
 
 - 请求参数

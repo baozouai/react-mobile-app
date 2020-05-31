@@ -1,10 +1,8 @@
 import axios from 'axios'
 import qs from 'querystring'
 // 设置公共请求前缀
-// 或者 https://www.ehomespace.com/api/public/v1
-// 或者 https://autumnfish.cn/wx/api/public/v1
-// 或者 https://api.zbztb.cn/api/public/v1
-axios.defaults.baseURL = 'https://api.zbztb.cn/api/public/v1'
+export const baseUrl = 'https://api-hmugo-web.itheima.net';
+axios.defaults.baseURL = `${baseUrl}/api/public/v1`;
 // 设置请求头token
 axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('token')
 
