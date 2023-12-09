@@ -20,6 +20,9 @@ dependencies:
   m-ui:
     specifier: 0.0.2
     version: registry.npmmirror.com/m-ui@0.0.2
+  query-string:
+    specifier: ^8.1.0
+    version: registry.npmmirror.com/query-string@8.1.0
   rc-form:
     specifier: ^2.4.8
     version: registry.npmmirror.com/rc-form@2.4.12(prop-types@15.8.1)
@@ -67,6 +70,9 @@ devDependencies:
   vite:
     specifier: ^5.0.0
     version: registry.npmmirror.com/vite@5.0.7
+  vite-plugin-enhance-log:
+    specifier: ^0.5.2
+    version: registry.npmmirror.com/vite-plugin-enhance-log@0.5.2(@babel/core@7.23.5)(vite@5.0.7)
   vite-plugin-import:
     specifier: ^0.4.0
     version: registry.npmmirror.com/vite-plugin-import@0.4.0(vite@5.0.7)
@@ -282,6 +288,19 @@ packages:
       '@babel/types': registry.npmmirror.com/@babel/types@7.23.5
     dev: true
 
+  registry.npmmirror.com/@babel/plugin-syntax-typescript@7.23.3(@babel/core@7.23.5):
+    resolution: {integrity: sha512-9EiNjVJOMwCO+43TqoTrgQ8jMwcAd0sWyXi9RPfIsLTj4R2MADDDQXELhffaUx/uJv2AYcxBgPwH6j4TIA4ytQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.23.3.tgz}
+    id: registry.npmmirror.com/@babel/plugin-syntax-typescript/7.23.3
+    name: '@babel/plugin-syntax-typescript'
+    version: 7.23.3
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.5
+      '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
+    dev: true
+
   registry.npmmirror.com/@babel/plugin-transform-react-jsx-self@7.23.3(@babel/core@7.23.5):
     resolution: {integrity: sha512-qXRvbeKDSfwnlJnanVRp0SfuWE5DQhwQr5xtLBzp56Wabyo+4CMosF6Kfp+eOD/4FYpql64XVJ2W0pVLlJZxOQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.23.3.tgz}
     id: registry.npmmirror.com/@babel/plugin-transform-react-jsx-self/7.23.3
@@ -325,6 +344,26 @@ packages:
       '@babel/code-frame': registry.npmmirror.com/@babel/code-frame@7.23.5
       '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.5
       '@babel/types': registry.npmmirror.com/@babel/types@7.23.5
+    dev: true
+
+  registry.npmmirror.com/@babel/traverse@7.21.4:
+    resolution: {integrity: sha512-eyKrRHKdyZxqDm+fV1iqL9UAHMoIg0nDaGqfIOd8rKH17m5snv7Gn4qgjBoFfLz9APvjFU/ICT00NVCv1Epp8Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/traverse/-/traverse-7.21.4.tgz}
+    name: '@babel/traverse'
+    version: 7.21.4
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/code-frame': registry.npmmirror.com/@babel/code-frame@7.23.5
+      '@babel/generator': registry.npmmirror.com/@babel/generator@7.23.5
+      '@babel/helper-environment-visitor': registry.npmmirror.com/@babel/helper-environment-visitor@7.22.20
+      '@babel/helper-function-name': registry.npmmirror.com/@babel/helper-function-name@7.23.0
+      '@babel/helper-hoist-variables': registry.npmmirror.com/@babel/helper-hoist-variables@7.22.5
+      '@babel/helper-split-export-declaration': registry.npmmirror.com/@babel/helper-split-export-declaration@7.22.6
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.5
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.5
+      debug: registry.npmmirror.com/debug@4.3.4
+      globals: registry.npmmirror.com/globals@11.12.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/@babel/traverse@7.23.5:
@@ -1207,6 +1246,13 @@ packages:
       ms: registry.npmmirror.com/ms@2.1.2
     dev: true
 
+  registry.npmmirror.com/decode-uri-component@0.4.1:
+    resolution: {integrity: sha512-+8VxcR21HhTy8nOt6jf20w0c9CADrw1O8d+VZ/YzzCt4bJ3uBjw+D1q2osAB8RnpwwaeYBxy0HyKQxD5JBMuuQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/decode-uri-component/-/decode-uri-component-0.4.1.tgz}
+    name: decode-uri-component
+    version: 0.4.1
+    engines: {node: '>=14.16'}
+    dev: false
+
   registry.npmmirror.com/deep-diff@0.3.8:
     resolution: {integrity: sha512-yVn6RZmHiGnxRKR9sJb3iVV2XTF1Ghh2DiWRZ3dMnGc43yUdWWF/kX6lQyk3+P84iprfWKU/8zFTrlkvtFm1ug==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/deep-diff/-/deep-diff-0.3.8.tgz}
     name: deep-diff
@@ -1358,6 +1404,13 @@ packages:
       strip-outer: registry.npmmirror.com/strip-outer@1.0.1
       trim-repeated: registry.npmmirror.com/trim-repeated@1.0.0
     dev: true
+
+  registry.npmmirror.com/filter-obj@5.1.0:
+    resolution: {integrity: sha512-qWeTREPoT7I0bifpPUXtxkZJ1XJzxWtfoWWkdVGqa+eCr3SHW/Ocp89o8vLvbUuQnadybJpjOKu4V+RwO6sGng==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/filter-obj/-/filter-obj-5.1.0.tgz}
+    name: filter-obj
+    version: 5.1.0
+    engines: {node: '>=14.16'}
+    dev: false
 
   registry.npmmirror.com/follow-redirects@1.5.10:
     resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.5.10.tgz}
@@ -1809,6 +1862,17 @@ packages:
       object-assign: registry.npmmirror.com/object-assign@4.1.1
       strict-uri-encode: registry.npmmirror.com/strict-uri-encode@1.1.0
     dev: true
+
+  registry.npmmirror.com/query-string@8.1.0:
+    resolution: {integrity: sha512-BFQeWxJOZxZGix7y+SByG3F36dA0AbTy9o6pSmKFcFz7DAj0re9Frkty3saBn3nHo3D0oZJ/+rx3r8H8r8Jbpw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/query-string/-/query-string-8.1.0.tgz}
+    name: query-string
+    version: 8.1.0
+    engines: {node: '>=14.16'}
+    dependencies:
+      decode-uri-component: registry.npmmirror.com/decode-uri-component@0.4.1
+      filter-obj: registry.npmmirror.com/filter-obj@5.1.0
+      split-on-first: registry.npmmirror.com/split-on-first@3.0.0
+    dev: false
 
   registry.npmmirror.com/raf@3.4.1:
     resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/raf/-/raf-3.4.1.tgz}
@@ -2457,6 +2521,20 @@ packages:
     engines: {node: '>= 8'}
     dev: false
 
+  registry.npmmirror.com/source-map@0.7.4:
+    resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.7.4.tgz}
+    name: source-map
+    version: 0.7.4
+    engines: {node: '>= 8'}
+    dev: true
+
+  registry.npmmirror.com/split-on-first@3.0.0:
+    resolution: {integrity: sha512-qxQJTx2ryR0Dw0ITYyekNQWpz6f8dGd7vffGNflQQ3Iqj9NJ6qiZ7ELpZsJ/QBhIVAiDfXdag3+Gp8RvWa62AA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/split-on-first/-/split-on-first-3.0.0.tgz}
+    name: split-on-first
+    version: 3.0.0
+    engines: {node: '>=12'}
+    dev: false
+
   registry.npmmirror.com/strict-uri-encode@1.1.0:
     resolution: {integrity: sha512-R3f198pcvnB+5IpnBlRkphuE9n46WyVl8I39W/ZUTZLz4nqSP/oLYUrcnJrw462Ds8he4YKMov2efsTIw1BDGQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz}
     name: strict-uri-encode
@@ -2606,6 +2684,25 @@ packages:
       copy-text-to-clipboard: registry.npmmirror.com/copy-text-to-clipboard@3.2.0
       core-js: registry.npmmirror.com/core-js@3.34.0
       mutation-observer: registry.npmmirror.com/mutation-observer@1.0.3
+    dev: true
+
+  registry.npmmirror.com/vite-plugin-enhance-log@0.5.2(@babel/core@7.23.5)(vite@5.0.7):
+    resolution: {integrity: sha512-ybCnKHMAE5viRkMacTw3WX5bLV/YLyELScwhw1LW1H3/uCpdx8Bu3vOO8C1RghbSrRlpmnJKnSY7SatttW2YZg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-enhance-log/-/vite-plugin-enhance-log-0.5.2.tgz}
+    id: registry.npmmirror.com/vite-plugin-enhance-log/0.5.2
+    name: vite-plugin-enhance-log
+    version: 0.5.2
+    peerDependencies:
+      vite: ^2.9.0 || ^3.0.0 || ^4.0.0
+    dependencies:
+      '@babel/generator': registry.npmmirror.com/@babel/generator@7.23.5
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.5
+      '@babel/plugin-syntax-typescript': registry.npmmirror.com/@babel/plugin-syntax-typescript@7.23.3(@babel/core@7.23.5)
+      '@babel/traverse': registry.npmmirror.com/@babel/traverse@7.21.4
+      source-map: registry.npmmirror.com/source-map@0.7.4
+      vite: registry.npmmirror.com/vite@5.0.7
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
     dev: true
 
   registry.npmmirror.com/vite-plugin-import@0.4.0(vite@5.0.7):

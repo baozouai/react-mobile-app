@@ -37,7 +37,7 @@ export class Login extends Component {
                     // 这里的号码格式是139 9999 9999 ，提交之前把中间的空格去掉
                     username: value.username.replace(/\s/g, ''),
                     password: value.password
-                  }
+                }
                 submitLogin(obj).then(res => {
                     // 解构赋值
                     const {meta: {status, msg}, message} = res.data

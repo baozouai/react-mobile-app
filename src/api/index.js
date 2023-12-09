@@ -1,5 +1,5 @@
 import axios from 'axios'
-import qs from 'querystring'
+import qs from 'query-string'
 // 设置公共请求前缀
 export const baseUrl = 'https://api-hmugo-web.itheima.net';
 axios.defaults.baseURL = `${baseUrl}/api/public/v1`;
