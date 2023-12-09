@@ -2,23 +2,31 @@ import React, { Component } from 'react'
 import { Tabs, NavBar, Icon, WingBlank } from 'antd-mobile';
 import { getOrder } from '../api/index'
 import '../style/orderlist.css'
+
+const tabs = [
+    { title: '全部订单', },
+    { title: '待付款',  },
+    { title: '待发货', },
+];
 export class OrderList extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             count: 0,
-            orders: []
+            orders: [],
+            type: 1,
         }
     }
     UNSAFE_componentWillMount() {
         // render之前获取页面是否有id 如果是提交订单后跳转过来的话没有id，Number之后的NaN
-        let id = Number(this.props.location.pathname.split('/').pop())
-        if (id) {
-            this.setState({ id })
+        let type = Number(this.props.location.pathname.split('/').pop())
+
+        if (type) {
+            this.setState({ type })
         }
         // 获取订单
-        getOrder().then(res => {
+        getOrder(type).then(res => {
             const { meta: { status }, message: {orders } } = res.data
             if (status === 200) {
                 let count = 0
@@ -44,11 +52,7 @@ export class OrderList extends Component {
         return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s;
     }
     render() {
-        const tabs = [
-            { title: '全部订单' },
-            { title: '待付款' },
-            { title: '待发货' },
-        ];
+        console.log(this.state.type)
         return (
             <div>
                 <NavBar
@@ -59,10 +63,10 @@ export class OrderList extends Component {
                 >
                     我的订单{this.state.count ? `(${this.state.count})` : ''}
                 </NavBar>
-                <Tabs tabs={tabs} initialPage={this.state.id ? this.state.id : 0} animated={false} useOnPan={false}>
+                <Tabs tabs={tabs} initialPage={this.state.type - 1} animated useOnPan={false}>
                     <WingBlank style={{ marginTop: 20, marginBottom: 60 }}>
                         <div>
-                            {this.state.orders.length ?
+                            {
                                 this.state.orders.map(v => (
                                     v.goods.length ?
                                         <div key={v.order_id} className="single-order-list">
@@ -121,7 +125,7 @@ export class OrderList extends Component {
                                         </div>
                                         : ''
                                 ))
-                                : ''}
+                                }
                         </div>
                     </WingBlank>
                     <WingBlank style={{ marginTop: 20, marginBottom: 60 }}>

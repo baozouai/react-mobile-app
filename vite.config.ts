@@ -20,7 +20,7 @@ export default defineConfig({
         // transforming with esbuild
         return transformWithEsbuild(code, id, {
           loader: 'jsx',
-          sourcefile: id,
+          // sourcefile: id,
           jsx: 'automatic', // 👈 this is important
         });
       },

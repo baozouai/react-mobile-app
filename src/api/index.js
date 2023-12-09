@@ -31,6 +31,10 @@ export const syncCart = infos => axios.post('/my/cart/sync', infos)
 // 创建订单
 export const createOrder = goodsInfo => axios.post('/my/orders/create', goodsInfo)
 // 获取订单
-export const getOrder = () => axios.get('my/orders/all')
+export const getOrder = (type) => axios.get('my/orders/all', {
+  params: {
+    type,
+  }
+})
 // 获取用户信息
 export const getUserInfo = () => axios.get('/my/users/userinfo')

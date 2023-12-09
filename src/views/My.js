@@ -77,21 +77,21 @@ export class My extends Component {
                         title="所有订单"
                         key="Home"
                         icon={<i className="iconfont icon-dingdan"></i>}
-                        onPress={() => { this.props.history.push('/order/0') }}
+                        onPress={() => { this.props.history.push('/order/1') }}
                     >
                     </TabBar.Item>
                     <TabBar.Item
                         title="待付款"
                         key="obligation"
                         icon={<i className="iconfont icon-daifukuan"></i>}
-                        onPress={() => { this.props.history.push('/order/1') }}
+                        onPress={() => { this.props.history.push('/order/2') }}
                     >
                     </TabBar.Item>
                     <TabBar.Item
                         title="待发货"
                         key="Mine"
                         icon={<i className="iconfont icon-daifahuo"></i>}
-                        onPress={() => { this.props.history.push('/order/2') }}
+                        onPress={() => { this.props.history.push('/order/3') }}
                     >
                     </TabBar.Item>
                 </TabBar>
