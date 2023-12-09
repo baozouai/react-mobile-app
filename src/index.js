@@ -7,7 +7,8 @@ import store from './store/store'
 // 引入全局样式
 import './style/index.css'
 // 处理点击移动端事件
-import FastClick from 'fastclick';
+import { FastClick } from 'fastclick';
+
 FastClick.attach(document.body);
 ReactDOM.render(
     <Provider store={store}>

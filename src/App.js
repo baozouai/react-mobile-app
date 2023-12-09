@@ -17,11 +17,9 @@ import SearchGoods from './views/SearchGoods'
 import ErrorPage from './views/ErrorPage'
 import PrivateRoute from './components/PrivateRoute'
 
-const isProd = process.env.NODE_ENV === 'production'
-
 function App() {
   return (
-    <Router basename={isProd ? '/react-mobile-app': '/'}>
+    <Router basename={process.env.PUBLIC_URL}>
       <div style={{ height: '100%' }}>
         <Switch>
           <Route path='/' exact render={props => <Layout {...props}><Home></Home></Layout>}></Route>
