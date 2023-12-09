@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Carousel, Flex, WingBlank, WhiteSpace, SearchBar } from 'antd-mobile';
 import { getHomeGoodslist } from '../api/index'
-import qs from 'querystring'
+import qs from 'query-string'
 import '../style/home.css'
 import banner1 from '../upload/banner1.png'
 import banner2 from '../upload/banner2.png'

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Tabs, NavBar, Icon } from 'antd-mobile'
 import { getCategory } from '../api/index'
-import qs from 'querystring'
+import qs from 'query-string'
 import '../style/category.css'
 
 export class Category extends Component {
