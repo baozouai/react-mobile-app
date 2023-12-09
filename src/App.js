@@ -30,7 +30,7 @@ function App() {
           <Route path='/cart' render={props => <Layout {...props}><PrivateRoute path="/cart" component={Cart}></PrivateRoute></Layout>}></Route>
           <Route path='/pay' render={props => <PrivateRoute {...props} component={Pay}></PrivateRoute>}></Route>
           <Route path='/address' render={props => <PrivateRoute {...props} component={AddressInfo}></PrivateRoute>}></Route>
-          <Route path='/order' render={props => <PrivateRoute {...props} component={OrderList}></PrivateRoute>}></Route>
+          <Route path='/order/:id' render={props => <PrivateRoute {...props} component={OrderList}></PrivateRoute>}></Route>
           <Route path='/register' render={props => <Layout {...props}><Register></Register></Layout>}></Route>
           <Route path='/goodsdetail/:id' render={props => <GoodsDetail {...props}></GoodsDetail>}></Route>
           <Route path='/searchfield' render={props => <SearchField {...props}></SearchField>}></Route>
