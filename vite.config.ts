@@ -1,6 +1,6 @@
 import { defineConfig, transformWithEsbuild } from 'vite'
 import react from '@vitejs/plugin-react'
-process.env.NODE_ENV = 'a'
+
 const isProd = process.env.NODE_ENV === 'production'
 const base = isProd ? '/react-mobile-app': undefined
 
@@ -37,9 +37,6 @@ export default defineConfig({
     port: 3002
   },
   base,
-  build: {
-    sourcemap: true,
-  },
   optimizeDeps: {
     esbuildOptions: {
       loader: {
